@@ -7,9 +7,11 @@ import (
 	"context"
 	"fmt"
 	"strconv"
+	"time"
 
 	"github.com/bytedance/gg/gptr"
 
+	"github.com/coze-dev/coze-loop/backend/infra/backoff"
 	"github.com/coze-dev/coze-loop/backend/infra/idgen"
 	"github.com/coze-dev/coze-loop/backend/kitex_gen/base"
 	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation"
@@ -28,6 +30,7 @@ import (
 	"github.com/coze-dev/coze-loop/backend/modules/evaluation/pkg/errno"
 	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
 	"github.com/coze-dev/coze-loop/backend/pkg/json"
+	"github.com/coze-dev/coze-loop/backend/pkg/lang/goroutine"
 	"github.com/coze-dev/coze-loop/backend/pkg/lang/maps"
 	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
 	"github.com/coze-dev/coze-loop/backend/pkg/lang/slices"
@@ -520,20 +523,37 @@ func (e *experimentApplication) KillExperiment(ctx context.Context, req *expt.Ki
 		return nil, err
 	}
 
-	err = e.auth.AuthorizationWithoutSPI(ctx, &rpc.AuthorizationWithoutSPIParam{
-		ObjectID:        strconv.FormatInt(req.GetExptID(), 10),
-		SpaceID:         req.GetWorkspaceID(),
-		ActionObjects:   []*rpc.ActionObject{{Action: gptr.Of(consts.Run), EntityType: gptr.Of(rpc.AuthEntityType_EvaluationExperiment)}},
-		OwnerID:         gptr.Of(got.CreatedBy),
-		ResourceSpaceID: req.GetWorkspaceID(),
-	})
-	if err != nil {
+	if !e.configer.GetMaintainerUserIDs(ctx)[session.UserID] {
+		if err := e.auth.AuthorizationWithoutSPI(ctx, &rpc.AuthorizationWithoutSPIParam{
+			ObjectID:        strconv.FormatInt(req.GetExptID(), 10),
+			SpaceID:         req.GetWorkspaceID(),
+			ActionObjects:   []*rpc.ActionObject{{Action: gptr.Of(consts.Run), EntityType: gptr.Of(rpc.AuthEntityType_EvaluationExperiment)}},
+			OwnerID:         gptr.Of(got.CreatedBy),
+			ResourceSpaceID: req.GetWorkspaceID(),
+		}); err != nil {
+			return nil, err
+		}
+	}
+
+	if err := e.manager.SetExptTerminating(ctx, req.GetExptID(), got.LatestRunID, req.GetWorkspaceID(), session); err != nil {
 		return nil, err
 	}
 
-	if err := e.manager.CompleteExpt(ctx, req.GetExptID(), req.GetWorkspaceID(), session, entity.WithStatus(entity.ExptStatus_Terminated)); err != nil {
-		return nil, err
+	kill := func(ctx context.Context, exptID, exptRunID, spaceID int64, session *entity.Session) error {
+		if err := e.manager.CompleteRun(ctx, exptID, exptRunID, spaceID, session, entity.WithStatus(entity.ExptStatus_Terminated)); err != nil {
+			return err
+		}
+		return e.manager.CompleteExpt(ctx, exptID, spaceID, session,
+			entity.WithStatus(entity.ExptStatus_Terminated), entity.WithCompleteInterval(time.Second), entity.NoCompleteItemTurn(), entity.NoAggrCalculate())
 	}
+
+	goroutine.Go(ctx, func() {
+		if err := backoff.RetryWithElapsedTime(ctx, time.Minute*1, func() error {
+			return kill(ctx, req.GetExptID(), got.LatestRunID, req.GetWorkspaceID(), session)
+		}); err != nil {
+			logs.CtxInfo(ctx, "kill expt failed, expt_id: %v, err: %v", req.GetExptID(), err)
+		}
+	})
 
 	return &expt.KillExperimentResponse{BaseResp: base.NewBaseResp()}, nil
 }

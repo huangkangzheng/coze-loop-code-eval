@@ -161,8 +161,8 @@ func TestExptSchedulerImpl_Schedule(t *testing.T) {
 				f.configer.EXPECT().GetExptExecConf(gomock.Any(), int64(3)).Return(&entity.ExptExecConf{ZombieIntervalSecond: math.MaxInt}).AnyTimes()
 				f.configer.EXPECT().GetConsumerConf(gomock.Any()).Return(&entity.ExptConsumerConf{}).AnyTimes()
 				f.idGen.EXPECT().GenMultiIDs(gomock.Any(), gomock.Any()).Return([]int64{1, 2, 3}, nil).AnyTimes()
-				f.manager.EXPECT().CompleteRun(gomock.Any(), int64(1), int64(2), gomock.Any(), gomock.Any(), args.event.Session, gomock.Any()).Return(nil).Times(1)
-				f.manager.EXPECT().CompleteExpt(gomock.Any(), gomock.Any(), gomock.Any(), gomock.Any(), gomock.Any(), gomock.Any(), gomock.Any()).Return(nil).Times(1)
+				f.manager.EXPECT().CompleteRun(gomock.Any(), int64(1), int64(2), int64(3), args.event.Session, gomock.Any(), gomock.Any()).Return(nil).Times(1)
+				f.manager.EXPECT().CompleteExpt(gomock.Any(), gomock.Any(), gomock.Any(), gomock.Any(), gomock.Any(), gomock.Any(), gomock.Any(), gomock.Any()).Return(nil).Times(1)
 				mode := entitymocks.NewMockExptSchedulerMode(ctrl)
 				mode.EXPECT().ExptStart(gomock.Any(), gomock.Any(), gomock.Any()).Return(nil).Times(1)
 				mode.EXPECT().ScheduleStart(gomock.Any(), gomock.Any(), gomock.Any()).Return(nil).Times(1)
@@ -648,6 +648,40 @@ func TestExptSchedulerImpl_HandleEventCheck(t *testing.T) {
 			},
 			preparemock: func() {
 				manager.EXPECT().GetRunLog(gomock.Any(), gomock.Any(), gomock.Any(), gomock.Any(), gomock.Any()).Return(&entity.ExptRunLog{Status: int64(entity.ExptStatus_Success)}, nil).Times(1)
+			},
+			wantErr: false,
+		},
+		{
+			name: "实验正在终止直接返回nil",
+			args: checkArgs{
+				event:      &entity.ExptScheduleEvent{ExptID: 1, ExptRunID: 2, SpaceID: 3},
+				runLog:     &entity.ExptRunLog{Status: int64(entity.ExptStatus_Terminating)},
+				runLogErr:  nil,
+				zombieSecs: 10000,
+				createdAt:  time.Now().Unix(),
+			},
+			next: func(ctx context.Context, event *entity.ExptScheduleEvent) error {
+				return errors.New("should not be called")
+			},
+			preparemock: func() {
+				manager.EXPECT().GetRunLog(gomock.Any(), gomock.Any(), gomock.Any(), gomock.Any(), gomock.Any()).Return(&entity.ExptRunLog{Status: int64(entity.ExptStatus_Terminating)}, nil).Times(1)
+			},
+			wantErr: false,
+		},
+		{
+			name: "实验正在排空直接返回nil",
+			args: checkArgs{
+				event:      &entity.ExptScheduleEvent{ExptID: 1, ExptRunID: 2, SpaceID: 3},
+				runLog:     &entity.ExptRunLog{Status: int64(entity.ExptStatus_Draining)},
+				runLogErr:  nil,
+				zombieSecs: 10000,
+				createdAt:  time.Now().Unix(),
+			},
+			next: func(ctx context.Context, event *entity.ExptScheduleEvent) error {
+				return errors.New("should not be called")
+			},
+			preparemock: func() {
+				manager.EXPECT().GetRunLog(gomock.Any(), gomock.Any(), gomock.Any(), gomock.Any(), gomock.Any()).Return(&entity.ExptRunLog{Status: int64(entity.ExptStatus_Draining)}, nil).Times(1)
 			},
 			wantErr: false,
 		},
