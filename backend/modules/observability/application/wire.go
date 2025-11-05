@@ -289,6 +289,7 @@ func InitTraceApplication(
 	db db.Provider,
 	ckDb ck.Provider,
 	redis redis.Cmdable,
+	persistentCmdable redis.PersistentCmdable,
 	meter metrics.Meter,
 	mqFactory mq.IFactory,
 	configFactory conf.IConfigLoaderFactory,
@@ -319,6 +320,7 @@ func InitOpenAPIApplication(
 	redis redis.Cmdable,
 	idgen idgen.IIDGenerator,
 	evalService evaluatorservice.Client,
+	persistentCmdable redis.PersistentCmdable,
 ) (IObservabilityOpenAPIApplication, error) {
 	wire.Build(openApiSet)
 	return nil, nil

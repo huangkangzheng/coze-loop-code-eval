@@ -146,6 +146,9 @@ func (t *TraceCkRepoImpl) ListSpans(ctx context.Context, req *repo.ListSpansPara
 }
 
 func (t *TraceCkRepoImpl) GetTrace(ctx context.Context, req *repo.GetTraceParam) (loop_span.SpanList, error) {
+	if req.TraceID == "" && req.LogID == "" && len(req.SpanIDs) == 0 {
+		return nil, errorx.NewByCode(obErrorx.CommercialCommonInvalidParamCodeCode, errorx.WithExtraMsg("at least need trace_id or log_id or span_ids"))
+	}
 	tableCfg, err := t.getQueryTenantTables(ctx, req.Tenants)
 	if err != nil {
 		return nil, err
@@ -160,7 +163,7 @@ func (t *TraceCkRepoImpl) GetTrace(ctx context.Context, req *repo.GetTraceParam)
 			Values:    []string{req.TraceID},
 			QueryType: ptr.Of(loop_span.QueryTypeEnumEq),
 		})
-	} else {
+	} else if req.LogID != "" {
 		filter.FilterFields = append(filter.FilterFields, &loop_span.FilterField{
 			FieldName: loop_span.SpanFieldLogID,
 			FieldType: loop_span.FieldTypeString,

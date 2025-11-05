@@ -10,6 +10,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/coze-dev/coze-loop/backend/infra/redis"
 	tconv "github.com/coze-dev/coze-loop/backend/modules/observability/application/convertor/task"
 	taskRepo "github.com/coze-dev/coze-loop/backend/modules/observability/domain/task/repo"
 	"github.com/coze-dev/coze-loop/backend/modules/observability/infra/repo/mysql"
@@ -58,6 +59,18 @@ type ListSpansResp struct {
 	Spans         loop_span.SpanList
 	NextPageToken string
 	HasMore       bool
+}
+
+type ListPreSpanReq struct {
+	WorkspaceID        int64
+	TraceID            string
+	SpanID             string
+	PreviousResponseID string
+	PlatformType       loop_span.PlatformType
+}
+
+type ListPreSpanResp struct {
+	Spans loop_span.SpanList
 }
 
 type GetTraceReq struct {
@@ -250,6 +263,7 @@ type IAnnotationEvent interface {
 //go:generate mockgen -destination=mocks/trace_service.go -package=mocks . ITraceService
 type ITraceService interface {
 	ListSpans(ctx context.Context, req *ListSpansReq) (*ListSpansResp, error)
+	ListPreSpan(ctx context.Context, req *ListPreSpanReq) (r *ListPreSpanResp, err error)
 	GetTrace(ctx context.Context, req *GetTraceReq) (*GetTraceResp, error)
 	SearchTraceOApi(ctx context.Context, req *SearchTraceOApiReq) (*SearchTraceOApiResp, error)
 	ListSpansOApi(ctx context.Context, req *ListSpansOApiReq) (*ListSpansOApiResp, error)
@@ -278,6 +292,7 @@ func NewTraceServiceImpl(
 	tenantProvider tenant.ITenantProvider,
 	evalSvc rpc.IEvaluatorRPCAdapter,
 	taskRepo taskRepo.ITaskRepo,
+	persistentRedis redis.PersistentCmdable,
 ) (ITraceService, error) {
 	return &TraceServiceImpl{
 		traceRepo:          tRepo,
@@ -289,6 +304,7 @@ func NewTraceServiceImpl(
 		metrics:            metrics,
 		evalSvc:            evalSvc,
 		taskRepo:           taskRepo,
+		persistentRedis:    persistentRedis,
 	}, nil
 }
 
@@ -302,6 +318,176 @@ type TraceServiceImpl struct {
 	tenantProvider     tenant.ITenantProvider
 	evalSvc            rpc.IEvaluatorRPCAdapter
 	taskRepo           taskRepo.ITaskRepo
+	persistentRedis    redis.Cmdable
+}
+
+const (
+	keySpanID             = "span_id"
+	keyPreviousResponseID = "previous_response_id"
+)
+
+func (r *TraceServiceImpl) ListPreSpan(ctx context.Context, req *ListPreSpanReq) (resp *ListPreSpanResp, err error) {
+	tenants, err := r.getTenants(ctx, req.PlatformType)
+	if err != nil {
+		return nil, err
+	}
+
+	// get pre span ids from redis
+	preSpanIDs := make([]string, 0, 8)
+	respIDByOrder := make([]string, 0, 8)
+	preRespID := req.PreviousResponseID
+	spanNum := 0
+	spanNumLimit := int32(500)
+	for preRespID != "" {
+		rawVal, err := r.persistentRedis.Get(ctx, preRespID).Result()
+		if err != nil {
+			return nil, errorx.WrapByCode(err, obErrorx.CommercialCommonInternalErrorCodeCode)
+		}
+		redisValue := make(map[string]string)
+		if err = json.Unmarshal([]byte(rawVal), &redisValue); err != nil {
+			return nil, errorx.WrapByCode(err, obErrorx.CommercialCommonInternalErrorCodeCode)
+		}
+		spanID, ok := redisValue[keySpanID]
+		if ok {
+			preSpanIDs = append(preSpanIDs, spanID) // do not need order, only for select from db
+		}
+		respIDByOrder = append([]string{preRespID}, respIDByOrder...) // need order, for order SpanList
+		preRespID, _ = redisValue[keyPreviousResponseID]
+
+		spanNum++
+		if spanNum >= int(spanNumLimit) {
+			break
+		}
+	}
+
+	// select from ck, 100 one batch
+	respIDSpanMap := make(map[string]*loop_span.Span)
+	batchNum := 100
+	batchPreSpan := make([][]string, 0)
+	oneBatchPreSpan := make([]string, 0)
+	for _, spanID := range preSpanIDs {
+		oneBatchPreSpan = append(oneBatchPreSpan, spanID)
+		if len(oneBatchPreSpan) == batchNum {
+			batchPreSpan = append(batchPreSpan, oneBatchPreSpan)
+			oneBatchPreSpan = make([]string, 0)
+		}
+	}
+	if len(oneBatchPreSpan) > 0 {
+		batchPreSpan = append(batchPreSpan, oneBatchPreSpan)
+	}
+	for _, oneBatchSpan := range batchPreSpan {
+		dbSpans, err := r.traceRepo.GetTrace(ctx, &repo.GetTraceParam{
+			Tenants: tenants,
+			StartAt: time.Now().Add(-1 * time.Hour * 24 * 30 * time.Duration(spanNum)).UnixMilli(), // last one month
+			EndAt:   time.Now().UnixMilli(),
+			Limit:   200,
+			SpanIDs: oneBatchSpan,
+		})
+		if err != nil {
+			return nil, err
+		}
+		for _, span := range dbSpans {
+			if respID, ok := span.SystemTagsString["response_id"]; ok {
+				respIDSpanMap[respID] = span
+			}
+		}
+	}
+
+	// order SpanList
+	orderSpans := make(loop_span.SpanList, 0, len(preRespID))
+	for i := range respIDByOrder {
+		if s, ok := respIDSpanMap[respIDByOrder[i]]; ok {
+			orderSpans = append(orderSpans, s)
+		}
+	}
+
+	// auth check
+	// 1. if one span of preSpan in this workspace, pass
+	// 2. if current span in this workspace, pass
+	// 3. if previous_response_id is correct, not pass
+	// 4. if one span of trace in this workspace, pass
+	isAuthPass := false
+	for _, span := range orderSpans {
+		if span.WorkspaceID == strconv.FormatInt(req.WorkspaceID, 10) {
+			isAuthPass = true
+			break
+		}
+	}
+	if !isAuthPass {
+		dbSpans, err := r.traceRepo.GetTrace(ctx, &repo.GetTraceParam{
+			Tenants:     tenants,
+			StartAt:     time.Now().Add(-1 * time.Hour * 24 * 30 * time.Duration(spanNum)).UnixMilli(), // last one month
+			EndAt:       time.Now().UnixMilli(),
+			Limit:       1,
+			SpanIDs:     []string{req.SpanID},
+			TraceID:     req.TraceID,
+			OmitColumns: []string{"input", "output"},
+		})
+		if err != nil {
+			return nil, err
+		}
+		if len(dbSpans) == 0 {
+			return nil, errorx.NewByCode(obErrorx.CommercialCommonInvalidParamCodeCode, errorx.WithExtraMsg("no span in this workspace"))
+		}
+		if dbSpans[0].SystemTagsString["previous_response_id"] != req.PreviousResponseID {
+			return nil, errorx.NewByCode(obErrorx.CommercialCommonInvalidParamCodeCode, errorx.WithExtraMsg("previous_response_id is not equal to current span's"))
+		}
+		if dbSpans[0].TraceID != req.TraceID {
+			return nil, errorx.NewByCode(obErrorx.CommercialCommonInvalidParamCodeCode, errorx.WithExtraMsg("trace_id is not equal to current span's"))
+		}
+		if dbSpans[0].WorkspaceID == strconv.FormatInt(req.WorkspaceID, 10) {
+			isAuthPass = true
+		}
+	}
+	if !isAuthPass {
+		dbSpans, err := r.traceRepo.GetTrace(ctx, &repo.GetTraceParam{
+			Tenants:     tenants,
+			StartAt:     time.Now().Add(-1 * time.Hour * 24 * 30 * time.Duration(spanNum)).UnixMilli(), // last one month
+			EndAt:       time.Now().UnixMilli(),
+			Limit:       10000,
+			TraceID:     req.TraceID,
+			OmitColumns: []string{"input", "output"},
+		})
+		if err != nil {
+			return nil, err
+		}
+		for _, span := range dbSpans {
+			if span.WorkspaceID == strconv.FormatInt(req.WorkspaceID, 10) {
+				isAuthPass = true
+				break
+			}
+		}
+	}
+	if !isAuthPass {
+		return nil, errorx.NewByCode(obErrorx.CommercialCommonInvalidParamCodeCode, errorx.WithExtraMsg("no span in this workspace"))
+	}
+
+	// Simplify core fields Input and Output
+	coreField := []string{"input", "output", "messages", "choices"}
+	for i := range orderSpans {
+		rawInputMap := make(map[string]interface{})
+		if err := json.Unmarshal([]byte(orderSpans[i].Input), &rawInputMap); err == nil {
+			m := make(map[string]interface{})
+			for _, field := range coreField {
+				if v, ok := rawInputMap[field]; ok {
+					m[field] = v
+				}
+			}
+			orderSpans[i].Input = json.MarshalStringIgnoreErr(m)
+		}
+		rawOutputMap := make(map[string]interface{})
+		if err := json.Unmarshal([]byte(orderSpans[i].Output), &rawOutputMap); err == nil {
+			m := make(map[string]interface{})
+			for _, field := range coreField {
+				if v, ok := rawOutputMap[field]; ok {
+					m[field] = v
+				}
+			}
+			orderSpans[i].Output = json.MarshalStringIgnoreErr(m)
+		}
+	}
+
+	return &ListPreSpanResp{Spans: orderSpans}, nil
 }
 
 func (r *TraceServiceImpl) GetTrace(ctx context.Context, req *GetTraceReq) (*GetTraceResp, error) {
