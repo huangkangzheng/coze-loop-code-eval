@@ -576,3 +576,8 @@ query.Use(d.db.NewSession(ctx, opts...)).WithContext(ctx)
     *(获取接口C的SLA或超时配置)*
 4.  **`提取服务“D”所有对外暴露的RPC/HTTP接口的完整定义...`**
     *(获取接口D的SLA或超时配置)*
+
+# 用户偏好要求
+
+## 技术方案输出要求
+如果用户切换到plan mode或者是用户要求你输出技术方案，请将技术方案写在.claude/specs/{{标题}}.md文件中
