@@ -8,11 +8,11 @@ import (
 
 	"github.com/bytedance/gg/gptr"
 
-	"github.com/coze-dev/coze-loop/backend/infra/mq"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/application"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/consts"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/mq/rocket"
-	"github.com/coze-dev/coze-loop/backend/pkg/conf"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/mq"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/application"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/consts"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/mq/rocket"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/conf"
 )
 
 func NewConsumerWorkers(

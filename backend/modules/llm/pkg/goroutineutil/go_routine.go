@@ -7,7 +7,7 @@ import (
 	"context"
 	"runtime"
 
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 func GoWithDeferFunc(ctx context.Context, f func()) {

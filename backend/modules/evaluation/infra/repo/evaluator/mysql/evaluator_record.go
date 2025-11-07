@@ -11,9 +11,9 @@ import (
 	"gorm.io/gorm"
 	"gorm.io/plugin/dbresolver"
 
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/evaluator/mysql/gorm_gen/model"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/pkg/contexts"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/evaluator/mysql/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/pkg/contexts"
 )
 
 // EvaluatorRecordDAO 定义 EvaluatorRecord 的 Dao 接口

@@ -6,7 +6,7 @@ package service
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
 )
 
 // EvaluatorSourceService 定义 Evaluator 的 DO 接口
@@ -17,6 +17,4 @@ type EvaluatorSourceService interface {
 	Run(ctx context.Context, evaluator *entity.Evaluator, input *entity.EvaluatorInputData, disableTracing bool) (output *entity.EvaluatorOutputData, runStatus entity.EvaluatorRunStatus, traceID string)
 	Debug(ctx context.Context, evaluator *entity.Evaluator, input *entity.EvaluatorInputData) (output *entity.EvaluatorOutputData, err error)
 	PreHandle(ctx context.Context, evaluator *entity.Evaluator) error
-	// Validate 验证评估器
-	Validate(ctx context.Context, evaluator *entity.Evaluator) error
 }

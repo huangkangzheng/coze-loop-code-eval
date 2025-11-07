@@ -11,9 +11,9 @@ import (
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/component/rpc"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/component/rpc/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/loop_span"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/component/rpc"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/component/rpc/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/loop_span"
 )
 
 func TestAttrTosProcessor_Transform(t *testing.T) {

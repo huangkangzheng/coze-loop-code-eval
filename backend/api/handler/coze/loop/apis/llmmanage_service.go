@@ -10,7 +10,7 @@ import (
 
 	"github.com/cloudwego/hertz/pkg/app"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/apis/llmmanageservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/apis/llmmanageservice"
 )
 
 var llmManageSvc llmmanageservice.Client

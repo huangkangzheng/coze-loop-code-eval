@@ -7,12 +7,12 @@ import (
 	"context"
 	"time"
 
-	"github.com/coze-dev/coze-loop/backend/infra/external/benefit"
-	"github.com/coze-dev/coze-loop/backend/infra/middleware/session"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/loop_span"
-	obErrorx "github.com/coze-dev/coze-loop/backend/modules/observability/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/external/benefit"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/middleware/session"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/loop_span"
+	obErrorx "code.byted.org/flowdevops/cozeloop/backend/modules/observability/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 type ExpireErrorProcessor struct {

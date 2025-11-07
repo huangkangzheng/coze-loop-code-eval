@@ -12,13 +12,13 @@ import (
 	"github.com/bytedance/gg/gptr"
 	"gorm.io/gorm"
 
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/events"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/repo"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/pkg/contexts"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/events"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/repo"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/pkg/contexts"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 type ExptAnnotateServiceImpl struct {
@@ -114,7 +114,7 @@ func (e ExptAnnotateServiceImpl) CreateExptTurnResultTagRefs(ctx context.Context
 	return nil
 }
 
-func (e ExptAnnotateServiceImpl) DeleteExptTurnResultTagRef(ctx context.Context, exptID, spaceID, tagKeyID int64) error {
+func (e ExptAnnotateServiceImpl) DeleteExptTurnResultTagRef(ctx context.Context, exptID int64, spaceID int64, tagKeyID int64) error {
 	mapping := &entity.ExptTurnResultFilterKeyMapping{
 		SpaceID:   spaceID,
 		ExptID:    exptID,
@@ -169,7 +169,7 @@ func (e ExptAnnotateServiceImpl) GetExptTurnResultTagRefs(ctx context.Context, e
 	return refs, nil
 }
 
-func (e ExptAnnotateServiceImpl) SaveAnnotateRecord(ctx context.Context, exptID, itemID, turnID int64, record *entity.AnnotateRecord) error {
+func (e ExptAnnotateServiceImpl) SaveAnnotateRecord(ctx context.Context, exptID int64, itemID int64, turnID int64, record *entity.AnnotateRecord) error {
 	turnResult, err := e.exptTurnResultRepo.Get(ctx, record.SpaceID, exptID, itemID, turnID)
 	if err != nil {
 		return err
@@ -238,7 +238,7 @@ func (e ExptAnnotateServiceImpl) SaveAnnotateRecord(ctx context.Context, exptID,
 	return nil
 }
 
-func (e ExptAnnotateServiceImpl) UpdateAnnotateRecord(ctx context.Context, itemID, turnID int64, record *entity.AnnotateRecord) error {
+func (e ExptAnnotateServiceImpl) UpdateAnnotateRecord(ctx context.Context, itemID int64, turnID int64, record *entity.AnnotateRecord) error {
 	tagRef, err := e.repo.GetTagRefByTagKeyID(ctx, record.ExperimentID, record.SpaceID, record.TagKeyID)
 	if err != nil {
 		return err

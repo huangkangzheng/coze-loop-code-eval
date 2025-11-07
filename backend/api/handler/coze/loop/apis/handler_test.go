@@ -15,7 +15,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
 )
 
 type helloReq struct {
@@ -116,38 +116,6 @@ func Test_invokeAndRender(t *testing.T) {
 				assert.Error(t, c.Errors.Last())
 			} else {
 				assert.Equal(t, http.StatusOK, c.Response.StatusCode())
-			}
-		})
-	}
-}
-
-func TestValidateEvaluator(t *testing.T) {
-	tests := []struct {
-		name      string
-		wantPanic bool
-	}{
-		{
-			name:      "ValidateEvaluator function exists and can be called",
-			wantPanic: false,
-		},
-	}
-
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			ctx := context.Background()
-			c := &app.RequestContext{}
-
-			// The function will panic due to nil localEvaluatorSvc, but we verify it exists and can be called
-			// This test mainly ensures the function compiles and follows the expected pattern
-			if tt.wantPanic {
-				assert.Panics(t, func() {
-					ValidateEvaluator(ctx, c)
-				})
-			} else {
-				// Even though it panics, we verify the function signature is correct
-				assert.Panics(t, func() {
-					ValidateEvaluator(ctx, c)
-				})
 			}
 		})
 	}

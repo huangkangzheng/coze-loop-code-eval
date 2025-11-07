@@ -1,4 +1,4 @@
-module github.com/coze-dev/coze-loop/backend/script/cloudwego/tmpl
+module code.byted.org/flowdevops/cozeloop/backend/script/cloudwego/tmpl
 
 go 1.22.7
 

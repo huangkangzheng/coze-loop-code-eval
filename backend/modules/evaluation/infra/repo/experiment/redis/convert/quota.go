@@ -6,10 +6,10 @@ package convert
 import (
 	"github.com/samber/lo"
 
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/json"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/conv"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/json"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/conv"
 )
 
 func NewQuotaSpaceExptConverter() *QuotaSpaceExptConverter {
@@ -41,7 +41,7 @@ func (QuotaSpaceExptConverter) ToDO(b []byte) (*entity.QuotaSpaceExpt, error) {
 
 // toBytes
 //
-//nolint:staticcheck
+//nolint:staticcheck,S1034
 func toBytes(v any) []byte {
 	switch v.(type) {
 	case string:

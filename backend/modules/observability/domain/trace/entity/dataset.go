@@ -5,14 +5,12 @@ package entity
 
 import (
 	"context"
-	"strconv"
 
 	"github.com/bytedance/gg/gptr"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/domain/common"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/loop_span"
-	"github.com/coze-dev/coze-loop/backend/pkg/json"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/common"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/loop_span"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/json"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 	"github.com/coze-dev/cozeloop-go/spec/tracespec"
 )
 
@@ -46,10 +44,6 @@ const (
 
 type EvaluationBizCategory string
 
-const (
-	BizCategoryFromOnlineTrace EvaluationBizCategory = "from_online_trace"
-)
-
 type Dataset struct {
 	// 主键&外键
 	ID          int64
@@ -63,8 +57,6 @@ type Dataset struct {
 	DatasetVersion DatasetVersion
 	// 评测集属性
 	EvaluationBizCategory *EvaluationBizCategory
-	Seesion               *common.Session
-	UserID                *string
 }
 
 type DatasetVersion struct {
@@ -103,11 +95,7 @@ type FieldSchema struct {
 	DisplayFormat FieldDisplayFormat
 }
 
-func NewDataset(id, spaceID int64, name string, category DatasetCategory, schema DatasetSchema, session *common.Session, evaluationBizCategory *EvaluationBizCategory) *Dataset {
-	var userID *string
-	if session != nil {
-		userID = ptr.Of(strconv.FormatInt(*session.UserID, 10))
-	}
+func NewDataset(id, spaceID int64, name string, category DatasetCategory, schema DatasetSchema) *Dataset {
 	dataset := &Dataset{
 		ID:          id,
 		WorkspaceID: spaceID,
@@ -115,10 +103,7 @@ func NewDataset(id, spaceID int64, name string, category DatasetCategory, schema
 		DatasetVersion: DatasetVersion{
 			DatasetSchema: schema,
 		},
-		EvaluationBizCategory: evaluationBizCategory,
-		DatasetCategory:       category,
-		Seesion:               session,
-		UserID:                userID,
+		DatasetCategory: category,
 	}
 	return dataset
 }
@@ -143,7 +128,6 @@ type DatasetItem struct {
 	Error       []*ItemError
 	SpanType    string
 	SpanName    string
-	Source      *ItemSource
 }
 
 type ItemError struct {
@@ -156,40 +140,6 @@ type FieldData struct {
 	Key     string // 评测集的唯一键
 	Name    string // 用于展现的列名
 	Content *Content
-}
-
-type ItemSource struct {
-	Type LineageSourceType
-	// 任务类型，根据该字段区分数据导入任务/数据回流任务/...
-	JobType *TrackedJobType
-	// item 关联的任务 id，为 0 表示无相应任务(例如数据是通过克隆另一数据行产生的)
-	JobID *int64
-	// type = DataReflow 时，从该字段获取 span 信息
-	Span *TrackedTraceSpan
-}
-type LineageSourceType int64
-
-const (
-	// 数据回流，需要根据 ItemSource.span.isManual 是否是手动回流。如果是自动回流，则 ItemSource.jobID 中会包含对应的任务 ID
-	LineageSourceType_DataReflow LineageSourceType = 4
-)
-
-type TrackedJobType int64
-
-const (
-	// 数据导入任务
-	TrackedJobType_DatasetIOJob TrackedJobType = 1
-	// 数据回流任务
-	TrackedJobType_DataReflow TrackedJobType = 2
-)
-
-type TrackedTraceSpan struct {
-	TraceID  *string
-	SpanID   *string
-	SpanName *string
-	SpanType *string
-	// 是否手工回流
-	IsManual *bool
 }
 
 type Content struct {
@@ -251,7 +201,7 @@ func (c *Content) GetMultiPart() []*Content {
 	return c.MultiPart
 }
 
-func NewDatasetItem(workspaceID int64, datasetID int64, span *loop_span.Span, source *ItemSource) *DatasetItem {
+func NewDatasetItem(workspaceID int64, datasetID int64, span *loop_span.Span) *DatasetItem {
 	if span == nil {
 		return nil
 	}
@@ -263,7 +213,6 @@ func NewDatasetItem(workspaceID int64, datasetID int64, span *loop_span.Span, so
 		FieldData:   make([]*FieldData, 0),
 		SpanType:    span.SpanType,
 		SpanName:    span.SpanName,
-		Source:      source,
 	}
 }
 

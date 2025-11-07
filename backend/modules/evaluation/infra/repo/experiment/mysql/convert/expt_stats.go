@@ -6,8 +6,8 @@ package convert
 import (
 	"github.com/bytedance/gg/gptr"
 
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/experiment/mysql/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/experiment/mysql/gorm_gen/model"
 )
 
 func NewExptStatsConverter() ExptStatsConverter {

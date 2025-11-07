@@ -43,7 +43,7 @@
     "test:cov": "npm run test -- --coverage"
   },
   "dependencies": {
-    "@coze-arch/coze-design": "0.0.7-alpha.985c0d",
+    "@coze-arch/coze-design": "0.0.6-alpha.346d77",
     "@coze-arch/logger": "workspace:*",
     "@cozeloop/api-schema": "workspace:*",
     "@cozeloop/biz-hooks-adapter": "workspace:*",
@@ -91,3 +91,4 @@
     "react-dom": ">=18.2.0"
   }
 }
+

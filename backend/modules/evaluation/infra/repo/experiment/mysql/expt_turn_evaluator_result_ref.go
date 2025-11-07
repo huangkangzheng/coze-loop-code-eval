@@ -8,10 +8,10 @@ import (
 
 	"gorm.io/plugin/dbresolver"
 
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/experiment/mysql/gorm_gen/model"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/experiment/mysql/gorm_gen/query"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/pkg/contexts"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/experiment/mysql/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/experiment/mysql/gorm_gen/query"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/pkg/contexts"
 )
 
 //go:generate  mockgen -destination=mocks/expt_turn_evaluator_result_ref.go  -package mocks . IExptTurnEvaluatorResultRefDAO

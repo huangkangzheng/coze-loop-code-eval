@@ -6,9 +6,9 @@ package mysql
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	"github.com/coze-dev/coze-loop/backend/modules/foundation/infra/repo/mysql/gorm_gen/model"
-	"github.com/coze-dev/coze-loop/backend/modules/foundation/infra/repo/mysql/gorm_gen/query"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/foundation/infra/repo/mysql/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/foundation/infra/repo/mysql/gorm_gen/query"
 )
 
 //go:generate mockgen -destination=mocks/user_dao.go -package=mocks . IUserDAO

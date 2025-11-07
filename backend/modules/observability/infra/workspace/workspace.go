@@ -7,8 +7,8 @@ import (
 	"context"
 	"strconv"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/observability/domain/span"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/component/workspace"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/domain/span"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/component/workspace"
 )
 
 func NewWorkspaceProvider() workspace.IWorkSpaceProvider {

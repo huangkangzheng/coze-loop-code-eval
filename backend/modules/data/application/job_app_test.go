@@ -11,15 +11,15 @@ import (
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 
-	mock_audit "github.com/coze-dev/coze-loop/backend/infra/external/audit/mocks"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/dataset"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/domain/dataset_job"
-	mock_auth "github.com/coze-dev/coze-loop/backend/modules/data/domain/component/rpc/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/entity"
-	mock_repo "github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/repo/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/service"
-	mock_dataset "github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/service/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/data/infra/vfs"
+	mock_audit "code.byted.org/flowdevops/cozeloop/backend/infra/external/audit/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/dataset"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/domain/dataset_job"
+	mock_auth "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/component/rpc/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/entity"
+	mock_repo "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/repo/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/service"
+	mock_dataset "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/service/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/infra/vfs"
 )
 
 func TestDatasetApplicationImpl_ImportDataset(t *testing.T) {
@@ -110,7 +110,7 @@ func TestDatasetApplicationImpl_GetDatasetIOJob(t *testing.T) {
 		// 正常场景
 		{
 			name: "正常获取数据集 IO 任务",
-			req:  &dataset.GetDatasetIOJobRequest{
+			req: &dataset.GetDatasetIOJobRequest{
 				// 根据实际情况补充请求参数
 			},
 			mockAuth: func() {

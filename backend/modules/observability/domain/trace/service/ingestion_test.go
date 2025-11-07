@@ -11,15 +11,15 @@ import (
 
 	"go.uber.org/mock/gomock"
 
-	mqmocks "github.com/coze-dev/coze-loop/backend/infra/mq/mocks"
-	confmocks "github.com/coze-dev/coze-loop/backend/modules/observability/domain/component/config/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/collector"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/collector/exporter"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/collector/processor"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/collector/receiver"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/service/collector/exporter/clickhouseexporter"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/service/collector/processor/queueprocessor"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/service/collector/receiver/rmqreceiver"
+	mqmocks "code.byted.org/flowdevops/cozeloop/backend/infra/mq/mocks"
+	confmocks "code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/component/config/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/collector"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/collector/exporter"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/collector/processor"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/collector/receiver"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/service/collector/exporter/clickhouseexporter"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/service/collector/processor/queueprocessor"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/service/collector/receiver/rmqreceiver"
 )
 
 var collectorCfg = map[string]any{

@@ -8,11 +8,11 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/tag"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/tag/tagservice"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/component/rpc"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/infra/rpc/tag/convertor"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/tag"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/tag/tagservice"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/component/rpc"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/infra/rpc/tag/convertor"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 	"github.com/samber/lo"
 )
 

@@ -16,16 +16,16 @@ import (
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 
-	idgenMocks "github.com/coze-dev/coze-loop/backend/infra/idgen/mocks"
-	"github.com/coze-dev/coze-loop/backend/infra/platestwrite"
-	lwtMocks "github.com/coze-dev/coze-loop/backend/infra/platestwrite/mocks"
-	metricsMocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/metrics/mocks"
-	rpcMocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/rpc/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	eventsMocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/events/mocks"
-	repoMocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/repo/mocks"
-	svcMocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/service/mocks"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
+	idgenMocks "code.byted.org/flowdevops/cozeloop/backend/infra/idgen/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/platestwrite"
+	lwtMocks "code.byted.org/flowdevops/cozeloop/backend/infra/platestwrite/mocks"
+	metricsMocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/metrics/mocks"
+	rpcMocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/rpc/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	eventsMocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/events/mocks"
+	repoMocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/repo/mocks"
+	svcMocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/service/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
 )
 
 func TestExptResultServiceImpl_MGetStats(t *testing.T) {

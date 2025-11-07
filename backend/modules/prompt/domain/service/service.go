@@ -6,11 +6,11 @@ package service
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/infra/idgen"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/domain/component/conf"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/domain/component/rpc"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/domain/repo"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/idgen"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/component/conf"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/component/rpc"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/repo"
 )
 
 //go:generate mockgen -destination=mocks/prompt_service.go -package=mocks . IPromptService

@@ -9,18 +9,17 @@ import (
 	"github.com/pkg/errors"
 	"gorm.io/gorm"
 
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/target/mysql/gorm_gen/model"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/target/mysql/gorm_gen/query"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/pkg/contexts"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/target/mysql/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/target/mysql/gorm_gen/query"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/pkg/contexts"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
 )
 
 //go:generate mockgen -destination=mocks/eval_target_record.go -package=mocks . EvalTargetRecordDAO
 type EvalTargetRecordDAO interface {
 	Create(ctx context.Context, record *model.TargetRecord) (id int64, err error)
-	Save(ctx context.Context, record *model.TargetRecord) error
 	GetByIDAndSpaceID(ctx context.Context, recordID int64, spaceID int64) (*model.TargetRecord, error)
 	ListByIDsAndSpaceID(ctx context.Context, recordIDs []int64, spaceID int64) ([]*model.TargetRecord, error)
 }
@@ -34,13 +33,6 @@ func NewEvalTargetRecordDAO(db db.Provider) EvalTargetRecordDAO {
 	return &EvalTargetRecordDAOImpl{db: db, query: query.Use(db.NewSession(context.Background()))}
 }
 
-func (e *EvalTargetRecordDAOImpl) Save(ctx context.Context, record *model.TargetRecord) error {
-	if err := e.db.NewSession(ctx).Save(record).Error; err != nil {
-		return errorx.WrapByCode(err, errno.CommonMySqlErrorCode)
-	}
-	return nil
-}
-
 func (e *EvalTargetRecordDAOImpl) Create(ctx context.Context, record *model.TargetRecord) (id int64, err error) {
 	// 写DB
 	err = e.db.NewSession(ctx).Create(record).Error
@@ -50,7 +42,7 @@ func (e *EvalTargetRecordDAOImpl) Create(ctx context.Context, record *model.Targ
 	return record.ID, nil
 }
 
-func (e *EvalTargetRecordDAOImpl) GetByIDAndSpaceID(ctx context.Context, recordID, spaceID int64) (*model.TargetRecord, error) {
+func (e *EvalTargetRecordDAOImpl) GetByIDAndSpaceID(ctx context.Context, recordID int64, spaceID int64) (*model.TargetRecord, error) {
 	q := e.query
 	first, err := q.WithContext(ctx).TargetRecord.Where(q.TargetRecord.SpaceID.Eq(spaceID), q.TargetRecord.ID.Eq(recordID), q.TargetRecord.DeletedAt.IsNull()).First()
 

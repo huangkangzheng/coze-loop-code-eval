@@ -12,7 +12,7 @@ import (
 	"github.com/apache/rocketmq-client-go/v2/consumer"
 	"github.com/apache/rocketmq-client-go/v2/primitive"
 
-	"github.com/coze-dev/coze-loop/backend/infra/mq"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/mq"
 )
 
 type Consumer struct {

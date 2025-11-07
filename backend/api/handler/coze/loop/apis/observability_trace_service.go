@@ -11,8 +11,8 @@ import (
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/apis/observabilitytraceservice"
-	trace "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/observability/trace"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/apis/observabilitytraceservice"
+	trace "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/trace"
 )
 
 var observabilityClient observabilitytraceservice.Client
@@ -119,38 +119,4 @@ func PreviewExportTracesToDataset(ctx context.Context, c *app.RequestContext) {
 	resp := new(trace.PreviewExportTracesToDatasetResponse)
 
 	c.JSON(consts.StatusOK, resp)
-}
-
-// SearchTraceTree .
-// @router /api/observability/v1/traces/search_tree [POST]
-func SearchTraceTree(ctx context.Context, c *app.RequestContext) {
-	var err error
-	var req trace.SearchTraceTreeRequest
-	err = c.BindAndValidate(&req)
-	if err != nil {
-		c.String(consts.StatusBadRequest, err.Error())
-		return
-	}
-
-	resp := new(trace.SearchTraceTreeResponse)
-
-	c.JSON(consts.StatusOK, resp)
-}
-
-// ChangeEvaluatorScore .
-// @router /api/observability/v1/annotations/change_eEvaluator_sScore [POST]
-func ChangeEvaluatorScore(ctx context.Context, c *app.RequestContext) {
-	invokeAndRender(ctx, c, observabilityClient.ChangeEvaluatorScore)
-}
-
-// ListAnnotationEvaluators .
-// @router /api/observability/v1/annotations/lis_annotation_evaluators [POST]
-func ListAnnotationEvaluators(ctx context.Context, c *app.RequestContext) {
-	invokeAndRender(ctx, c, observabilityClient.ListAnnotationEvaluators)
-}
-
-// ExtractSpanInfo .
-// @router /api/observability/v1/traces/extract_span_info [POST]
-func ExtractSpanInfo(ctx context.Context, c *app.RequestContext) {
-	invokeAndRender(ctx, c, observabilityClient.ExtractSpanInfo)
 }

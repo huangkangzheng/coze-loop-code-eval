@@ -12,15 +12,15 @@ import (
 	"github.com/bytedance/gg/gslice"
 	"gorm.io/gorm"
 
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	"github.com/coze-dev/coze-loop/backend/infra/idgen"
-	"github.com/coze-dev/coze-loop/backend/infra/platestwrite"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/consts"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/repo"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/evaluator/mysql"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/evaluator/mysql/convertor"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/evaluator/mysql/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/idgen"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/platestwrite"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/consts"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/repo"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/evaluator/mysql"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/evaluator/mysql/convertor"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/evaluator/mysql/gorm_gen/model"
 )
 
 // EvaluatorRepoImpl 实现 EvaluatorRepo 接口
@@ -47,7 +47,7 @@ func (r *EvaluatorRepoImpl) SubmitEvaluatorVersion(ctx context.Context, evaluato
 	err := r.dbProvider.Transaction(ctx, func(tx *gorm.DB) error {
 		opt := db.WithTransaction(tx)
 		// 更新Evaluator最新版本
-		err := r.evaluatorDao.UpdateEvaluatorLatestVersion(ctx, evaluator.ID, evaluator.GetVersion(), gptr.Indirect(evaluator.BaseInfo.UpdatedBy.UserID), opt)
+		err := r.evaluatorDao.UpdateEvaluatorLatestVersion(ctx, evaluator.ID, evaluator.GetEvaluatorVersion().GetVersion(), gptr.Indirect(evaluator.BaseInfo.UpdatedBy.UserID), opt)
 		if err != nil {
 			return err
 		}
@@ -130,15 +130,6 @@ func (r *EvaluatorRepoImpl) BatchGetEvaluatorByVersionID(ctx context.Context, sp
 			evaluatorDO := convertor.ConvertEvaluatorPO2DO(evaluatorMap[evaluatorVersionPO.EvaluatorID])
 			evaluatorDO.PromptEvaluatorVersion = evaluatorVersionDO.PromptEvaluatorVersion
 			evaluatorDO.EvaluatorType = entity.EvaluatorTypePrompt
-			evaluatorDOList = append(evaluatorDOList, evaluatorDO)
-		case int32(entity.EvaluatorTypeCode):
-			evaluatorVersionDO, err := convertor.ConvertEvaluatorVersionPO2DO(evaluatorVersionPO)
-			if err != nil {
-				return nil, err
-			}
-			evaluatorDO := convertor.ConvertEvaluatorPO2DO(evaluatorMap[evaluatorVersionPO.EvaluatorID])
-			evaluatorDO.CodeEvaluatorVersion = evaluatorVersionDO.CodeEvaluatorVersion
-			evaluatorDO.EvaluatorType = entity.EvaluatorTypeCode
 			evaluatorDOList = append(evaluatorDOList, evaluatorDO)
 		default:
 			continue
@@ -250,7 +241,7 @@ func (r *EvaluatorRepoImpl) CreateEvaluator(ctx context.Context, do *entity.Eval
 	evaluatorPO.ID = genIDs[0]
 	evaluatorID = evaluatorPO.ID
 	evaluatorPO.DraftSubmitted = gptr.Of(true) // 初始化创建时草稿统一已提交
-	evaluatorPO.LatestVersion = do.GetVersion()
+	evaluatorPO.LatestVersion = do.GetEvaluatorVersion().GetVersion()
 	evaluatorVersionPO, err := convertor.ConvertEvaluatorVersionDO2PO(do)
 	if err != nil {
 		return 0, err

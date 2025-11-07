@@ -4,8 +4,8 @@
 package common
 
 import (
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/domain/common"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/domain/common"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/entity"
 )
 
 // ConvertUserInfoDO2DTO 将 UserInfo 结构体转换为 DTO

@@ -6,10 +6,10 @@ package evaluation_set
 import (
 	"github.com/bytedance/gg/gptr"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/domain/dataset"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/domain/eval_set"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/application/convertor/common"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/domain/dataset"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/eval_set"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/application/convertor/common"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
 )
 
 func ItemDTO2DOs(dtos []*eval_set.EvaluationSetItem) []*entity.EvaluationSetItem {
@@ -163,29 +163,6 @@ func ItemErrorGroupDO2DTOs(dos []*entity.ItemErrorGroup) []*dataset.ItemErrorGro
 		result = append(result, ItemErrorGroupDO2DTO(do))
 	}
 	return result
-}
-
-func CreateDatasetItemOutputDO2DTOs(dos []*entity.DatasetItemOutput) []*dataset.CreateDatasetItemOutput {
-	if dos == nil {
-		return nil
-	}
-	result := make([]*dataset.CreateDatasetItemOutput, 0)
-	for _, do := range dos {
-		result = append(result, CreateDatasetItemOutputDO2DTO(do))
-	}
-	return result
-}
-
-func CreateDatasetItemOutputDO2DTO(do *entity.DatasetItemOutput) *dataset.CreateDatasetItemOutput {
-	if do == nil {
-		return nil
-	}
-	return &dataset.CreateDatasetItemOutput{
-		ItemIndex: do.ItemIndex,
-		ItemKey:   do.ItemKey,
-		ItemID:    do.ItemID,
-		IsNewItem: do.IsNewItem,
-	}
 }
 
 func ItemErrorGroupDO2DTO(do *entity.ItemErrorGroup) *dataset.ItemErrorGroup {

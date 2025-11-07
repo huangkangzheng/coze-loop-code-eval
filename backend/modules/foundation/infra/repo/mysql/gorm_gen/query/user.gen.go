@@ -16,7 +16,7 @@ import (
 
 	"gorm.io/plugin/dbresolver"
 
-	"github.com/coze-dev/coze-loop/backend/modules/foundation/infra/repo/mysql/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/foundation/infra/repo/mysql/gorm_gen/model"
 )
 
 func newUser(db *gorm.DB, opts ...gen.DOOption) user {

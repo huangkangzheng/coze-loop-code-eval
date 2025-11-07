@@ -9,7 +9,7 @@ import (
 	"github.com/bytedance/gg/gptr"
 	"github.com/samber/lo"
 
-	"github.com/coze-dev/coze-loop/backend/infra/mq"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/mq"
 )
 
 const (

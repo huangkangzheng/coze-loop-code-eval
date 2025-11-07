@@ -9,8 +9,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/data/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/pkg/errno"
 )
 
 func TestSanitizeInputItem(t *testing.T) {

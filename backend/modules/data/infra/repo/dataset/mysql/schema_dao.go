@@ -7,12 +7,12 @@ import (
 	"context"
 	"strconv"
 
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	"github.com/coze-dev/coze-loop/backend/infra/platestwrite"
-	"github.com/coze-dev/coze-loop/backend/infra/redis"
-	"github.com/coze-dev/coze-loop/backend/modules/data/infra/repo/dataset/mysql/gorm_gen/model"
-	"github.com/coze-dev/coze-loop/backend/modules/data/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/platestwrite"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/redis"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/infra/repo/dataset/mysql/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 //go:generate mockgen -destination=mocks/schema_dao.go -package=mocks . ISchemaDAO

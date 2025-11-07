@@ -4,9 +4,9 @@
 package trace
 
 import (
-	commondto "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/observability/domain/common"
-	commonentity "github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/common"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
+	commondto "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/domain/common"
+	commonentity "code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/common"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
 )
 
 func UserInfoDO2DTO(info *commonentity.UserInfo) *commondto.UserInfo {

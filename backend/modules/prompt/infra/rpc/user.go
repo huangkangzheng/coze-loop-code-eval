@@ -6,10 +6,10 @@ package rpc
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/user"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/user/userservice"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/domain/component/rpc"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/infra/rpc/convertor"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/user"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/user/userservice"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/component/rpc"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/infra/rpc/convertor"
 )
 
 type UserRPCAdapter struct {

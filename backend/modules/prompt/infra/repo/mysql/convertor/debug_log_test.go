@@ -9,9 +9,9 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/infra/repo/mysql/gorm_gen/model"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/infra/repo/mysql/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
 )
 
 func TestDebugLogsPO2DO(t *testing.T) {

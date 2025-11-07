@@ -7,15 +7,15 @@ import (
 	"context"
 	"strings"
 
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	"github.com/coze-dev/coze-loop/backend/infra/idgen"
-	"github.com/coze-dev/coze-loop/backend/infra/middleware/session"
-	"github.com/coze-dev/coze-loop/backend/modules/foundation/domain/user/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/foundation/domain/user/repo"
-	"github.com/coze-dev/coze-loop/backend/modules/foundation/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/modules/foundation/pkg/pswd"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/conv"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/idgen"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/middleware/session"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/foundation/domain/user/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/foundation/domain/user/repo"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/foundation/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/foundation/pkg/pswd"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/conv"
 )
 
 type UserServiceImpl struct {

@@ -4,8 +4,8 @@ package prompt
 
 import (
 	"github.com/apache/thrift/lib/go/thrift"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/llm/manage"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/llm/runtime"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/llm/manage"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/llm/runtime"
 )
 
 type LLMManageService interface {

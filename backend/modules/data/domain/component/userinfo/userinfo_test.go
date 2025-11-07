@@ -11,9 +11,9 @@ import (
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 
-	commondto "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/domain/common"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/component/rpc/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/entity"
+	commondto "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/domain/common"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/component/rpc/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/entity"
 )
 
 func TestNewUserInfoServiceImpl(t *testing.T) {

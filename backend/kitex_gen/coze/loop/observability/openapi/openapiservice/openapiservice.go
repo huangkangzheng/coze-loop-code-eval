@@ -7,7 +7,7 @@ import (
 	"errors"
 	client "github.com/cloudwego/kitex/client"
 	kitex "github.com/cloudwego/kitex/pkg/serviceinfo"
-	openapi "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/observability/openapi"
+	openapi "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/openapi"
 )
 
 var errInvalidMessageType = errors.New("invalid message type for service method handler")
@@ -31,13 +31,6 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		searchTraceOApiHandler,
 		newOpenAPIServiceSearchTraceOApiArgs,
 		newOpenAPIServiceSearchTraceOApiResult,
-		false,
-		kitex.WithStreamingMode(kitex.StreamingNone),
-	),
-	"SearchTraceTreeOApi": kitex.NewMethodInfo(
-		searchTraceTreeOApiHandler,
-		newOpenAPIServiceSearchTraceTreeOApiArgs,
-		newOpenAPIServiceSearchTraceTreeOApiResult,
 		false,
 		kitex.WithStreamingMode(kitex.StreamingNone),
 	),
@@ -159,25 +152,6 @@ func newOpenAPIServiceSearchTraceOApiResult() interface{} {
 	return openapi.NewOpenAPIServiceSearchTraceOApiResult()
 }
 
-func searchTraceTreeOApiHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-	realArg := arg.(*openapi.OpenAPIServiceSearchTraceTreeOApiArgs)
-	realResult := result.(*openapi.OpenAPIServiceSearchTraceTreeOApiResult)
-	success, err := handler.(openapi.OpenAPIService).SearchTraceTreeOApi(ctx, realArg.Req)
-	if err != nil {
-		return err
-	}
-	realResult.Success = success
-	return nil
-}
-
-func newOpenAPIServiceSearchTraceTreeOApiArgs() interface{} {
-	return openapi.NewOpenAPIServiceSearchTraceTreeOApiArgs()
-}
-
-func newOpenAPIServiceSearchTraceTreeOApiResult() interface{} {
-	return openapi.NewOpenAPIServiceSearchTraceTreeOApiResult()
-}
-
 func listSpansOApiHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	realArg := arg.(*openapi.OpenAPIServiceListSpansOApiArgs)
 	realResult := result.(*openapi.OpenAPIServiceListSpansOApiResult)
@@ -291,16 +265,6 @@ func (p *kClient) SearchTraceOApi(ctx context.Context, req *openapi.SearchTraceO
 	_args.Req = req
 	var _result openapi.OpenAPIServiceSearchTraceOApiResult
 	if err = p.c.Call(ctx, "SearchTraceOApi", &_args, &_result); err != nil {
-		return
-	}
-	return _result.GetSuccess(), nil
-}
-
-func (p *kClient) SearchTraceTreeOApi(ctx context.Context, req *openapi.SearchTraceTreeOApiRequest) (r *openapi.SearchTraceTreeOApiResponse, err error) {
-	var _args openapi.OpenAPIServiceSearchTraceTreeOApiArgs
-	_args.Req = req
-	var _result openapi.OpenAPIServiceSearchTraceTreeOApiResult
-	if err = p.c.Call(ctx, "SearchTraceTreeOApi", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

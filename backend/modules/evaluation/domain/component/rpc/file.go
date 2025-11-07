@@ -8,7 +8,7 @@ import (
 
 	"github.com/cloudwego/kitex/client/callopt"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/file"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/file"
 )
 
 type IFileRPCAdapter interface {

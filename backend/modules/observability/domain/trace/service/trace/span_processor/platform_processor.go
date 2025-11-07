@@ -6,8 +6,8 @@ package span_processor
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/component/config"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/loop_span"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/component/config"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/loop_span"
 )
 
 type PlatformProcessor struct {

@@ -6,9 +6,9 @@ package convertor
 import (
 	"time"
 
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/loop_span"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/infra/repo/ck/gorm_gen/model"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/loop_span"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/infra/repo/ck/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
 )
 
 func SpanListDO2PO(spans loop_span.SpanList, TTL loop_span.TTL) []*model.ObservabilitySpan {

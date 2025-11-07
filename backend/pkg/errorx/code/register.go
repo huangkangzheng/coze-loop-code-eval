@@ -4,7 +4,7 @@
 package code
 
 import (
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx/internal"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx/internal"
 )
 
 type RegisterOptionFn = internal.RegisterOption

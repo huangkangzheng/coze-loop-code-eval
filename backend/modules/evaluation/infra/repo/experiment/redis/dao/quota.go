@@ -8,11 +8,11 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/coze-dev/coze-loop/backend/infra/redis"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/experiment/redis/convert"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/conv"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/redis"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/experiment/redis/convert"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/conv"
 )
 
 //go:generate mockgen -source=quota.go -destination=mocks/quota.go -package=mocks -mock_names=IQuotaDAO=MockIQuotaDAO

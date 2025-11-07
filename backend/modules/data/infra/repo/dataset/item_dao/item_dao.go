@@ -6,7 +6,7 @@ package item_dao
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/entity"
 )
 
 type ItemDAO interface {

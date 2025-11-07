@@ -10,11 +10,11 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/collector/component"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/collector/consumer"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/collector/processor"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/loop_span"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/collector/component"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/collector/consumer"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/collector/processor"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/loop_span"
 )
 
 type nextConsumerMock struct {

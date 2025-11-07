@@ -6,7 +6,7 @@ package rpc
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/entity"
 )
 
 type LLMCallParam struct {

@@ -9,21 +9,20 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/bytedance/gg/gcond"
 	"github.com/bytedance/gg/gptr"
 	"github.com/jinzhu/copier"
 
-	"github.com/coze-dev/coze-loop/backend/infra/external/benefit"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/metrics"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/repo"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/consts"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/json"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/maps"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/external/benefit"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/metrics"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/repo"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/consts"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/json"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/maps"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 type ExptItemEvaluation interface {
@@ -39,7 +38,6 @@ func NewExptItemEvaluation(
 	evaluatorRecordService EvaluatorRecordService,
 	evaluatorService EvaluatorService,
 	benefitService benefit.IBenefitService,
-	evalAsyncRepo repo.IEvalAsyncRepo,
 ) ExptItemEvaluation {
 	return &ExptItemEvalCtxExecutor{
 		TurnResultRepo:         turnResultRepo,
@@ -50,7 +48,6 @@ func NewExptItemEvaluation(
 		evaluatorRecordService: evaluatorRecordService,
 		evaluatorService:       evaluatorService,
 		benefitService:         benefitService,
-		evalAsyncRepo:          evalAsyncRepo,
 	}
 }
 
@@ -63,7 +60,6 @@ type ExptItemEvalCtxExecutor struct {
 	evaluatorService       EvaluatorService
 	evaluatorRecordService EvaluatorRecordService
 	benefitService         benefit.IBenefitService
-	evalAsyncRepo          repo.IEvalAsyncRepo
 }
 
 func (e *ExptItemEvalCtxExecutor) Eval(ctx context.Context, eiec *entity.ExptItemEvalCtx) error {
@@ -72,55 +68,43 @@ func (e *ExptItemEvalCtxExecutor) Eval(ctx context.Context, eiec *entity.ExptIte
 	// if err := e.SetItemRunProcessing(ctx, event.ExptID, event.ExptRunID, event.EvalSetItemID, event.SpaceID, event.Session); err != nil {
 	//	return err
 	// }
-
-	asyncAbort, evalErr := e.EvalTurns(ctx, eiec)
-	if asyncAbort {
-		return nil
-	}
-
-	if err := e.CompleteItemRun(ctx, event, evalErr); err != nil {
+	if err := e.CompleteItemRun(ctx, event, e.EvalTurns(ctx, eiec)); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func (e *ExptItemEvalCtxExecutor) EvalTurns(ctx context.Context, eiec *entity.ExptItemEvalCtx) (asyncAbort bool, err error) {
+func (e *ExptItemEvalCtxExecutor) EvalTurns(ctx context.Context, eiec *entity.ExptItemEvalCtx) error {
 	var history []*entity.Message
 
 	if eiec.EvalSetItem == nil {
-		return false, fmt.Errorf("EvalTurns with invalid empty eval_set_item")
+		return fmt.Errorf("EvalTurns with invalid empty eval_set_item")
 	}
 
 	for _, turn := range eiec.EvalSetItem.Turns {
 		etec, err := e.buildExptTurnEvalCtx(ctx, turn, eiec, history)
 		if err != nil {
-			return false, err
+			return err
 		}
 
-		ctx = context.WithValue(ctx, consts.CtxKeyLogID, etec.GetTurnEvalLogID(ctx, turn.ID)) //nolint:staticcheck
+		ctx = context.WithValue(ctx, consts.CtxKeyLogID, etec.GetTurnEvalLogID(ctx, turn.ID)) //nolint:staticcheck,SA1029
 
-		turnRunRes := NewExptTurnEvaluation(e.Metric, e.evalTargetService, e.evaluatorService, e.benefitService, e.evalAsyncRepo).Eval(ctx, etec)
+		turnRunRes := NewExptTurnEvaluation(e.Metric, e.evalTargetService, e.evaluatorService, e.benefitService).Eval(ctx, etec)
 
 		if err := e.storeTurnRunResult(ctx, etec, turnRunRes); err != nil {
-			return false, err
-		}
-
-		if turnRunRes.AsyncAbort {
-			logs.CtxInfo(ctx, "[ExptTurnEval] eval async abort, expt_id: %v, item_id: %v, turn_id: %v", eiec.Event.ExptID, eiec.Event.EvalSetItemID, turn.ID)
-			return true, nil
+			return err
 		}
 
 		if err := turnRunRes.GetEvalErr(); err != nil {
-			return false, err
+			return err
 		}
 
 		history = append(history, buildHistoryMessage(ctx, turnRunRes)...)
 	}
 
-	time.Sleep(time.Second * 1)
-
-	return false, nil
+	time.Sleep(time.Second * 1) // 确保日志落库
+	return nil
 }
 
 func (e *ExptItemEvalCtxExecutor) storeTurnRunResult(ctx context.Context, etec *entity.ExptTurnEvalCtx, result *entity.ExptTurnRunResult) error {
@@ -181,7 +165,7 @@ func (e *ExptItemEvalCtxExecutor) storeTurnRunResult(ctx context.Context, etec *
 		clone.Status = entity.TurnRunState_Fail
 		clone.ErrMsg = errno.SerializeErr(evalErr)
 	} else {
-		clone.Status = gcond.If(result.AsyncAbort, clone.Status, entity.TurnRunState_Success)
+		clone.Status = entity.TurnRunState_Success
 	}
 
 	result.SetEvalErr(evalErr)
@@ -196,7 +180,7 @@ func (e *ExptItemEvalCtxExecutor) storeTurnRunResult(ctx context.Context, etec *
 	return nil
 }
 
-func (e *ExptItemEvalCtxExecutor) SetItemRunProcessing(ctx context.Context, exptID, exptRunID, itemID, spaceID int64, session *entity.Session) error {
+func (e *ExptItemEvalCtxExecutor) SetItemRunProcessing(ctx context.Context, exptID, exptRunID, itemID int64, spaceID int64, session *entity.Session) error {
 	return e.ItemResultRepo.UpdateItemRunLog(ctx, exptID, exptRunID, []int64{itemID}, map[string]any{"status": int32(entity.ItemRunState_Processing)}, spaceID)
 }
 
@@ -212,24 +196,17 @@ func (e *ExptItemEvalCtxExecutor) buildExptTurnEvalCtx(ctx context.Context, turn
 		}
 	)
 	etec.Ext = make(map[string]string)
-	for k, v := range eiec.Event.Ext {
-		etec.Ext[k] = v
-	}
 	for _, fieldData := range eiec.EvalSetItem.Turns[0].FieldDataList {
 		if fieldData.Name == "span_id" {
 			etec.Ext["span_id"] = fieldData.Content.GetText()
-		}
-		if fieldData.Name == "run_id" {
-			etec.Ext["run_id"] = fieldData.Content.GetText()
-		}
-		if fieldData.Name == "trace_id" {
-			etec.Ext["trace_id"] = fieldData.Content.GetText()
 		}
 	}
 	etec.Ext["task_id"] = eiec.Expt.SourceID
 	etec.Ext["workspace_id"] = strconv.FormatInt(eiec.Expt.SpaceID, 10)
 	etec.Ext["start_time"] = strconv.FormatInt(gptr.Indirect(eiec.EvalSetItem.BaseInfo.CreatedAt)*1000, 10) // 存储是毫秒，需要存入微妙
-
+	for k, v := range eiec.Event.Ext {
+		etec.Ext[k] = v
+	}
 	if existTurnRunResult == nil {
 		return etec, nil
 	}
@@ -244,7 +221,7 @@ func (e *ExptItemEvalCtxExecutor) buildExptTurnEvalCtx(ctx context.Context, turn
 
 	if erids := existTurnRunResult.EvaluatorResultIds; erids != nil && len(erids.EvalVerIDToResID) > 0 {
 		// evaluatorRecords, err := e.EvalCall.BatchGetEvaluatorRecord(ctx, spaceID, maps.ToSlice(erids.EvalVerIDToResID, func(k int64, v int64) int64 { return v }))
-		evaluatorRecords, err := e.evaluatorRecordService.BatchGetEvaluatorRecord(ctx, maps.ToSlice(erids.EvalVerIDToResID, func(k, v int64) int64 { return v }), false)
+		evaluatorRecords, err := e.evaluatorRecordService.BatchGetEvaluatorRecord(ctx, maps.ToSlice(erids.EvalVerIDToResID, func(k int64, v int64) int64 { return v }), false)
 		if err != nil {
 			return nil, err
 		}
@@ -281,11 +258,11 @@ func (e *ExptItemEvalCtxExecutor) CompleteItemRun(ctx context.Context, event *en
 	}
 
 	if e.evalErrNeedTerminateExpt(ctx, event.SpaceID, evalErr) {
-		logs.CtxWarn(ctx, "[ExptTurnEval] found error which should terminate expt, expt_id: %v, expt_run_id: %v, item_id: %v, err: %v", event.ExptID, event.ExptRunID, event.EvalSetItemID, evalErr)
+		logs.CtxWarn(ctx, "[ExptRecordEval] found error which should terminate expt, expt_id: %v, expt_run_id: %v, item_id: %v, err: %v", event.ExptID, event.ExptRunID, event.EvalSetItemID, evalErr)
 		return evalErr
 	}
 
-	logs.CtxInfo(ctx, "[ExptTurnEval] expt item eval finished, expt_id: %v, expt_run_id: %v, success: %v, update_fields: %v", event.ExptID, event.ExptRunID, evalErr == nil, ufields)
+	logs.CtxInfo(ctx, "[ExptRecordEval] expt item eval finished, expt_id: %v, expt_run_id: %v, success: %v, update_fields: %v", event.ExptID, event.ExptRunID, evalErr == nil, ufields)
 	time.Sleep(time.Second * 2) // 确保日志落库
 	return nil
 }

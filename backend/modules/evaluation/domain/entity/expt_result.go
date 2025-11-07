@@ -8,9 +8,9 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/coze-dev/coze-loop/backend/infra/middleware/session"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/json"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/middleware/session"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/json"
 )
 
 type FieldType int64

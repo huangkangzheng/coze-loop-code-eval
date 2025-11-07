@@ -10,12 +10,12 @@ import (
 
 	"github.com/cloudwego/gopkg/protocol/thrift"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/auth"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/authn"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/file"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/openapi"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/space"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/user"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/auth"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/authn"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/file"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/openapi"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/space"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/user"
 )
 
 var (

@@ -10,16 +10,16 @@ import (
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 
-	"github.com/coze-dev/coze-loop/backend/infra/idgen"
-	idgenmocks "github.com/coze-dev/coze-loop/backend/infra/idgen/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/domain/component/conf"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/domain/component/rpc"
-	rpcmocks "github.com/coze-dev/coze-loop/backend/modules/prompt/domain/component/rpc/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/domain/repo"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
-	"github.com/coze-dev/coze-loop/backend/pkg/unittest"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/idgen"
+	idgenmocks "code.byted.org/flowdevops/cozeloop/backend/infra/idgen/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/component/conf"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/component/rpc"
+	rpcmocks "code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/component/rpc/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/repo"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/unittest"
 )
 
 func TestPromptServiceImpl_FormatPrompt(t *testing.T) {

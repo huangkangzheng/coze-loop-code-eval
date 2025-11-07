@@ -10,7 +10,7 @@ import (
 	"github.com/bytedance/sonic"
 	"github.com/cloudwego/kitex/pkg/kerrors"
 
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/conv"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/conv"
 )
 
 var _ KiteXBizStatusError = &statusError{}

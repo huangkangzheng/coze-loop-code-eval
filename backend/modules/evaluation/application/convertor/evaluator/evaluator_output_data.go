@@ -6,8 +6,8 @@ package evaluator
 import (
 	"github.com/bytedance/gg/gptr"
 
-	evaluatordto "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/domain/evaluator"
-	evaluatorentity "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
+	evaluatordto "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/evaluator"
+	evaluatorentity "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
 )
 
 // ConvertEvaluatorOutputDataDTO2DO 将 DTO 转换为 evaluatorentity.EvaluatorOutputData 结构体
@@ -20,7 +20,6 @@ func ConvertEvaluatorOutputDataDTO2DO(dto *evaluatordto.EvaluatorOutputData) *ev
 		EvaluatorUsage:    ConvertEvaluatorUsageDTO2DO(dto.EvaluatorUsage),
 		EvaluatorRunError: ConvertEvaluatorRunErrorDTO2DO(dto.EvaluatorRunError),
 		TimeConsumingMS:   dto.GetTimeConsumingMs(),
-		Stdout:            dto.GetStdout(),
 	}
 }
 
@@ -34,7 +33,6 @@ func ConvertEvaluatorOutputDataDO2DTO(do *evaluatorentity.EvaluatorOutputData) *
 		EvaluatorUsage:    ConvertEvaluatorUsageDO2DTO(do.EvaluatorUsage),
 		EvaluatorRunError: ConvertEvaluatorRunErrorDO2DTO(do.EvaluatorRunError),
 		TimeConsumingMs:   gptr.Of(do.TimeConsumingMS),
-		Stdout:            gptr.Of(do.Stdout),
 	}
 }
 

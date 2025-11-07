@@ -16,7 +16,7 @@ import (
 
 	"gorm.io/plugin/dbresolver"
 
-	"github.com/coze-dev/coze-loop/backend/modules/data/infra/repo/dataset/mysql/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/infra/repo/dataset/mysql/gorm_gen/model"
 )
 
 func newItemSnapshot(db *gorm.DB, opts ...gen.DOOption) itemSnapshot {

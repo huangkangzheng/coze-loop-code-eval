@@ -6,11 +6,11 @@ package service
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/collector"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/collector/exporter"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/collector/processor"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/collector/receiver"
-	"github.com/coze-dev/coze-loop/backend/pkg/conf"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/collector"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/collector/exporter"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/collector/processor"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/collector/receiver"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/conf"
 )
 
 //go:generate mockgen -destination=mocks/ingestion.go -package=mocks . IngestionService

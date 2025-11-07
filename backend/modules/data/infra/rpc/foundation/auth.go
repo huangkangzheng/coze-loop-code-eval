@@ -10,14 +10,14 @@ import (
 	"github.com/bytedance/gg/gcond"
 	"github.com/bytedance/gg/gptr"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/auth"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/auth/authservice"
-	authentity "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/domain/auth"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/component/rpc"
-	"github.com/coze-dev/coze-loop/backend/modules/data/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/json"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/auth"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/auth/authservice"
+	authentity "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/domain/auth"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/component/rpc"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/json"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 type AuthRPCAdapter struct {

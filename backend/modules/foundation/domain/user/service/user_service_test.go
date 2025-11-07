@@ -11,16 +11,16 @@ import (
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	"github.com/coze-dev/coze-loop/backend/infra/idgen"
-	idgenmocks "github.com/coze-dev/coze-loop/backend/infra/idgen/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/foundation/domain/user/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/foundation/domain/user/repo"
-	repomocks "github.com/coze-dev/coze-loop/backend/modules/foundation/domain/user/repo/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/foundation/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/modules/foundation/pkg/pswd"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/unittest"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/idgen"
+	idgenmocks "code.byted.org/flowdevops/cozeloop/backend/infra/idgen/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/foundation/domain/user/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/foundation/domain/user/repo"
+	repomocks "code.byted.org/flowdevops/cozeloop/backend/modules/foundation/domain/user/repo/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/foundation/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/foundation/pkg/pswd"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/unittest"
 )
 
 func TestUserServiceImpl_Create(t *testing.T) {

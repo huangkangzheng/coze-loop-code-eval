@@ -8,7 +8,7 @@ package api
 import (
 	"github.com/cloudwego/hertz/pkg/app/server"
 
-	handler "github.com/coze-dev/coze-loop/backend/api/handler"
+	handler "code.byted.org/flowdevops/cozeloop/backend/api/handler"
 )
 
 // customizeRegister registers customize routers.

@@ -11,7 +11,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
 	"github.com/stretchr/testify/assert"
 )
 

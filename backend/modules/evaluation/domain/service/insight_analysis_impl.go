@@ -10,17 +10,16 @@ import (
 	"time"
 
 	"github.com/bytedance/gg/gptr"
-
-	"github.com/coze-dev/coze-loop/backend/infra/fileserver"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/consts"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/rpc"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/events"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/repo"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/fileserver"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/consts"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/rpc"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/events"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/repo"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 type ExptInsightAnalysisServiceImpl struct {

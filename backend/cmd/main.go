@@ -17,32 +17,32 @@ import (
 	"github.com/coze-dev/cozeloop-go"
 	goredis "github.com/redis/go-redis/v9"
 
-	"github.com/coze-dev/coze-loop/backend/api"
-	"github.com/coze-dev/coze-loop/backend/api/handler/coze/loop/apis"
-	"github.com/coze-dev/coze-loop/backend/infra/ck"
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	"github.com/coze-dev/coze-loop/backend/infra/external/audit"
-	"github.com/coze-dev/coze-loop/backend/infra/external/benefit"
-	"github.com/coze-dev/coze-loop/backend/infra/fileserver"
-	"github.com/coze-dev/coze-loop/backend/infra/i18n"
-	"github.com/coze-dev/coze-loop/backend/infra/i18n/goi18n"
-	"github.com/coze-dev/coze-loop/backend/infra/idgen"
-	"github.com/coze-dev/coze-loop/backend/infra/idgen/redis_gen"
-	"github.com/coze-dev/coze-loop/backend/infra/limiter"
-	"github.com/coze-dev/coze-loop/backend/infra/limiter/dist"
-	"github.com/coze-dev/coze-loop/backend/infra/looptracer"
-	"github.com/coze-dev/coze-loop/backend/infra/looptracer/rpc"
-	"github.com/coze-dev/coze-loop/backend/infra/metrics"
-	"github.com/coze-dev/coze-loop/backend/infra/mq"
-	"github.com/coze-dev/coze-loop/backend/infra/mq/registry"
-	"github.com/coze-dev/coze-loop/backend/infra/mq/rocketmq"
-	"github.com/coze-dev/coze-loop/backend/infra/redis"
-	"github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/foundation/lofile"
-	"github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/observability/lotrace"
-	"github.com/coze-dev/coze-loop/backend/pkg/conf"
-	"github.com/coze-dev/coze-loop/backend/pkg/conf/viper"
-	"github.com/coze-dev/coze-loop/backend/pkg/file"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/api"
+	"code.byted.org/flowdevops/cozeloop/backend/api/handler/coze/loop/apis"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/ck"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/external/audit"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/external/benefit"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/fileserver"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/i18n"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/i18n/goi18n"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/idgen"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/idgen/redis_gen"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/limiter"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/limiter/dist"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/looptracer"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/looptracer/rpc"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/metrics"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/mq"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/mq/registry"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/mq/rocketmq"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/redis"
+	"code.byted.org/flowdevops/cozeloop/backend/loop_gen/coze/loop/foundation/lofile"
+	"code.byted.org/flowdevops/cozeloop/backend/loop_gen/coze/loop/observability/lotrace"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/conf"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/conf/viper"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/file"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 func main() {
@@ -60,8 +60,8 @@ func main() {
 	if err := initTracer(handler); err != nil {
 		panic(err)
 	}
-	consumerWorkers := MustInitConsumerWorkers(c.cfgFactory, handler, handler, handler, handler)
-	if err := registry.NewConsumerRegistry(c.mqFactory).Register(consumerWorkers).StartAll(ctx); err != nil {
+
+	if err := registry.NewConsumerRegistry(c.mqFactory).Register(mustInitConsumerWorkers(c.cfgFactory, handler, handler, handler)).StartAll(ctx); err != nil {
 		panic(err)
 	}
 

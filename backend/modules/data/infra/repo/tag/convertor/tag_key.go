@@ -10,9 +10,9 @@ import (
 	"github.com/bytedance/gg/gslice"
 	"github.com/bytedance/sonic"
 
-	entity2 "github.com/coze-dev/coze-loop/backend/modules/data/domain/tag/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/data/infra/repo/tag/mysql/gorm_gen/model"
-	"github.com/coze-dev/coze-loop/backend/modules/data/pkg/errno"
+	entity2 "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/tag/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/infra/repo/tag/mysql/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/pkg/errno"
 )
 
 func TagKeyPO2DO(val *model.TagKey) (*entity2.TagKey, error) {

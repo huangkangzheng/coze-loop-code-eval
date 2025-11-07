@@ -8,12 +8,12 @@ import (
 	"strconv"
 	"time"
 
-	annodto "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/observability/domain/annotation"
-	commdto "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/observability/domain/common"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/component/rpc"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/common"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/loop_span"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
+	annodto "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/domain/annotation"
+	commdto "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/domain/common"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/component/rpc"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/common"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/loop_span"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
 	"github.com/samber/lo"
 )
 
@@ -179,8 +179,6 @@ func AnnotationListDO2DTO(
 		case loop_span.AnnotationTypeManualFeedback:
 			fallthrough
 		case loop_span.AnnotationTypeCozeFeedback:
-			fallthrough
-		case loop_span.AnnotationTypeOpenAPIFeedback:
 			ret = append(ret, AnnotationDO2DTO(a, userMap, evalMap, tagMap))
 		default:
 			continue

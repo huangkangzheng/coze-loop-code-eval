@@ -7,7 +7,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/loop_span"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/loop_span"
 )
 
 type TagContentType string

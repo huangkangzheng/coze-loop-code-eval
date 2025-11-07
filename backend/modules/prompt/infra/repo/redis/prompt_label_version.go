@@ -9,8 +9,8 @@ import (
 
 	"github.com/bytedance/gg/gslice"
 
-	"github.com/coze-dev/coze-loop/backend/infra/redis"
-	promptconf "github.com/coze-dev/coze-loop/backend/modules/prompt/domain/component/conf"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/redis"
+	promptconf "code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/component/conf"
 )
 
 //go:generate mockgen -destination=mocks/prompt_label_version_dao.go -package=mocks . IPromptLabelVersionDAO

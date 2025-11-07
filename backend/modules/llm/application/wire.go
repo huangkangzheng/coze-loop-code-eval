@@ -11,20 +11,20 @@ import (
 
 	"github.com/google/wire"
 
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	"github.com/coze-dev/coze-loop/backend/infra/idgen"
-	"github.com/coze-dev/coze-loop/backend/infra/limiter"
-	"github.com/coze-dev/coze-loop/backend/infra/redis"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/auth/authservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/llm/manage"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/llm/runtime"
-	"github.com/coze-dev/coze-loop/backend/modules/llm/domain/service"
-	"github.com/coze-dev/coze-loop/backend/modules/llm/domain/service/llmfactory"
-	"github.com/coze-dev/coze-loop/backend/modules/llm/infra/config"
-	"github.com/coze-dev/coze-loop/backend/modules/llm/infra/repo"
-	"github.com/coze-dev/coze-loop/backend/modules/llm/infra/repo/dao"
-	"github.com/coze-dev/coze-loop/backend/modules/llm/infra/rpc"
-	"github.com/coze-dev/coze-loop/backend/pkg/conf"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/idgen"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/limiter"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/redis"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/auth/authservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/llm/manage"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/llm/runtime"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/llm/domain/service"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/llm/domain/service/llmfactory"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/llm/infra/config"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/llm/infra/repo"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/llm/infra/repo/dao"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/llm/infra/rpc"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/conf"
 )
 
 var (
@@ -54,8 +54,7 @@ func InitRuntimeApplication(
 	configFactory conf.IConfigLoaderFactory,
 	db db.Provider,
 	redis redis.Cmdable,
-	factory limiter.IRateLimiterFactory,
-) (runtime.LLMRuntimeService, error) {
+	factory limiter.IRateLimiterFactory) (runtime.LLMRuntimeService, error) {
 	wire.Build(runtimeSet)
 	return nil, nil
 }
@@ -63,8 +62,7 @@ func InitRuntimeApplication(
 func InitManageApplication(
 	ctx context.Context,
 	configFactory conf.IConfigLoaderFactory,
-	authClient authservice.Client,
-) (manage.LLMManageService, error) {
+	authClient authservice.Client) (manage.LLMManageService, error) {
 	wire.Build(manageSet)
 	return nil, nil
 }

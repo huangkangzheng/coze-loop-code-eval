@@ -8,8 +8,8 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/slices"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/slices"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 /*

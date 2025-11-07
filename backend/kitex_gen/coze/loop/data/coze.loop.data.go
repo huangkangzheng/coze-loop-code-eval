@@ -4,8 +4,8 @@ package data
 
 import (
 	"github.com/apache/thrift/lib/go/thrift"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/dataset"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/tag"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/dataset"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/tag"
 )
 
 type DatasetService interface {

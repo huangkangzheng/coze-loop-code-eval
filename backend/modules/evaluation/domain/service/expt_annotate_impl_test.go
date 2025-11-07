@@ -12,13 +12,13 @@ import (
 	"go.uber.org/mock/gomock"
 	"gorm.io/gorm"
 
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	dbMocks "github.com/coze-dev/coze-loop/backend/infra/db/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	eventsMocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/events/mocks"
-	repoMocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/repo/mocks"
-	svcMocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/service/mocks"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	dbMocks "code.byted.org/flowdevops/cozeloop/backend/infra/db/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	eventsMocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/events/mocks"
+	repoMocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/repo/mocks"
+	svcMocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/service/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
 )
 
 func newTestExptAnnotateService(ctrl *gomock.Controller) *ExptAnnotateServiceImpl {

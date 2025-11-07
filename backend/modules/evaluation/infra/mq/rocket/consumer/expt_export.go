@@ -8,11 +8,11 @@ import (
 
 	"github.com/bytedance/sonic"
 
-	"github.com/coze-dev/coze-loop/backend/infra/middleware/session"
-	"github.com/coze-dev/coze-loop/backend/infra/mq"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/service"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/middleware/session"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/mq"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/service"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 type ExptExportConsumer struct {

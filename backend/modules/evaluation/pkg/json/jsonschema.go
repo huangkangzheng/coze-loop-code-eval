@@ -9,14 +9,14 @@ import (
 
 	jsonschemav5 "github.com/santhosh-tekuri/jsonschema/v5"
 
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/consts"
-	"github.com/coze-dev/coze-loop/backend/pkg/json"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/consts"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/json"
 )
 
 var SchemaCompiler *jsonschemav5.Compiler
 
 // ValidateJSONSchema 验证JSON字符串是否符合schema
-func ValidateJSONSchema(schemaStr, dataStr string) (bool, error) {
+func ValidateJSONSchema(schemaStr string, dataStr string) (bool, error) {
 	// 获取 JSON Schema 编译器实例
 	compiler := jsonschemav5.NewCompiler()
 	if err := compiler.AddResource("schema.json", strings.NewReader(schemaStr)); err != nil {
@@ -43,7 +43,7 @@ func ValidateJSONSchema(schemaStr, dataStr string) (bool, error) {
 }
 
 // ExtractFieldValue 用 JSON Schema 验证 JSON 数据并提取指定字段的值
-func ExtractFieldValue(schemaStr, dataStr, fieldName string) (interface{}, error) {
+func ExtractFieldValue(schemaStr string, dataStr string, fieldName string) (interface{}, error) {
 	// 获取 JSON Schema 编译器实例
 	compiler := jsonschemav5.NewCompiler()
 

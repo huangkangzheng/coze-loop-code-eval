@@ -9,9 +9,9 @@ import (
 	"github.com/bytedance/gg/gptr"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/domain/dataset"
-	commondto "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/domain/common"
-	commonentity "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/domain/dataset"
+	commondto "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/common"
+	commonentity "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
 )
 
 func TestConvertContentTypeDTO2DO(t *testing.T) {

@@ -8,9 +8,9 @@ import (
 
 	"github.com/bytedance/gg/gptr"
 
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/target/mysql/gorm_gen/model"
-	"github.com/coze-dev/coze-loop/backend/pkg/json"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/target/mysql/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/json"
 )
 
 func EvalTargetDO2PO(do *entity.EvalTarget) (po *model.Target) {
@@ -60,11 +60,6 @@ func EvalTargetVersionDO2PO(do *entity.EvalTargetVersion) (po *model.TargetVersi
 		}
 	case entity.EvalTargetTypeVolcengineAgent:
 		meta, err = json.Marshal(do.VolcengineAgent)
-		if err != nil {
-			return nil, err
-		}
-	case entity.EvalTargetTypeCustomRPCServer:
-		meta, err = json.Marshal(do.CustomRPCServer)
 		if err != nil {
 			return nil, err
 		}
@@ -204,11 +199,6 @@ func EvalTargetVersionPO2DO(targetVersionPO *model.TargetVersion, targetType ent
 			meta := &entity.VolcengineAgent{}
 			if err := json.Unmarshal(*targetVersionPO.TargetMeta, meta); err == nil {
 				targetVersionDO.VolcengineAgent = meta
-			}
-		case entity.EvalTargetTypeCustomRPCServer:
-			meta := &entity.CustomRPCServer{}
-			if err := json.Unmarshal(*targetVersionPO.TargetMeta, meta); err == nil {
-				targetVersionDO.CustomRPCServer = meta
 			}
 		default:
 			// todo

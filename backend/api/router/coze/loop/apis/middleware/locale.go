@@ -9,8 +9,8 @@ import (
 
 	"github.com/cloudwego/hertz/pkg/app"
 
-	"github.com/coze-dev/coze-loop/backend/pkg/consts"
-	"github.com/coze-dev/coze-loop/backend/pkg/contexts"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/consts"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/contexts"
 )
 
 var supportedLocales = []string{

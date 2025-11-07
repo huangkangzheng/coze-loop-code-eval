@@ -10,8 +10,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/collector/component"
-	exportermock "github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/collector/exporter/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/collector/component"
+	exportermock "code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/collector/exporter/mocks"
 )
 
 func TestNewFactory(t *testing.T) {

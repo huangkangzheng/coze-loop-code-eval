@@ -7,7 +7,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/entity"
 )
 
 //go:generate mockgen -destination=mocks/dataset_job_pub.go -package=mocks . IDatasetJobPublisher

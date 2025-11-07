@@ -6,9 +6,9 @@ package evaluation_set
 import (
 	"github.com/bytedance/gg/gptr"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/domain/eval_set"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/application/convertor/common"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/eval_set"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/application/convertor/common"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
 )
 
 func VersionDO2DTOs(dos []*entity.EvaluationSetVersion) []*eval_set.EvaluationSetVersion {

@@ -6,7 +6,7 @@ package redis
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/entity"
 )
 
 //go:generate mockgen -destination=mocks/prompt_basic_dao.go -package=mocks . IPromptBasicDAO

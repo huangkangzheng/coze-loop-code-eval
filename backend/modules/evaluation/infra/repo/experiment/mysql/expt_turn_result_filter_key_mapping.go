@@ -9,10 +9,10 @@ import (
 	"gorm.io/gorm/clause" // 导入 GORM 的 clause 包
 	"gorm.io/plugin/dbresolver"
 
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/experiment/mysql/gorm_gen/model"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/experiment/mysql/gorm_gen/query"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/pkg/contexts"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/experiment/mysql/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/experiment/mysql/gorm_gen/query"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/pkg/contexts"
 )
 
 //go:generate  mockgen -destination=mocks/expt_turn_result_filter_key_mapping.go  -package mocks . IExptTurnResultFilterKeyMappingDAO

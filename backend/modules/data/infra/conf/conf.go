@@ -8,9 +8,9 @@ import (
 
 	"github.com/samber/lo"
 
-	dataconf "github.com/coze-dev/coze-loop/backend/modules/data/domain/component/conf"
-	"github.com/coze-dev/coze-loop/backend/modules/data/pkg/consts"
-	"github.com/coze-dev/coze-loop/backend/pkg/conf"
+	dataconf "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/component/conf"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/pkg/consts"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/conf"
 )
 
 func NewConfigerFactory(configerFactory conf.IConfigLoaderFactory) (conf.IConfigLoader, error) {

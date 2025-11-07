@@ -8,8 +8,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/coze-dev/coze-loop/backend/infra/metrics"
-	eval_metrics "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/metrics"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/metrics"
+	eval_metrics "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/metrics"
 )
 
 const (
@@ -73,7 +73,7 @@ func (e *EvalTargetMetricsImpl) EmitRun(spaceID int64, err error, start time.Tim
 }
 
 func (e *EvalTargetMetricsImpl) EmitCreate(spaceID int64, err error) {
-	if e == nil || e.metric == nil {
+	if e.metric == nil {
 		return
 	}
 	code, isError := eval_metrics.GetCode(err)

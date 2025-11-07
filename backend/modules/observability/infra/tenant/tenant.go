@@ -6,12 +6,12 @@ package tenant
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/component/config"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/component/tenant"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/loop_span"
-	obErrorx "github.com/coze-dev/coze-loop/backend/modules/observability/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/component/config"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/component/tenant"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/loop_span"
+	obErrorx "code.byted.org/flowdevops/cozeloop/backend/modules/observability/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 func NewTenantProvider(traceConfig config.ITraceConfig) tenant.ITenantProvider {
@@ -42,11 +42,7 @@ func (t *TenantProviderImpl) GetTenantsByPlatformType(ctx context.Context, platf
 	if tenants, ok := cfg.Config[string(platform)]; ok {
 		return tenants, nil
 	} else {
-		if tenants, ok = cfg.Config[string(loop_span.PlatformDefault)]; ok {
-			return tenants, nil
-		}
-		defaultTenant := t.traceConfig.GetDefaultTraceTenant(ctx)
-		logs.CtxInfo(ctx, "tenant not found for platform [%s], use default tenant [%s]", platform, defaultTenant)
-		return []string{defaultTenant}, nil
+		logs.CtxError(ctx, "tenant not found for platform %s", platform)
+		return nil, errorx.NewByCode(obErrorx.CommercialCommonInvalidParamCodeCode, errorx.WithExtraMsg("tenant not found for the platform"))
 	}
 }

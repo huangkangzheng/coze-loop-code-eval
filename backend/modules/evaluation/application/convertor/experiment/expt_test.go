@@ -10,13 +10,13 @@ import (
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/domain/common"
-	domain_expt "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/domain/expt"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/expt"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/consts"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/pkg/json"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/common"
+	domain_expt "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/expt"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/expt"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/consts"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/json"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
 )
 
 func TestEvalConfConvert_ConvertEntityToDTO(t *testing.T) {

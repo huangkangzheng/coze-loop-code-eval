@@ -11,9 +11,9 @@ import (
 	"github.com/cloudwego/hertz/pkg/protocol"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/coze-dev/coze-loop/backend/pkg/consts"
-	"github.com/coze-dev/coze-loop/backend/pkg/contexts"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/consts"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/contexts"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
 )
 
 func TestLocaleMW(t *testing.T) {

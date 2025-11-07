@@ -6,11 +6,11 @@ package evaluator
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/infra/limiter"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/consts"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/repo"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/pkg/conf"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/limiter"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/consts"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/repo"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/pkg/conf"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 type RateLimiterImpl struct {

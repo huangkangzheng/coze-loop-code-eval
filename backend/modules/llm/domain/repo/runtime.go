@@ -6,7 +6,7 @@ package repo
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/modules/llm/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/llm/domain/entity"
 )
 
 //go:generate mockgen -destination=mocks/runtime.go -package=mocks . IRuntimeRepo

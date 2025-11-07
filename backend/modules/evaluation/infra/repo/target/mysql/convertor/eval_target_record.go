@@ -9,9 +9,9 @@ import (
 
 	"github.com/bytedance/gg/gptr"
 
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/target/mysql/gorm_gen/model"
-	"github.com/coze-dev/coze-loop/backend/pkg/json"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/target/mysql/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/json"
 )
 
 func EvalTargetRecordDO2PO(e *entity.EvalTargetRecord) (*model.TargetRecord, error) {

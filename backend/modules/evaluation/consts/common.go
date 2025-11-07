@@ -13,16 +13,10 @@ const (
 )
 
 const (
-	Read          = "read"
-	Edit          = "edit"
-	Run           = "run"
-	Debug         = "debug"
-	UpdateItem    = "updateItem"
-	AddItem       = "addItem"
-	DeleteItem    = "deleteItem"
-	ReadItem      = "readItem"
-	CreateVersion = "createVersion"
-	EditSchema    = "editSchema"
+	Read  = "read"
+	Edit  = "edit"
+	Run   = "run"
+	Debug = "debug"
 )
 
 const (

@@ -11,10 +11,10 @@ import (
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 
-	mockidgen "github.com/coze-dev/coze-loop/backend/infra/idgen/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	model "github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/experiment/mysql/gorm_gen/model"
-	mocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/experiment/mysql/mocks"
+	mockidgen "code.byted.org/flowdevops/cozeloop/backend/infra/idgen/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	model "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/experiment/mysql/gorm_gen/model"
+	mocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/experiment/mysql/mocks"
 )
 
 func newExportRecordRepo(ctrl *gomock.Controller) (*ExptResultExportRecordRepoImpl, *mocks.MockExptResultExportRecordDAO, *mockidgen.MockIIDGenerator) {

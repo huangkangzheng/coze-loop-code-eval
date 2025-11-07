@@ -8,10 +8,10 @@ import (
 
 	"github.com/bytedance/gg/gslice"
 
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	"github.com/coze-dev/coze-loop/backend/infra/idgen"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/repo"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/idgen"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/repo"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 type getSetID interface {

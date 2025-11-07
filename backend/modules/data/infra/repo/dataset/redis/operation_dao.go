@@ -11,11 +11,11 @@ import (
 	"github.com/bytedance/sonic"
 	goredis "github.com/redis/go-redis/v9"
 
-	"github.com/coze-dev/coze-loop/backend/infra/redis"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/data/infra/rediskey"
-	"github.com/coze-dev/coze-loop/backend/modules/data/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/redis"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/infra/rediskey"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 type OperationDAO interface {

@@ -10,10 +10,10 @@ import (
 	"github.com/bytedance/gg/gptr"
 	"github.com/bytedance/gg/gslice"
 
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/repo"
-	"github.com/coze-dev/coze-loop/backend/modules/data/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/modules/data/pkg/pagination"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/repo"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/pkg/pagination"
 )
 
 func (s *DatasetServiceImpl) CreateDataset(ctx context.Context, dataset *entity.Dataset, fields []*entity.FieldSchema) error {

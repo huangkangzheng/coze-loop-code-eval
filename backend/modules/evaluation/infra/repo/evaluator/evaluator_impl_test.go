@@ -12,16 +12,16 @@ import (
 	"go.uber.org/mock/gomock"
 	"gorm.io/gorm"
 
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	dbmocks "github.com/coze-dev/coze-loop/backend/infra/db/mocks"
-	idgenmocks "github.com/coze-dev/coze-loop/backend/infra/idgen/mocks"
-	"github.com/coze-dev/coze-loop/backend/infra/platestwrite"
-	platestwritemocks "github.com/coze-dev/coze-loop/backend/infra/platestwrite/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/repo"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/evaluator/mysql"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/evaluator/mysql/gorm_gen/model"
-	evaluatormocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/evaluator/mysql/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	dbmocks "code.byted.org/flowdevops/cozeloop/backend/infra/db/mocks"
+	idgenmocks "code.byted.org/flowdevops/cozeloop/backend/infra/idgen/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/platestwrite"
+	platestwritemocks "code.byted.org/flowdevops/cozeloop/backend/infra/platestwrite/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/repo"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/evaluator/mysql"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/evaluator/mysql/gorm_gen/model"
+	evaluatormocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/evaluator/mysql/mocks"
 )
 
 func TestEvaluatorRepoImpl_SubmitEvaluatorVersion(t *testing.T) {
@@ -420,46 +420,6 @@ func TestEvaluatorRepoImpl_BatchGetEvaluatorByVersionID(t *testing.T) {
 			expectedError: nil,
 		},
 		{
-			name:           "成功批量获取code评估器版本",
-			ids:            []int64{3},
-			includeDeleted: false,
-			mockSetup: func() {
-				// 设置获取评估器版本的期望
-				mockEvaluatorVersionDAO.EXPECT().
-					BatchGetEvaluatorVersionByID(gomock.Any(), gomock.Any(), []int64{3}, false).
-					Return([]*model.EvaluatorVersion{
-						{
-							ID:            3,
-							EvaluatorID:   3,
-							EvaluatorType: gptr.Of(int32(entity.EvaluatorTypeCode)),
-							Version:       "1.0.0",
-						},
-					}, nil)
-
-				// 设置获取评估器的期望
-				mockEvaluatorDAO.EXPECT().
-					BatchGetEvaluatorByID(gomock.Any(), gomock.Any(), gomock.Any()).
-					Return([]*model.Evaluator{
-						{
-							ID:            3,
-							EvaluatorType: int32(entity.EvaluatorTypeCode),
-							Name:          gptr.Of("code-test"),
-						},
-					}, nil)
-			},
-			expectedResult: []*entity.Evaluator{
-				{
-					ID:            3,
-					EvaluatorType: entity.EvaluatorTypeCode,
-					Name:          "code-test",
-					CodeEvaluatorVersion: &entity.CodeEvaluatorVersion{
-						Version: "1.0.0",
-					},
-				},
-			},
-			expectedError: nil,
-		},
-		{
 			name:           "获取评估器版本失败",
 			ids:            []int64{1, 2},
 			includeDeleted: false,
@@ -493,6 +453,7 @@ func TestEvaluatorRepoImpl_BatchGetEvaluatorByVersionID(t *testing.T) {
 					assert.Equal(t, tt.expectedResult[i].ID, result[i].ID)
 					assert.Equal(t, tt.expectedResult[i].EvaluatorType, result[i].EvaluatorType)
 					assert.Equal(t, tt.expectedResult[i].Name, result[i].Name)
+					assert.Equal(t, tt.expectedResult[i].PromptEvaluatorVersion.Version, result[i].PromptEvaluatorVersion.Version)
 				}
 			}
 		})

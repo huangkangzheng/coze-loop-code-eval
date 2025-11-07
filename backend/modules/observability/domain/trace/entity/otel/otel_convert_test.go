@@ -8,7 +8,7 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/loop_span"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/loop_span"
 	"github.com/coze-dev/cozeloop-go/spec/tracespec"
 	"github.com/stretchr/testify/assert"
 	semconv1_27_0 "go.opentelemetry.io/otel/semconv/v1.27.0"

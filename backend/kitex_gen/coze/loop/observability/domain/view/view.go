@@ -5,7 +5,7 @@ package view
 import (
 	"fmt"
 	"github.com/apache/thrift/lib/go/thrift"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/observability/domain/common"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/domain/common"
 	"strings"
 )
 

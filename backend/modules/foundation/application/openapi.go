@@ -12,14 +12,14 @@ import (
 
 	"github.com/samber/lo"
 
-	"github.com/coze-dev/coze-loop/backend/infra/fileserver"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/base"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/openapi"
-	"github.com/coze-dev/coze-loop/backend/modules/foundation/domain/component/rpc"
-	"github.com/coze-dev/coze-loop/backend/modules/foundation/domain/file/service"
-	"github.com/coze-dev/coze-loop/backend/modules/foundation/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/fileserver"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/base"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/openapi"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/foundation/domain/component/rpc"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/foundation/domain/file/service"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/foundation/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 type FoundationOpenAPIApplicationImpl struct {

@@ -11,9 +11,9 @@ import (
 	"github.com/bytedance/sonic"
 	"github.com/pkg/errors"
 
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/data/infra/repo/dataset/mysql/gorm_gen/model"
-	"github.com/coze-dev/coze-loop/backend/modules/data/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/infra/repo/dataset/mysql/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/pkg/errno"
 )
 
 func IoJobPO2DO(p *model.DatasetIOJob) (*entity.IOJob, error) {

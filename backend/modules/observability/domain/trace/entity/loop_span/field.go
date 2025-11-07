@@ -29,7 +29,7 @@ func (p *Field) TagJson() (alias string, err error) {
 	if len(alias) <= 0 {
 		return "", fmt.Errorf("%s json tag is not set", p.Name())
 	}
-	return alias, err
+	return
 }
 
 func (p *Field) Set(val any) error {

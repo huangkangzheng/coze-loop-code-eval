@@ -9,14 +9,14 @@ import (
 
 	"github.com/google/uuid"
 
-	"github.com/coze-dev/coze-loop/backend/infra/external/audit"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/domain/component/rpc"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/domain/entity"
-	prompterr "github.com/coze-dev/coze-loop/backend/modules/prompt/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/encoding"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/external/audit"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/component/rpc"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/entity"
+	prompterr "code.byted.org/flowdevops/cozeloop/backend/modules/prompt/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/encoding"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 type AuditRPCAdapter struct {

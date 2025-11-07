@@ -10,42 +10,40 @@ import (
 	"context"
 
 	"github.com/cloudwego/kitex/pkg/endpoint"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/experimentservice"
-	task_processor "github.com/coze-dev/coze-loop/backend/modules/observability/domain/task/service/taskexe/processor"
 	"github.com/google/wire"
 
-	"github.com/coze-dev/coze-loop/backend/infra/ck"
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	"github.com/coze-dev/coze-loop/backend/infra/external/audit"
-	"github.com/coze-dev/coze-loop/backend/infra/external/benefit"
-	"github.com/coze-dev/coze-loop/backend/infra/fileserver"
-	"github.com/coze-dev/coze-loop/backend/infra/idgen"
-	"github.com/coze-dev/coze-loop/backend/infra/limiter"
-	"github.com/coze-dev/coze-loop/backend/infra/metrics"
-	"github.com/coze-dev/coze-loop/backend/infra/mq"
-	"github.com/coze-dev/coze-loop/backend/infra/redis"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/apis/promptexecuteservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/dataset/datasetservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/tag/tagservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/evaluationsetservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/evaluatorservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/auth/authservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/file/fileservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/user/userservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/llm/runtime/llmruntimeservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/prompt/promptmanageservice"
-	"github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/foundation/loauth"
-	dataapp "github.com/coze-dev/coze-loop/backend/modules/data/application"
-	conf2 "github.com/coze-dev/coze-loop/backend/modules/data/infra/conf"
-	"github.com/coze-dev/coze-loop/backend/modules/data/infra/rpc/foundation"
-	evaluationapp "github.com/coze-dev/coze-loop/backend/modules/evaluation/application"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/rpc/data"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/rpc/prompt"
-	foundationapp "github.com/coze-dev/coze-loop/backend/modules/foundation/application"
-	llmapp "github.com/coze-dev/coze-loop/backend/modules/llm/application"
-	obapp "github.com/coze-dev/coze-loop/backend/modules/observability/application"
-	promptapp "github.com/coze-dev/coze-loop/backend/modules/prompt/application"
-	"github.com/coze-dev/coze-loop/backend/pkg/conf"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/ck"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/external/audit"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/external/benefit"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/fileserver"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/idgen"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/limiter"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/metrics"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/mq"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/redis"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/apis/promptexecuteservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/dataset/datasetservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/tag/tagservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/evaluationsetservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/evaluatorservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/auth/authservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/file/fileservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/user/userservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/llm/runtime/llmruntimeservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/promptmanageservice"
+	"code.byted.org/flowdevops/cozeloop/backend/loop_gen/coze/loop/foundation/loauth"
+	dataapp "code.byted.org/flowdevops/cozeloop/backend/modules/data/application"
+	conf2 "code.byted.org/flowdevops/cozeloop/backend/modules/data/infra/conf"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/infra/rpc/foundation"
+	evaluationapp "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/application"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/rpc/data"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/rpc/prompt"
+	foundationapp "code.byted.org/flowdevops/cozeloop/backend/modules/foundation/application"
+	llmapp "code.byted.org/flowdevops/cozeloop/backend/modules/llm/application"
+	obapp "code.byted.org/flowdevops/cozeloop/backend/modules/observability/application"
+	promptapp "code.byted.org/flowdevops/cozeloop/backend/modules/prompt/application"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/conf"
 )
 
 var (
@@ -81,7 +79,6 @@ var (
 		evaluationapp.InitEvaluatorApplication,
 		evaluationapp.InitEvaluationSetApplication,
 		evaluationapp.InitEvalTargetApplication,
-		evaluationapp.InitEvalOpenAPIApplication,
 	)
 	dataSet = wire.NewSet(
 		NewDataHandler,
@@ -95,8 +92,6 @@ var (
 		obapp.InitTraceApplication,
 		obapp.InitTraceIngestionApplication,
 		obapp.InitOpenAPIApplication,
-		obapp.InitTaskApplication,
-		obapp.InitMetricApplication,
 	)
 )
 
@@ -212,10 +207,6 @@ func InitObservabilityHandler(
 	tagClient tagservice.Client,
 	limiterFactory limiter.IRateLimiterFactory,
 	datasetClient datasetservice.Client,
-	redis redis.Cmdable,
-	experimentClient experimentservice.Client,
-	taskProcessor task_processor.TaskProcessor,
-	aid int32,
 ) (*ObservabilityHandler, error) {
 	wire.Build(
 		observabilitySet,

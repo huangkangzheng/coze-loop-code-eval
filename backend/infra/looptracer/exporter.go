@@ -16,12 +16,12 @@ import (
 	"github.com/coze-dev/cozeloop-go/entity"
 	"github.com/samber/lo"
 
-	"github.com/coze-dev/coze-loop/backend/infra/looptracer/rpc"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/file"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/observability/domain/span"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/observability/trace"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/looptracer/rpc"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/file"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/domain/span"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/trace"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 const (
@@ -69,7 +69,7 @@ func (e *MultiSpaceSpanExporter) ExportSpans(ctx context.Context, spans []*entit
 	}
 
 	if env := os.Getenv(XttEnv); env != "" {
-		ctx = context.WithValue(ctx, CtxKeyEnv, env) //nolint:staticcheck
+		ctx = context.WithValue(ctx, CtxKeyEnv, env) //nolint:staticcheck,SA1029
 	}
 	resp, err := rpc.GetLoopTracerHandler().LocalTraceService.IngestTracesInner(ctx, req)
 	if err != nil {

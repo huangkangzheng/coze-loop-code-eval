@@ -8,9 +8,9 @@ import (
 
 	"github.com/bytedance/gg/gptr"
 
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/conv"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/js_conv"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/conv"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/js_conv"
 )
 
 type IRuntimeParam interface {

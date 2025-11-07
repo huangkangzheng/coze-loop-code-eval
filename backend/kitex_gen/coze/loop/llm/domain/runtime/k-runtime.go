@@ -11,7 +11,7 @@ import (
 	"github.com/cloudwego/gopkg/protocol/thrift"
 	kutils "github.com/cloudwego/kitex/pkg/utils"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/llm/domain/common"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/llm/domain/common"
 )
 
 var (

@@ -3,7 +3,7 @@ package experimentservice
 
 import (
 	server "github.com/cloudwego/kitex/server"
-	expt "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/expt"
+	expt "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/expt"
 )
 
 // NewServer creates a server.Server with the given handler and options.

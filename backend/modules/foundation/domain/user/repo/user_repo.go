@@ -6,7 +6,7 @@ package repo
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/modules/foundation/domain/user/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/foundation/domain/user/entity"
 )
 
 //go:generate mockgen -destination=mocks/user_repo.go -package=mocks . IUserRepo

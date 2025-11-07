@@ -3,7 +3,7 @@ package openapiservice
 
 import (
 	server "github.com/cloudwego/kitex/server"
-	openapi "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/observability/openapi"
+	openapi "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/openapi"
 )
 
 // NewServer creates a server.Server with the given handler and options.

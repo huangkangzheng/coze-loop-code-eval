@@ -11,9 +11,9 @@ import (
 	"github.com/stretchr/testify/require"
 	"gorm.io/gorm"
 
-	evaluatordo "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/evaluator/mysql/gorm_gen/model"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
+	evaluatordo "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/evaluator/mysql/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
 )
 
 func TestConvertEvaluatorVersionPO2DO(t *testing.T) {
@@ -418,17 +418,18 @@ func TestConvertEvaluatorVersionPO2DO(t *testing.T) {
 			}
 
 			// 验证基础信息字段
-			assert.Equal(t, tt.po.ID, got.GetEvaluatorVersionID())
-			assert.Equal(t, tt.po.Version, got.GetVersion())
-			assert.Equal(t, tt.po.SpaceID, got.GetSpaceID())
-			assert.Equal(t, tt.po.EvaluatorID, got.GetEvaluatorID())
+			require.NotNil(t, got.GetEvaluatorVersion())
+			assert.Equal(t, tt.po.ID, got.GetEvaluatorVersion().GetID())
+			assert.Equal(t, tt.po.Version, got.GetEvaluatorVersion().GetVersion())
+			assert.Equal(t, tt.po.SpaceID, got.GetEvaluatorVersion().GetSpaceID())
+			assert.Equal(t, tt.po.EvaluatorID, got.GetEvaluatorVersion().GetEvaluatorID())
 
 			if tt.po.Description != nil {
-				assert.Equal(t, *tt.po.Description, got.GetEvaluatorVersionDescription())
+				assert.Equal(t, *tt.po.Description, got.GetEvaluatorVersion().GetDescription())
 			}
 
 			// 验证 BaseInfo
-			baseInfo := got.GetBaseInfo()
+			baseInfo := got.GetEvaluatorVersion().GetBaseInfo()
 			require.NotNil(t, baseInfo)
 			assert.Equal(t, tt.po.CreatedBy, *baseInfo.CreatedBy.UserID)
 			assert.Equal(t, tt.po.UpdatedBy, *baseInfo.UpdatedBy.UserID)

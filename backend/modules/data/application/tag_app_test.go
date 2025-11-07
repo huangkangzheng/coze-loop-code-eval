@@ -12,12 +12,12 @@ import (
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/tag"
-	mocks3 "github.com/coze-dev/coze-loop/backend/modules/data/domain/component/rpc/mocks"
-	mocks4 "github.com/coze-dev/coze-loop/backend/modules/data/domain/component/userinfo/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/tag/entity"
-	mocks2 "github.com/coze-dev/coze-loop/backend/modules/data/domain/tag/repo/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/tag/service/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/tag"
+	mocks3 "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/component/rpc/mocks"
+	mocks4 "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/component/userinfo/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/tag/entity"
+	mocks2 "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/tag/repo/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/tag/service/mocks"
 )
 
 func TestTagApplicationImpl_CreateTag(t *testing.T) {

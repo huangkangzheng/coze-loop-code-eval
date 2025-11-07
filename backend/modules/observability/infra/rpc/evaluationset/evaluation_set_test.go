@@ -11,16 +11,16 @@ import (
 	"github.com/stretchr/testify/assert"
 
 	"github.com/bytedance/gg/gptr"
-	"github.com/coze-dev/coze-loop/backend/infra/middleware/session"
-	dataset_domain "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/domain/dataset"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/domain/common"
-	eval_set_domain "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/domain/eval_set"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/middleware/session"
+	dataset_domain "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/domain/dataset"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/common"
+	eval_set_domain "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/eval_set"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity"
 	"github.com/samber/lo"
 )
 
 //go:generate mockgen -source=evaluation_set.go -destination=mocks/mock_evaluation_set.go
-//go:generate mockgen -package=mocks -destination=mocks/mock_evaluationsetservice_client.go github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/evaluationsetservice Client
+//go:generate mockgen -package=mocks -destination=mocks/mock_evaluationsetservice_client.go code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/evaluationsetservice Client
 
 // Test helper functions
 func createTestDataset() *entity.Dataset {

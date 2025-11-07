@@ -12,32 +12,31 @@ import (
 	"testing"
 
 	"github.com/bytedance/gg/gptr"
+	repo_mocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/repo/mocks"
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 
-	repo_mocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/repo/mocks"
-
-	idgenmock "github.com/coze-dev/coze-loop/backend/infra/idgen/mocks"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/base"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/domain/tag"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/domain/common"
-	domain_eval_set "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/domain/eval_set"
-	domain_eval_target "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/domain/eval_target"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/domain/expt"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/eval_target"
-	exptpb "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/expt"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/application/convertor/experiment"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/consts"
-	componentMocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/rpc"
-	rpcmocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/rpc/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/userinfo"
-	userinfomocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/userinfo/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	servicemocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/service/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
+	idgenmock "code.byted.org/flowdevops/cozeloop/backend/infra/idgen/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/base"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/domain/tag"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/common"
+	domain_eval_set "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/eval_set"
+	domain_eval_target "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/eval_target"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/expt"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/eval_target"
+	exptpb "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/expt"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/application/convertor/experiment"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/consts"
+	componentMocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/rpc"
+	rpcmocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/rpc/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/userinfo"
+	userinfomocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/userinfo/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	servicemocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/service/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
 )
 
 func TestExperimentApplication_CreateExperiment(t *testing.T) {
@@ -74,9 +73,6 @@ func TestExperimentApplication_CreateExperiment(t *testing.T) {
 				Desc:        gptr.Of("test description"),
 				CreateEvalTargetParam: &eval_target.CreateEvalTargetParam{
 					EvalTargetType: gptr.Of(domain_eval_target.EvalTargetType_CozeBot),
-					CustomEvalTarget: &domain_eval_target.CustomEvalTarget{
-						Name: gptr.Of("test"),
-					},
 				},
 				Session: &common.Session{
 					UserID: gptr.Of(int64(789)),
@@ -2076,7 +2072,7 @@ func TestExperimentApplication_BatchGetExperimentResult_(t *testing.T) {
 						},
 					},
 
-					// {
+					//{
 					//	TagKeyID:    ptr.Of(int64(1)),
 					//	TagKeyName:  ptr.Of("name"),
 					//	Description: ptr.Of("desc"),
@@ -2095,7 +2091,7 @@ func TestExperimentApplication_BatchGetExperimentResult_(t *testing.T) {
 					//		MaxValueDescription: ptr.Of("2"),
 					//	}},
 					//	Status: ptr.Of(tag.TagStatusActive),
-					// },
+					//},
 				},
 				ItemResults: []*expt.ItemResult_{
 					{
@@ -2636,12 +2632,12 @@ func TestExperimentApplication_InvokeExperiment(t *testing.T) {
 						gomock.Any(),
 						gomock.Any(), // 使用 Any 匹配器，因为结构体内部包含指针
 					).
-					DoAndReturn(func(_ context.Context, param *entity.BatchCreateEvaluationSetItemsParam) (map[int64]int64, []*entity.ItemErrorGroup, []*entity.DatasetItemOutput, error) {
+					DoAndReturn(func(_ context.Context, param *entity.BatchCreateEvaluationSetItemsParam) (map[int64]int64, []*entity.ItemErrorGroup, error) {
 						// 验证关键字段
 						if param.SpaceID != validSpaceID || param.EvaluationSetID != validEvalSetID {
 							t.Errorf("unexpected param values: got SpaceID=%v, EvaluationSetID=%v", param.SpaceID, param.EvaluationSetID)
 						}
-						return map[int64]int64{int64(0): 6001, int64(1): 6002}, nil, nil, nil
+						return map[int64]int64{int64(0): 6001, int64(1): 6002}, nil, nil
 					})
 
 				// Mock Invoke experiment with matcher

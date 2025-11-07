@@ -8,7 +8,7 @@ import (
 	"encoding/hex"
 	"strconv"
 
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 	v3 "go.opentelemetry.io/proto/otlp/collector/trace/v1"
 	v2 "go.opentelemetry.io/proto/otlp/common/v1"
 	v1 "go.opentelemetry.io/proto/otlp/trace/v1"
@@ -151,7 +151,7 @@ func OtelTraceRequestPbToJson(src *v3.ExportTraceServiceRequest) *ExportTraceSer
 		ResourceSpans: make([]*ResourceSpans, 0, len(src.ResourceSpans)),
 	}
 	for _, rs := range src.ResourceSpans {
-		if rs == nil || rs.Resource == nil {
+		if rs == nil {
 			continue
 		}
 

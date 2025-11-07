@@ -4,9 +4,9 @@
 package trace
 
 import (
-	traced "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/observability/domain/trace"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/observability/trace"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/loop_span"
+	traced "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/domain/trace"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/trace"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/loop_span"
 )
 
 func AdvanceInfoDO2DTO(info *loop_span.TraceAdvanceInfo) *trace.TraceAdvanceInfo {

@@ -10,8 +10,8 @@ import (
 	"github.com/bytedance/gg/gptr"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/domain/dataset"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/domain/dataset"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
 )
 
 func TestConvert2DatasetOrderBys_Simple(t *testing.T) {

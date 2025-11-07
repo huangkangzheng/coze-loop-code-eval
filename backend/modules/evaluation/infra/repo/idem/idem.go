@@ -7,8 +7,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/idem"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/idem/redis"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/idem"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/idem/redis"
 )
 
 func NewIdempotentService(idemDao redis.IIdemDAO) idem.IdempotentService {

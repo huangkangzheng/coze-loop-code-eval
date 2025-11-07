@@ -11,13 +11,13 @@ import (
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 
-	"github.com/coze-dev/coze-loop/backend/infra/mq"
-	mqmocks "github.com/coze-dev/coze-loop/backend/infra/mq/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/collector/consumer"
-	consumermocks "github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/collector/consumer/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/loop_span"
-	"github.com/coze-dev/coze-loop/backend/pkg/json"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/mq"
+	mqmocks "code.byted.org/flowdevops/cozeloop/backend/infra/mq/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/collector/consumer"
+	consumermocks "code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/collector/consumer/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/loop_span"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/json"
 )
 
 func TestRmqReceiver_Start(t *testing.T) {

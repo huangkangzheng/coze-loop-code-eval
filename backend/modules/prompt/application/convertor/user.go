@@ -4,9 +4,9 @@
 package convertor
 
 import (
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/prompt/domain/user"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/domain/component/rpc"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/domain/user"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/component/rpc"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
 )
 
 func BatchUserInfoDO2DTO(dos []*rpc.UserInfo) []*user.UserInfoDetail {

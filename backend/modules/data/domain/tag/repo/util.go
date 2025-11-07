@@ -8,7 +8,7 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/coze-dev/coze-loop/backend/modules/data/pkg/pagination"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/pkg/pagination"
 )
 
 func TagKeyOrderBy(orderBy string) pagination.PaginatorOption {

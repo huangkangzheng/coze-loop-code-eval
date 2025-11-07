@@ -13,20 +13,14 @@ const (
 	AuthActionTraceViewList      = "listLoopTraceView"
 	AuthActionTraceViewEdit      = "edit"
 	AuthActionAnnotationCreate   = "createLoopTraceAnnotation"
-	AuthActionAnnotationDelete   = "deleteLoopTraceAnnotation"
 	AuthActionTraceExport        = "exportLoopTrace"
 	AuthActionTracePreviewExport = "previewExportLoopTrace"
-	AuthActionTraceTaskCreate    = "createLoopTask"
-	AuthActionTraceTaskList      = "listLoopTask"
-	AuthActionTraceTaskEdit      = "edit"
-	AuthActionTraceMetricRead    = "readLoopIndictor"
 )
 
 //go:generate mockgen -destination=mocks/auth_provider.go -package=mocks . IAuthProvider
 type IAuthProvider interface {
-	CheckWorkspacePermission(ctx context.Context, action, workspaceId string, isOpi bool) error
+	CheckWorkspacePermission(ctx context.Context, action, workspaceId string) error
 	CheckViewPermission(ctx context.Context, action, workspaceId, viewId string) error
 	CheckIngestPermission(ctx context.Context, workspaceId string) error
 	CheckQueryPermission(ctx context.Context, workspaceId, platformType string) error
-	CheckTaskPermission(ctx context.Context, action, workspaceId, taskId string) error
 }

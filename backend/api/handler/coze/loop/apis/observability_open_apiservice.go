@@ -11,8 +11,8 @@ import (
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/apis/observabilityopenapiservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/observability/openapi"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/apis/observabilityopenapiservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/openapi"
 )
 
 var observabilityOpenAPIClient observabilityopenapiservice.Client
@@ -59,22 +59,4 @@ func OtelIngestTraces(ctx context.Context, c *app.RequestContext) {
 // @router /v1/loop/traces/list [POST]
 func ListTracesOApi(ctx context.Context, c *app.RequestContext) {
 	invokeAndRender(ctx, c, observabilityOpenAPIClient.ListTracesOApi)
-}
-
-// SearchTraceTreeOApi .
-// @router /v1/loop/traces/search_tree [POST]
-func SearchTraceTreeOApi(ctx context.Context, c *app.RequestContext) {
-	invokeAndRender(ctx, c, observabilityOpenAPIClient.SearchTraceTreeOApi)
-}
-
-// CreateAnnotation .
-// @router /v1/loop/annotations/create [POST]
-func CreateAnnotation(ctx context.Context, c *app.RequestContext) {
-	invokeAndRender(ctx, c, observabilityOpenAPIClient.CreateAnnotation)
-}
-
-// DeleteAnnotation .
-// @router /v1/loop/annotations/delete [DELETE]
-func DeleteAnnotation(ctx context.Context, c *app.RequestContext) {
-	invokeAndRender(ctx, c, observabilityOpenAPIClient.DeleteAnnotation)
 }

@@ -6,11 +6,11 @@ package convertor
 import (
 	"github.com/samber/lo"
 
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/infra/repo/mysql"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/infra/repo/mysql/gorm_gen/model"
-	"github.com/coze-dev/coze-loop/backend/pkg/json"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/infra/repo/mysql"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/infra/repo/mysql/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/json"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
 )
 
 func BatchBasicAndDraftPO2PromptDO(basicPOs []*model.PromptBasic, draftPOMap map[mysql.PromptIDUserIDPair]*model.PromptUserDraft, UserID string) []*entity.Prompt {

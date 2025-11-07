@@ -6,9 +6,9 @@ package llm
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/llm/runtime/llmruntimeservice"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/rpc"
-	llmentity "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/llm/runtime/llmruntimeservice"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/rpc"
+	llmentity "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
 )
 
 type LLMRPCAdapter struct {

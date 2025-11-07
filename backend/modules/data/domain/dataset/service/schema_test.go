@@ -12,12 +12,12 @@ import (
 	"go.uber.org/mock/gomock"
 	"gorm.io/gorm"
 
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	dbmock "github.com/coze-dev/coze-loop/backend/infra/db/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/repo"
-	mock_repo "github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/repo/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/data/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	dbmock "code.byted.org/flowdevops/cozeloop/backend/infra/db/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/repo"
+	mock_repo "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/repo/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/pkg/errno"
 )
 
 func TestDatasetServiceImpl_UpdateSchema(t *testing.T) {

@@ -4,9 +4,9 @@
 package convertor
 
 import (
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/domain/tag"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/component/rpc"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/domain/tag"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/component/rpc"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
 )
 
 func TagValueDTO2DO(tagValue *tag.TagValue) *rpc.TagValue {

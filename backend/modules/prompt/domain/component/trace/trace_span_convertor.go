@@ -6,15 +6,14 @@ package trace
 import (
 	"github.com/coze-dev/cozeloop-go/spec/tracespec"
 
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
 )
 
 func VariableValsToSpanPromptVariables(variables []*entity.VariableVal) []*tracespec.PromptArgument {
 	if variables == nil {
 		return nil
 	}
-
 	spanVariables := make([]*tracespec.PromptArgument, 0, len(variables))
 	for _, variable := range variables {
 		if variable == nil {

@@ -9,8 +9,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/component/conf"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/component/conf"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/entity"
 )
 
 func TestDatasetSpec_GetSpecByCategory(t *testing.T) {

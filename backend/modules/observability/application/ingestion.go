@@ -6,7 +6,7 @@ package application
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/service"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/service"
 )
 
 type ITraceIngestionApplication interface {

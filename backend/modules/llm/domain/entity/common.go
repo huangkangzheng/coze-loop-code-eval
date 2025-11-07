@@ -11,7 +11,6 @@ const (
 	ScenarioEvalTarget       Scenario = "eval_target"
 	ScenarioEvaluator        Scenario = "evaluator"
 	ScenarioPromptAsAService Scenario = "prompt_as_a_service" // ptaas
-	ScenarioDataSynthesis    Scenario = "data_synthesis"
 )
 
 func ScenarioValue(scenario *Scenario) Scenario {

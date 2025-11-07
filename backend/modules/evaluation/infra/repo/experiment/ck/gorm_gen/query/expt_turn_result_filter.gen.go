@@ -17,7 +17,7 @@ import (
 
 	"gorm.io/plugin/dbresolver"
 
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/experiment/ck/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/experiment/ck/gorm_gen/model"
 )
 
 func newExptTurnResultFilter(db *gorm.DB, opts ...gen.DOOption) exptTurnResultFilter {

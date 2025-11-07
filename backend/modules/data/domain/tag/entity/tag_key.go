@@ -14,12 +14,12 @@ import (
 	"github.com/bytedance/gg/gvalue"
 	"github.com/bytedance/sonic"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/domain/common"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/domain/tag"
-	"github.com/coze-dev/coze-loop/backend/modules/data/infra/repo/tag/mysql/gorm_gen/model"
-	"github.com/coze-dev/coze-loop/backend/modules/data/pkg/consts"
-	"github.com/coze-dev/coze-loop/backend/modules/data/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/ptrutil"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/domain/common"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/domain/tag"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/infra/repo/tag/mysql/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/pkg/consts"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/ptrutil"
 )
 
 type TagKey struct {

@@ -7,14 +7,14 @@ import (
 	"context"
 	"strconv"
 
-	"github.com/coze-dev/coze-loop/backend/infra/middleware/session"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/space"
-	"github.com/coze-dev/coze-loop/backend/modules/foundation/application/convertor"
-	"github.com/coze-dev/coze-loop/backend/modules/foundation/domain/user/repo"
-	"github.com/coze-dev/coze-loop/backend/modules/foundation/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/slices"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/middleware/session"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/space"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/foundation/application/convertor"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/foundation/domain/user/repo"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/foundation/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/slices"
 )
 
 type SpaceApplicationImpl struct {

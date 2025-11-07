@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/coze-dev/coze-loop/backend/infra/looptracer/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/looptracer/mocks"
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 )

@@ -7,13 +7,14 @@ import (
 	"context"
 
 	json "github.com/bytedance/sonic"
-	"github.com/coze-dev/coze-loop/backend/infra/mq"
-	"github.com/coze-dev/coze-loop/backend/modules/data/application"
-	dataset_conf "github.com/coze-dev/coze-loop/backend/modules/data/domain/component/conf"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/entity"
-	"github.com/coze-dev/coze-loop/backend/pkg/conf"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/conv"
+
+	"code.byted.org/flowdevops/cozeloop/backend/infra/mq"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/application"
+	dataset_conf "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/component/conf"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/conf"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/conv"
 )
 
 type DatasetJobConsumer struct {

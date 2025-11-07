@@ -9,9 +9,9 @@ import (
 	"testing"
 	"time"
 
-	infraMetrics "github.com/coze-dev/coze-loop/backend/infra/metrics"
-	"github.com/coze-dev/coze-loop/backend/infra/metrics/mocks"
-	metrics2 "github.com/coze-dev/coze-loop/backend/modules/observability/domain/component/metrics"
+	infraMetrics "code.byted.org/flowdevops/cozeloop/backend/infra/metrics"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/metrics/mocks"
+	metrics2 "code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/component/metrics"
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 )

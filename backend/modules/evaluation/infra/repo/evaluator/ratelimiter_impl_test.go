@@ -10,8 +10,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 
-	"github.com/coze-dev/coze-loop/backend/infra/limiter"
-	limiterMocks "github.com/coze-dev/coze-loop/backend/infra/limiter/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/limiter"
+	limiterMocks "code.byted.org/flowdevops/cozeloop/backend/infra/limiter/mocks"
 )
 
 func TestRateLimiterImpl_AllowInvoke(t *testing.T) {

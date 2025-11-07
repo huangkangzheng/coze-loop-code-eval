@@ -12,12 +12,12 @@ import (
 	"go.uber.org/mock/gomock"
 	"gorm.io/gorm"
 
-	"github.com/coze-dev/coze-loop/backend/modules/llm/domain/component/conf"
-	llmconfmocks "github.com/coze-dev/coze-loop/backend/modules/llm/domain/component/conf/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/llm/domain/entity"
-	llm_errorx "github.com/coze-dev/coze-loop/backend/modules/llm/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/unittest"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/llm/domain/component/conf"
+	llmconfmocks "code.byted.org/flowdevops/cozeloop/backend/modules/llm/domain/component/conf/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/llm/domain/entity"
+	llm_errorx "code.byted.org/flowdevops/cozeloop/backend/modules/llm/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/unittest"
 )
 
 func TestManageImpl_GetModelByID(t *testing.T) {

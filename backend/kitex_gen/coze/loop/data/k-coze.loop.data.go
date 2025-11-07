@@ -10,8 +10,8 @@ import (
 
 	"github.com/cloudwego/gopkg/protocol/thrift"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/dataset"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/tag"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/dataset"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/tag"
 )
 
 var (

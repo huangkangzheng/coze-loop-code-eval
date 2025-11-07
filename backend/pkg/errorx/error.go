@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx/internal"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx/internal"
 )
 
 // StatusError is an interface for error with status code, you can

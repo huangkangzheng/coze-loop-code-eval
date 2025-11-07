@@ -6,9 +6,9 @@ package conf
 import (
 	"time"
 
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/entity"
-	common_entity "github.com/coze-dev/coze-loop/backend/modules/data/domain/entity"
-	entity2 "github.com/coze-dev/coze-loop/backend/modules/data/domain/tag/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/entity"
+	common_entity "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/entity"
+	entity2 "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/tag/entity"
 )
 
 //go:generate mockgen -destination=mocks/conf.go -package=mocks . IConfig

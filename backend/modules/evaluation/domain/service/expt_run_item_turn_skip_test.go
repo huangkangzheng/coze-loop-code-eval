@@ -9,10 +9,10 @@ import (
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 
-	benefitMocks "github.com/coze-dev/coze-loop/backend/infra/external/benefit/mocks"
-	metricsMocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/metrics/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	svcMocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/service/mocks"
+	benefitMocks "code.byted.org/flowdevops/cozeloop/backend/infra/external/benefit/mocks"
+	metricsMocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/metrics/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	svcMocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/service/mocks"
 )
 
 func TestDefaultExptTurnEvaluationImpl_skipTargetNode_TargetVersionIDCheck(t *testing.T) {

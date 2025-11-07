@@ -14,10 +14,10 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 
-	"github.com/coze-dev/coze-loop/backend/infra/db/mocks"
-	mocks2 "github.com/coze-dev/coze-loop/backend/infra/idgen/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/tag/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/data/pkg/pagination"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db/mocks"
+	mocks2 "code.byted.org/flowdevops/cozeloop/backend/infra/idgen/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/tag/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/pkg/pagination"
 )
 
 func TestTagRepoImpl_MCreateTagKeys(t *testing.T) {

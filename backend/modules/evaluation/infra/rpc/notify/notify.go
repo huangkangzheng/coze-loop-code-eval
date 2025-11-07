@@ -6,7 +6,7 @@ package notify
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/rpc"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/rpc"
 )
 
 type NotifyRPCAdapter struct{}

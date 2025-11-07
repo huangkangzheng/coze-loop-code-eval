@@ -14,12 +14,12 @@ import (
 	"go.uber.org/mock/gomock"
 	"gorm.io/datatypes"
 
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	"github.com/coze-dev/coze-loop/backend/infra/idgen/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/repo"
-	"github.com/coze-dev/coze-loop/backend/modules/data/infra/repo/dataset/mysql/gorm_gen/model"
-	mysqlmocks "github.com/coze-dev/coze-loop/backend/modules/data/infra/repo/dataset/mysql/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/idgen/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/repo"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/infra/repo/dataset/mysql/gorm_gen/model"
+	mysqlmocks "code.byted.org/flowdevops/cozeloop/backend/modules/data/infra/repo/dataset/mysql/mocks"
 )
 
 func TestDatasetRepo_CreateIOJob(t *testing.T) {
@@ -144,7 +144,7 @@ func TestDatasetRepo_GetIOJob(t *testing.T) {
 			dbOpts:   []db.Option{},
 			setupMock: func() {
 				mockIOJobDAO.EXPECT().GetIOJob(ctx, int64(1), gomock.Any()). // gomock.Any() for db.Option for simplicity
-												Return(&model.DatasetIOJob{
+					Return(&model.DatasetIOJob{
 						ID:                1,
 						AppID:             1,
 						SpaceID:           10,

@@ -4,7 +4,7 @@
 package entity
 
 import (
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/domain/tag"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/domain/tag"
 )
 
 type TagStatus string

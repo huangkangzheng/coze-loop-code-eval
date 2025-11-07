@@ -12,13 +12,13 @@ import (
 	"github.com/bytedance/gg/gptr"
 	"go.uber.org/mock/gomock"
 
-	idgenmocks "github.com/coze-dev/coze-loop/backend/infra/idgen/mocks"
-	idemmocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/idem/mocks"
-	configmocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	eventmocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/events/mocks"
-	mock_repo "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/repo/mocks"
-	svcmocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/service/mocks"
+	idgenmocks "code.byted.org/flowdevops/cozeloop/backend/infra/idgen/mocks"
+	idemmocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/idem/mocks"
+	configmocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	eventmocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/events/mocks"
+	mock_repo "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/repo/mocks"
+	svcmocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/service/mocks"
 )
 
 // Phase 3: Target skip functionality and scheduler updates tests

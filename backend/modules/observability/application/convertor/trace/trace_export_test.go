@@ -6,13 +6,13 @@ import (
 	"testing"
 
 	"github.com/bytedance/gg/gptr"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/domain/dataset"
-	eval_common "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/domain/common"
-	dataset0 "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/observability/domain/dataset"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/observability/trace"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/loop_span"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/service"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/domain/dataset"
+	eval_common "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/common"
+	dataset0 "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/domain/dataset"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/trace"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/loop_span"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/service"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -589,7 +589,7 @@ func TestConvertFieldMappingsDTO2DO(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := ConvertFieldMappingsDTO2DO(tt.mappings)
+			got := convertFieldMappingsDTO2DO(tt.mappings)
 			assert.Equal(t, tt.want, got)
 		})
 	}

@@ -6,8 +6,8 @@ package utils
 import (
 	"time"
 
-	obErrorx "github.com/coze-dev/coze-loop/backend/modules/observability/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
+	obErrorx "code.byted.org/flowdevops/cozeloop/backend/modules/observability/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
 )
 
 const (

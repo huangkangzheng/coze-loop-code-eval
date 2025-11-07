@@ -14,8 +14,8 @@ import (
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
 	"github.com/hertz-contrib/sse"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/prompt/openapi"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/prompt/openapi/promptopenapiservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/openapi"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/openapi/promptopenapiservice"
 )
 
 var promptOpenAPISvc promptopenapiservice.Client

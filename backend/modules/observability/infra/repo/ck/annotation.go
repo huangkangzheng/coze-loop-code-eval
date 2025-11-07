@@ -6,8 +6,8 @@ package ck
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/infra/ck"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/infra/repo/ck/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/ck"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/infra/repo/ck/gorm_gen/model"
 )
 
 type InsertAnnotationParam struct {

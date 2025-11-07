@@ -8,12 +8,12 @@ import (
 
 	"go.uber.org/mock/gomock"
 
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	"github.com/coze-dev/coze-loop/backend/infra/idgen"
-	idgenmocks "github.com/coze-dev/coze-loop/backend/infra/idgen/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/data/infra/repo/dataset/mysql"
-	"github.com/coze-dev/coze-loop/backend/modules/data/infra/repo/dataset/mysql/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/data/infra/repo/dataset/redis"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/idgen"
+	idgenmocks "code.byted.org/flowdevops/cozeloop/backend/infra/idgen/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/infra/repo/dataset/mysql"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/infra/repo/dataset/mysql/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/infra/repo/dataset/redis"
 )
 
 func TestNewDatasetRepo(t *testing.T) {

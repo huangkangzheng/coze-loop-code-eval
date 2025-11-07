@@ -10,13 +10,13 @@ import (
 
 	"github.com/samber/lo"
 
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	"github.com/coze-dev/coze-loop/backend/infra/platestwrite"
-	"github.com/coze-dev/coze-loop/backend/infra/redis"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/infra/repo/mysql/gorm_gen/model"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/infra/repo/mysql/gorm_gen/query"
-	prompterr "github.com/coze-dev/coze-loop/backend/modules/prompt/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/platestwrite"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/redis"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/infra/repo/mysql/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/infra/repo/mysql/gorm_gen/query"
+	prompterr "code.byted.org/flowdevops/cozeloop/backend/modules/prompt/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
 )
 
 //go:generate mockgen -destination=mocks/prompt_user_draft_dao.go -package=mocks . IPromptUserDraftDAO

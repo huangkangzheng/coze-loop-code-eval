@@ -15,21 +15,21 @@ import (
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 
-	domain_eval_set "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/domain/eval_set"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/eval_set"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/application/convertor/evaluation_set"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/consts"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/metrics"
-	metricsmock "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/metrics/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/rpc"
-	rpcmocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/rpc/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/userinfo"
-	userinfomocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/userinfo/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/service"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/service/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
+	domain_eval_set "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/eval_set"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/eval_set"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/application/convertor/evaluation_set"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/consts"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/metrics"
+	metricsmock "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/metrics/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/rpc"
+	rpcmocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/rpc/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/userinfo"
+	userinfomocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/userinfo/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/service"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/service/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
 )
 
 func TestEvaluationSetApplicationImpl_CreateEvaluationSet(t *testing.T) {
@@ -731,12 +731,11 @@ func TestEvaluationSetApplicationImpl_BatchCreateEvaluationSetItems(t *testing.T
 				// Mock batch create
 				mockEvalSetItemService.EXPECT().
 					BatchCreateEvaluationSetItems(gomock.Any(), gomock.Any()).
-					Return(map[int64]int64{1: 101, 2: 102}, nil, nil, nil)
+					Return(map[int64]int64{1: 101, 2: 102}, nil, nil)
 			},
 			wantResp: &eval_set.BatchCreateEvaluationSetItemsResponse{
-				AddedItems:  map[int64]int64{1: 101, 2: 102},
-				Errors:      nil,
-				ItemOutputs: nil,
+				AddedItems: map[int64]int64{1: 101, 2: 102},
+				Errors:     nil,
 			},
 			wantErr: false,
 		},
@@ -814,7 +813,7 @@ func TestEvaluationSetApplicationImpl_BatchCreateEvaluationSetItems(t *testing.T
 
 				mockEvalSetItemService.EXPECT().
 					BatchCreateEvaluationSetItems(gomock.Any(), gomock.Any()).
-					Return(nil, nil, nil, errorx.NewByCode(errno.CommonInternalErrorCode))
+					Return(nil, nil, errorx.NewByCode(errno.CommonInternalErrorCode))
 			},
 			wantErr:     true,
 			wantErrCode: errno.CommonInternalErrorCode,

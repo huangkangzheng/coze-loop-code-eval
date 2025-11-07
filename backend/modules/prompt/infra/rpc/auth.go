@@ -8,13 +8,13 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/auth"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/auth/authservice"
-	authentity "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/domain/auth"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/domain/component/rpc"
-	prompterr "github.com/coze-dev/coze-loop/backend/modules/prompt/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/auth"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/auth/authservice"
+	authentity "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/domain/auth"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/component/rpc"
+	prompterr "code.byted.org/flowdevops/cozeloop/backend/modules/prompt/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
 )
 
 type AuthRPCAdapter struct {
@@ -27,7 +27,7 @@ func NewAuthRPCProvider(client authservice.Client) rpc.IAuthProvider {
 	}
 }
 
-func (a *AuthRPCAdapter) mCheckPromptPermissionBase(ctx context.Context, spaceID int64, promptIDs []int64, action string) error {
+func (a *AuthRPCAdapter) MCheckPromptPermission(ctx context.Context, spaceID int64, promptIDs []int64, action string) error {
 	var authPairs []*authentity.SubjectActionObjects
 	authSubject := &authentity.AuthPrincipal{
 		AuthPrincipalType:  authentity.AuthPrincipalTypePtr(authentity.AuthPrincipalType_CozeIdentifier),
@@ -74,17 +74,7 @@ func (a *AuthRPCAdapter) mCheckPromptPermissionBase(ctx context.Context, spaceID
 	return nil
 }
 
-// MCheckPromptPermission checks if the user has permission to perform an action on the given prompts.
-func (a *AuthRPCAdapter) MCheckPromptPermission(ctx context.Context, spaceID int64, promptIDs []int64, action string) error {
-	return a.mCheckPromptPermissionBase(ctx, spaceID, promptIDs, action)
-}
-
-// MCheckPromptPermissionForOpenAPI checks if the user has permission to perform an action on the given prompts for OpenAPI.
-func (a *AuthRPCAdapter) MCheckPromptPermissionForOpenAPI(ctx context.Context, spaceID int64, promptIDs []int64, action string) error {
-	return a.mCheckPromptPermissionBase(ctx, spaceID, promptIDs, action)
-}
-
-func (a *AuthRPCAdapter) checkSpacePermissionBase(ctx context.Context, spaceID int64, action string) error {
+func (a *AuthRPCAdapter) CheckSpacePermission(ctx context.Context, spaceID int64, action string) error {
 	authSubject := &authentity.AuthPrincipal{
 		AuthPrincipalType:  authentity.AuthPrincipalTypePtr(authentity.AuthPrincipalType_CozeIdentifier),
 		AuthCozeIdentifier: &authentity.AuthCozeIdentifier{IdentityTicket: nil},
@@ -115,14 +105,4 @@ func (a *AuthRPCAdapter) checkSpacePermissionBase(ctx context.Context, spaceID i
 		}
 	}
 	return nil
-}
-
-// CheckSpacePermission checks if the user has permission to perform an action on the given space.
-func (a *AuthRPCAdapter) CheckSpacePermission(ctx context.Context, spaceID int64, action string) error {
-	return a.checkSpacePermissionBase(ctx, spaceID, action)
-}
-
-// CheckSpacePermissionForOpenAPI checks if the user has permission to perform an action on the given space for OpenAPI.
-func (a *AuthRPCAdapter) CheckSpacePermissionForOpenAPI(ctx context.Context, spaceID int64, action string) error {
-	return a.checkSpacePermissionBase(ctx, spaceID, action)
 }

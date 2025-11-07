@@ -9,10 +9,10 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/coze-dev/coze-loop/backend/modules/llm/domain/entity"
-	llm_errorx "github.com/coze-dev/coze-loop/backend/modules/llm/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/unittest"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/llm/domain/entity"
+	llm_errorx "code.byted.org/flowdevops/cozeloop/backend/modules/llm/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/unittest"
 )
 
 func TestFactoryImpl_CreateLLM(t *testing.T) {

@@ -10,10 +10,10 @@ import (
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/collector/component"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/collector/consumer"
-	consumermocks "github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/collector/consumer/mocks"
-	processormock "github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/collector/processor/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/collector/component"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/collector/consumer"
+	consumermocks "code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/collector/consumer/mocks"
+	processormock "code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/collector/processor/mocks"
 )
 
 func getComponentID(s string) component.ID {

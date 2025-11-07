@@ -43,7 +43,7 @@ func getGenerateConfig(path string) gen.Config {
 		FieldWithIndexTag: true,                            // 从数据库同步的表结构代码包含gorm的index tag
 		FieldWithTypeTag:  true,
 	}
-	config.WithImportPkgPath(fmt.Sprintf("github.com/coze-dev/coze-loop/backend/%s/model", path))
+	config.WithImportPkgPath(fmt.Sprintf("code.byted.org/flowdevops/cozeloop/backend/%s/model", path))
 	return config
 }
 
@@ -250,12 +250,8 @@ func generateForObservability(db *gorm.DB) {
 
 	// 为 observability_view 表添加软删除字段
 	observabilityView := g.GenerateModelAs("observability_view", "ObservabilityView")
-	observabilityTask := g.GenerateModelAs("task", "ObservabilityTask")
-	observabilityTaskRun := g.GenerateModelAs("auto_task_run", "ObservabilityTaskRun")
 
 	g.ApplyBasic(observabilityView)
-	g.ApplyBasic(observabilityTask)
-	g.ApplyBasic(observabilityTaskRun)
 	g.Execute()
 }
 

@@ -15,13 +15,13 @@ import (
 	"github.com/jinzhu/copier"
 	"github.com/pkg/errors"
 
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/component/conf"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/repo"
-	common_entity "github.com/coze-dev/coze-loop/backend/modules/data/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/data/pkg/consts"
-	"github.com/coze-dev/coze-loop/backend/modules/data/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/component/conf"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/repo"
+	common_entity "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/pkg/consts"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 func (s *DatasetServiceImpl) LoadItemData(ctx context.Context, items ...*entity.Item) error {

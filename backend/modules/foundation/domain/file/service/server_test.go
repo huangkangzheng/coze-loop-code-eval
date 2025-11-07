@@ -18,12 +18,12 @@ import (
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 
-	"github.com/coze-dev/coze-loop/backend/infra/fileserver"
-	fsmocks "github.com/coze-dev/coze-loop/backend/infra/fileserver/mocks"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/file"
-	"github.com/coze-dev/coze-loop/backend/modules/foundation/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/unittest"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/fileserver"
+	fsmocks "code.byted.org/flowdevops/cozeloop/backend/infra/fileserver/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/file"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/foundation/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/unittest"
 )
 
 func createFileHeader(filePath string) (*multipart.FileHeader, error) {

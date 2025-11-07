@@ -3,7 +3,7 @@ package tagservice
 
 import (
 	server "github.com/cloudwego/kitex/server"
-	tag "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/tag"
+	tag "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/tag"
 )
 
 // NewServer creates a server.Server with the given handler and options.

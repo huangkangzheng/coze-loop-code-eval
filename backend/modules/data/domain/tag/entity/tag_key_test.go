@@ -11,9 +11,9 @@ import (
 	"github.com/bytedance/sonic"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/domain/tag"
-	"github.com/coze-dev/coze-loop/backend/modules/data/infra/repo/tag/mysql/gorm_gen/model"
-	"github.com/coze-dev/coze-loop/backend/modules/data/pkg/consts"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/domain/tag"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/infra/repo/tag/mysql/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/pkg/consts"
 )
 
 func TestTagKey_ToPO(t *testing.T) {

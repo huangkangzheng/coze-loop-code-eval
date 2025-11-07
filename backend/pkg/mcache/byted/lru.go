@@ -8,7 +8,7 @@ import (
 
 	"github.com/coocood/freecache"
 
-	"github.com/coze-dev/coze-loop/backend/pkg/mcache"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/mcache"
 )
 
 // NewLRUCache size is in bytes.

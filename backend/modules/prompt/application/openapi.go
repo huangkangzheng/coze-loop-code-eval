@@ -19,25 +19,25 @@ import (
 	"github.com/vincent-petithory/dataurl"
 	"golang.org/x/exp/maps"
 
-	"github.com/coze-dev/coze-loop/backend/infra/limiter"
-	"github.com/coze-dev/coze-loop/backend/infra/looptracer"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/prompt/openapi"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/application/convertor"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/domain/component/conf"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/domain/component/rpc"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/domain/component/trace"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/domain/repo"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/domain/service"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/infra/collector"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/pkg/consts"
-	prompterr "github.com/coze-dev/coze-loop/backend/modules/prompt/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/goroutine"
-	"github.com/coze-dev/coze-loop/backend/pkg/json"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
-	"github.com/coze-dev/coze-loop/backend/pkg/traceutil"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/limiter"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/looptracer"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/openapi"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/application/convertor"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/component/conf"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/component/rpc"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/component/trace"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/repo"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/service"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/infra/collector"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/pkg/consts"
+	prompterr "code.byted.org/flowdevops/cozeloop/backend/modules/prompt/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/goroutine"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/json"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/traceutil"
 )
 
 func NewPromptOpenAPIApplication(
@@ -96,7 +96,7 @@ func (p *PromptOpenAPIApplicationImpl) BatchGetPromptByPromptKey(ctx context.Con
 		return r, err
 	}
 	// 执行权限检查
-	if err = p.auth.MCheckPromptPermissionForOpenAPI(ctx, req.GetWorkspaceID(), maps.Values(promptKeyIDMap), consts.ActionLoopPromptRead); err != nil {
+	if err = p.auth.MCheckPromptPermission(ctx, req.GetWorkspaceID(), maps.Values(promptKeyIDMap), consts.ActionLoopPromptRead); err != nil {
 		return nil, err
 	}
 
@@ -330,7 +330,7 @@ func (p *PromptOpenAPIApplicationImpl) doExecute(ctx context.Context, req *opena
 	}
 
 	// 执行权限检查
-	if err = p.auth.MCheckPromptPermissionForOpenAPI(ctx, req.GetWorkspaceID(), []int64{promptDO.ID}, consts.ActionLoopPromptExecute); err != nil {
+	if err = p.auth.MCheckPromptPermission(ctx, req.GetWorkspaceID(), []int64{promptDO.ID}, consts.ActionLoopPromptExecute); err != nil {
 		return promptDO, nil, err
 	}
 
@@ -418,7 +418,7 @@ func (p *PromptOpenAPIApplicationImpl) doExecuteStreaming(ctx context.Context, r
 	}
 
 	// 执行权限检查
-	if err = p.auth.MCheckPromptPermissionForOpenAPI(ctx, req.GetWorkspaceID(), []int64{promptDO.ID}, consts.ActionLoopPromptExecute); err != nil {
+	if err = p.auth.MCheckPromptPermission(ctx, req.GetWorkspaceID(), []int64{promptDO.ID}, consts.ActionLoopPromptExecute); err != nil {
 		return promptDO, nil, err
 	}
 

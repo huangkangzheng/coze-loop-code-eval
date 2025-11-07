@@ -15,11 +15,11 @@ import (
 	"github.com/cloudwego/kitex/pkg/kerrors"
 	"github.com/mitchellh/mapstructure"
 
-	"github.com/coze-dev/coze-loop/backend/infra/i18n"
-	"github.com/coze-dev/coze-loop/backend/modules/foundation/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/consts"
-	"github.com/coze-dev/coze-loop/backend/pkg/json"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/i18n"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/foundation/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/consts"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/json"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 const (

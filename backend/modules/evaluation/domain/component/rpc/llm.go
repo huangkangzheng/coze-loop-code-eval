@@ -6,7 +6,7 @@ package rpc
 import (
 	"context"
 
-	commonentity "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
+	commonentity "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
 )
 
 //go:generate mockgen -destination=mocks/llm_provider.go -package=mocks . ILLMProvider

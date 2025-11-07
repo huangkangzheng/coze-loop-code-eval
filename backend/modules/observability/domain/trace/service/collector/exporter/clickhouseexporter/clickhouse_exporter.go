@@ -6,10 +6,10 @@ package clickhouseexporter
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/collector/consumer"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/loop_span"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/repo"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/collector/consumer"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/loop_span"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/repo"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 type ckExporter struct {

@@ -9,12 +9,12 @@ import (
 
 	"gorm.io/gorm"
 
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/infra/repo/mysql/gorm_gen/model"
-	genquery "github.com/coze-dev/coze-loop/backend/modules/observability/infra/repo/mysql/gorm_gen/query"
-	obErrorx "github.com/coze-dev/coze-loop/backend/modules/observability/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/infra/repo/mysql/gorm_gen/model"
+	genquery "code.byted.org/flowdevops/cozeloop/backend/modules/observability/infra/repo/mysql/gorm_gen/query"
+	obErrorx "code.byted.org/flowdevops/cozeloop/backend/modules/observability/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 //go:generate mockgen -destination=mocks/view.go -package=mocks . IViewDao

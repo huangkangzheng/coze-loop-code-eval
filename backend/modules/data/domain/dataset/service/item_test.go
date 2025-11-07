@@ -13,16 +13,16 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	"github.com/coze-dev/coze-loop/backend/infra/db/mocks"
-	idgenmock "github.com/coze-dev/coze-loop/backend/infra/idgen/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/component/conf"
-	confmocks "github.com/coze-dev/coze-loop/backend/modules/data/domain/component/conf/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/repo"
-	mock_repo "github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/repo/mocks"
-	common_entity "github.com/coze-dev/coze-loop/backend/modules/data/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/data/pkg/pagination"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db/mocks"
+	idgenmock "code.byted.org/flowdevops/cozeloop/backend/infra/idgen/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/component/conf"
+	confmocks "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/component/conf/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/repo"
+	mock_repo "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/repo/mocks"
+	common_entity "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/pkg/pagination"
 )
 
 func TestDatasetServiceImpl_LoadItemData(t *testing.T) {

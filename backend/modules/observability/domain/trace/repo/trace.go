@@ -6,7 +6,7 @@ package repo
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/loop_span"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/loop_span"
 )
 
 type GetTraceParam struct {
@@ -19,8 +19,6 @@ type GetTraceParam struct {
 	NotQueryAnnotation bool
 	SpanIDs            []string
 	OmitColumns        []string // omit specific columns
-	SelectColumns      []string // select specific columns, default select all columns
-	Filters            *loop_span.FilterFields
 }
 
 type ListSpansParam struct {

@@ -3,7 +3,7 @@ package datasetservice
 
 import (
 	server "github.com/cloudwego/kitex/server"
-	data "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data"
+	data "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data"
 )
 
 // NewServer creates a server.Server with the given handler and options.

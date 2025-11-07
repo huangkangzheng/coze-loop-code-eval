@@ -6,7 +6,7 @@ package mq
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity"
 )
 
 //go:generate mockgen -destination=mocks/annotation_producer.go -package=mocks . IAnnotationProducer

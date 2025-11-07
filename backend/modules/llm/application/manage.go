@@ -7,12 +7,12 @@ import (
 	"context"
 	"strconv"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/llm/manage"
-	"github.com/coze-dev/coze-loop/backend/modules/llm/application/convertor"
-	"github.com/coze-dev/coze-loop/backend/modules/llm/domain/component/rpc"
-	"github.com/coze-dev/coze-loop/backend/modules/llm/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/llm/domain/service"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/llm/manage"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/llm/application/convertor"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/llm/domain/component/rpc"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/llm/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/llm/domain/service"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
 )
 
 type manageApp struct {

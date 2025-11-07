@@ -9,53 +9,10 @@ import (
 	"github.com/bytedance/gg/gptr"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/domain/dataset"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/domain/eval_set"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/domain/dataset"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/eval_set"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
 )
-
-func TestCreateDatasetItemOutputDO2DTOs(t *testing.T) {
-	t.Parallel()
-
-	tests := []struct {
-		name     string
-		input    []*entity.DatasetItemOutput
-		expected []*dataset.CreateDatasetItemOutput
-	}{
-		{
-			name:     "nil input",
-			input:    nil,
-			expected: nil,
-		},
-		{
-			name: "empty slice",
-			input: []*entity.DatasetItemOutput{
-				{
-					ItemIndex: gptr.Of(int32(1)),
-					ItemKey:   gptr.Of("key1"),
-					ItemID:    gptr.Of(int64(1)),
-					IsNewItem: gptr.Of(true),
-				},
-			},
-			expected: []*dataset.CreateDatasetItemOutput{
-				{
-					ItemIndex: gptr.Of(int32(1)),
-					ItemKey:   gptr.Of("key1"),
-					ItemID:    gptr.Of(int64(1)),
-					IsNewItem: gptr.Of(true),
-				},
-			},
-		},
-	}
-
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			t.Parallel()
-			result := CreateDatasetItemOutputDO2DTOs(tt.input)
-			assert.Equal(t, tt.expected, result)
-		})
-	}
-}
 
 func TestEvaluationSetDO2DTOs_Simple(t *testing.T) {
 	t.Parallel()

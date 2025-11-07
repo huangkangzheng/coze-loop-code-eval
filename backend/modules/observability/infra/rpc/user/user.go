@@ -6,11 +6,11 @@ package user
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/user"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/user/userservice"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/component/rpc"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/common"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/user"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/user/userservice"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/component/rpc"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/common"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 	"github.com/samber/lo"
 )
 

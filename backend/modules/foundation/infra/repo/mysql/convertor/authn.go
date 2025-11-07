@@ -4,8 +4,8 @@
 package convertor
 
 import (
-	"github.com/coze-dev/coze-loop/backend/modules/foundation/domain/authn/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/foundation/infra/repo/mysql/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/foundation/domain/authn/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/foundation/infra/repo/mysql/gorm_gen/model"
 )
 
 func APIKeyDO2PO(do *entity.APIKey) *model.APIKey {

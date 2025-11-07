@@ -6,7 +6,7 @@ package tenant
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/loop_span"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/loop_span"
 )
 
 //go:generate mockgen -destination=mocks/tenant_provider.go -package=mocks . ITenantProvider

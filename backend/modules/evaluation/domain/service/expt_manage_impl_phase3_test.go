@@ -10,8 +10,8 @@ import (
 	"github.com/bytedance/gg/gptr"
 	"go.uber.org/mock/gomock"
 
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	svcMocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/service/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	svcMocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/service/mocks"
 )
 
 // Phase 3: Skip target logic tests

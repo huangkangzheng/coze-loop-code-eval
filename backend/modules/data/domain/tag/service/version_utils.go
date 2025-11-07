@@ -10,7 +10,7 @@ import (
 
 	"github.com/coreos/go-semver/semver"
 
-	"github.com/coze-dev/coze-loop/backend/modules/data/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/pkg/errno"
 )
 
 const (

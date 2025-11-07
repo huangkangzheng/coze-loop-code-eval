@@ -10,7 +10,7 @@ import (
 
 	"github.com/cloudwego/hertz/pkg/app"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/spaceservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/spaceservice"
 )
 
 var localSpaceClient spaceservice.Client

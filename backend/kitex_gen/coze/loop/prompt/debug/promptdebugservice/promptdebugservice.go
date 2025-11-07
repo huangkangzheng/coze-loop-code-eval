@@ -8,7 +8,7 @@ import (
 	client "github.com/cloudwego/kitex/client"
 	kitex "github.com/cloudwego/kitex/pkg/serviceinfo"
 	streaming "github.com/cloudwego/kitex/pkg/streaming"
-	debug "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/prompt/debug"
+	debug "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/debug"
 )
 
 var errInvalidMessageType = errors.New("invalid message type for service method handler")

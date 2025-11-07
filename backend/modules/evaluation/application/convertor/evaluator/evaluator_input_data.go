@@ -4,10 +4,10 @@
 package evaluator
 
 import (
-	commondto "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/domain/common"
-	evaluatordto "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/domain/evaluator"
-	commonconvertor "github.com/coze-dev/coze-loop/backend/modules/evaluation/application/convertor/common"
-	evaluatorentity "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
+	commondto "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/common"
+	evaluatordto "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/evaluator"
+	commonconvertor "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/application/convertor/common"
+	evaluatorentity "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
 )
 
 // ConvertEvaluatorInputDataDTO2DO 将 DTO 转换为 evaluatorentity.EvaluatorInputData 结构体
@@ -30,26 +30,9 @@ func ConvertEvaluatorInputDataDTO2DO(dto *evaluatordto.EvaluatorInputData) *eval
 		inputFields[key] = contentDO
 	}
 
-	// 转换 EvaluateDatasetFields
-	evaluateDatasetFields := make(map[string]*evaluatorentity.Content)
-	for key, contentDTO := range dto.EvaluateDatasetFields {
-		contentDO := commonconvertor.ConvertContentDTO2DO(contentDTO)
-		evaluateDatasetFields[key] = contentDO
-	}
-
-	// 转换 EvaluateTargetOutputFields
-	evaluateTargetOutputFields := make(map[string]*evaluatorentity.Content)
-	for key, contentDTO := range dto.EvaluateTargetOutputFields {
-		contentDO := commonconvertor.ConvertContentDTO2DO(contentDTO)
-		evaluateTargetOutputFields[key] = contentDO
-	}
-
 	return &evaluatorentity.EvaluatorInputData{
-		HistoryMessages:            historyMessages,
-		InputFields:                inputFields,
-		EvaluateDatasetFields:      evaluateDatasetFields,
-		EvaluateTargetOutputFields: evaluateTargetOutputFields,
-		Ext:                        dto.Ext,
+		HistoryMessages: historyMessages,
+		InputFields:     inputFields,
 	}
 }
 
@@ -73,25 +56,8 @@ func ConvertEvaluatorInputDataDO2DTO(do *evaluatorentity.EvaluatorInputData) *ev
 		inputFields[key] = contentDTO
 	}
 
-	// 转换 EvaluateDatasetFields
-	evaluateDatasetFields := make(map[string]*commondto.Content)
-	for key, contentDO := range do.EvaluateDatasetFields {
-		contentDTO := commonconvertor.ConvertContentDO2DTO(contentDO)
-		evaluateDatasetFields[key] = contentDTO
-	}
-
-	// 转换 EvaluateTargetOutputFields
-	evaluateTargetOutputFields := make(map[string]*commondto.Content)
-	for key, contentDO := range do.EvaluateTargetOutputFields {
-		contentDTO := commonconvertor.ConvertContentDO2DTO(contentDO)
-		evaluateTargetOutputFields[key] = contentDTO
-	}
-
 	return &evaluatordto.EvaluatorInputData{
-		HistoryMessages:            historyMessages,
-		InputFields:                inputFields,
-		EvaluateDatasetFields:      evaluateDatasetFields,
-		EvaluateTargetOutputFields: evaluateTargetOutputFields,
-		Ext:                        do.Ext,
+		HistoryMessages: historyMessages,
+		InputFields:     inputFields,
 	}
 }

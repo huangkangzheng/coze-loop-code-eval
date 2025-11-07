@@ -7,10 +7,10 @@ import (
 	"github.com/bytedance/gg/gslice"
 	"gorm.io/gorm/clause"
 
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	"github.com/coze-dev/coze-loop/backend/modules/data/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/modules/data/pkg/pagination"
-	"github.com/coze-dev/coze-loop/backend/pkg/vdutil"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/pkg/pagination"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/vdutil"
 )
 
 type MGetTagKeyParam struct {

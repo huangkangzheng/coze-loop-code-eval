@@ -12,17 +12,17 @@ import (
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 
-	"github.com/coze-dev/coze-loop/backend/infra/external/benefit"
-	benefitMocks "github.com/coze-dev/coze-loop/backend/infra/external/benefit/mocks"
-	lockMocks "github.com/coze-dev/coze-loop/backend/infra/lock/mocks"
-	lwtMocks "github.com/coze-dev/coze-loop/backend/infra/platestwrite/mocks"
-	idemMocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/idem/mocks"
-	metricsMocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/metrics/mocks"
-	componentMocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	eventsMocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/events/mocks"
-	repoMocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/repo/mocks"
-	svcMocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/service/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/external/benefit"
+	benefitMocks "code.byted.org/flowdevops/cozeloop/backend/infra/external/benefit/mocks"
+	lockMocks "code.byted.org/flowdevops/cozeloop/backend/infra/lock/mocks"
+	lwtMocks "code.byted.org/flowdevops/cozeloop/backend/infra/platestwrite/mocks"
+	idemMocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/idem/mocks"
+	metricsMocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/metrics/mocks"
+	componentMocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	eventsMocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/events/mocks"
+	repoMocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/repo/mocks"
+	svcMocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/service/mocks"
 )
 
 // newTestExptManager is defined in expt_manage_impl_test.go

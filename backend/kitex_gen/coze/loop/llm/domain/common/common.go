@@ -14,8 +14,6 @@ const (
 	ScenarioEvalTarget = "eval_target"
 
 	ScenarioEvaluator = "evaluator"
-
-	ScenarioDataSynthesis = "data_synthesis"
 )
 
 type Scenario = string

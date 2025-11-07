@@ -3,7 +3,7 @@ package foundationopenapiservice
 
 import (
 	server "github.com/cloudwego/kitex/server"
-	foundation "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation"
+	foundation "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation"
 )
 
 // NewServer creates a server.Server with the given handler and options.

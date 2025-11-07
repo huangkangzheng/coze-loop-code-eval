@@ -10,19 +10,18 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/component/config"
-	metric_repo "github.com/coze-dev/coze-loop/backend/modules/observability/domain/metric/repo"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/loop_span"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/repo"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/infra/repo/ck"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/infra/repo/ck/convertor"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/infra/repo/ck/gorm_gen/model"
-	obErrorx "github.com/coze-dev/coze-loop/backend/modules/observability/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/json"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
-	time_util "github.com/coze-dev/coze-loop/backend/pkg/time"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/component/config"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/loop_span"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/repo"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/infra/repo/ck"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/infra/repo/ck/convertor"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/infra/repo/ck/gorm_gen/model"
+	obErrorx "code.byted.org/flowdevops/cozeloop/backend/modules/observability/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/json"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
+	time_util "code.byted.org/flowdevops/cozeloop/backend/pkg/time"
 	"github.com/samber/lo"
 )
 
@@ -31,18 +30,6 @@ func NewTraceCKRepoImpl(
 	annoDao ck.IAnnotationDao,
 	traceConfig config.ITraceConfig,
 ) (repo.ITraceRepo, error) {
-	return &TraceCkRepoImpl{
-		spansDao:    spanDao,
-		annoDao:     annoDao,
-		traceConfig: traceConfig,
-	}, nil
-}
-
-func NewTraceMetricCKRepoImpl(
-	spanDao ck.ISpansDao,
-	annoDao ck.IAnnotationDao,
-	traceConfig config.ITraceConfig,
-) (metric_repo.IMetricRepo, error) {
 	return &TraceCkRepoImpl{
 		spansDao:    spanDao,
 		annoDao:     annoDao,
@@ -176,20 +163,16 @@ func (t *TraceCkRepoImpl) GetTrace(ctx context.Context, req *repo.GetTraceParam)
 			QueryType: ptr.Of(loop_span.QueryTypeEnumIn),
 		})
 	}
-	filter.FilterFields = append(filter.FilterFields, &loop_span.FilterField{
-		SubFilter: req.Filters,
-	})
 	st := time.Now()
 	spans, err := t.spansDao.Get(ctx, &ck.QueryParam{
-		QueryType:     ck.QueryTypeGetTrace,
-		Tables:        tableCfg.SpanTables,
-		AnnoTableMap:  tableCfg.AnnoTableMap,
-		StartTime:     time_util.MillSec2MicroSec(req.StartAt),
-		EndTime:       time_util.MillSec2MicroSec(req.EndAt),
-		Filters:       filter,
-		Limit:         req.Limit,
-		OmitColumns:   req.OmitColumns,
-		SelectColumns: req.SelectColumns,
+		QueryType:    ck.QueryTypeGetTrace,
+		Tables:       tableCfg.SpanTables,
+		AnnoTableMap: tableCfg.AnnoTableMap,
+		StartTime:    time_util.MillSec2MicroSec(req.StartAt),
+		EndTime:      time_util.MillSec2MicroSec(req.EndAt),
+		Filters:      filter,
+		Limit:        req.Limit,
+		OmitColumns:  req.OmitColumns,
 	})
 	if err != nil {
 		return nil, err
@@ -226,8 +209,6 @@ func (t *TraceCkRepoImpl) ListAnnotations(ctx context.Context, param *repo.ListA
 	tableCfg, err := t.getQueryTenantTables(ctx, param.Tenants)
 	if err != nil {
 		return nil, err
-	} else if len(tableCfg.AnnoTables) == 0 {
-		return loop_span.AnnotationList{}, nil
 	}
 	st := time.Now()
 	annotations, err := t.annoDao.List(ctx, &ck.ListAnnotationsParam{
@@ -253,8 +234,6 @@ func (t *TraceCkRepoImpl) GetAnnotation(ctx context.Context, param *repo.GetAnno
 	tableCfg, err := t.getQueryTenantTables(ctx, param.Tenants)
 	if err != nil {
 		return nil, err
-	} else if len(tableCfg.AnnoTables) == 0 {
-		return nil, nil
 	}
 	st := time.Now()
 	annotation, err := t.annoDao.Get(ctx, &ck.GetAnnotationParam{
@@ -290,30 +269,6 @@ func (t *TraceCkRepoImpl) InsertAnnotations(ctx context.Context, param *repo.Ins
 	})
 }
 
-func (t *TraceCkRepoImpl) GetMetrics(ctx context.Context, param *metric_repo.GetMetricsParam) (*metric_repo.GetMetricsResult, error) {
-	tableCfg, err := t.getQueryTenantTables(ctx, param.Tenants)
-	if err != nil {
-		return nil, err
-	}
-	st := time.Now()
-	metrics, err := t.spansDao.GetMetrics(ctx, &ck.GetMetricsParam{
-		Tables:       tableCfg.SpanTables,
-		Aggregations: param.Aggregations,
-		GroupBys:     param.GroupBys,
-		Filters:      param.Filters,
-		StartAt:      time_util.MillSec2MicroSec(param.StartAt),
-		EndAt:        time_util.MillSec2MicroSec(param.EndAt),
-		Granularity:  param.Granularity,
-	})
-	if err != nil {
-		return nil, err
-	}
-	logs.CtxInfo(ctx, "get metrics successfully, cost %v", time.Since(st))
-	return &metric_repo.GetMetricsResult{
-		Data: metrics,
-	}, nil
-}
-
 type queryTableCfg struct {
 	SpanTables    []string
 	AnnoTables    []string
@@ -341,10 +296,8 @@ func (t *TraceCkRepoImpl) getQueryTenantTables(ctx context.Context, tenants []st
 		}
 		for _, tableCfg := range tables {
 			ret.SpanTables = append(ret.SpanTables, tableCfg.SpanTable)
-			if tableCfg.AnnoTable != "" {
-				ret.AnnoTables = append(ret.AnnoTables, tableCfg.AnnoTable)
-				ret.AnnoTableMap[tableCfg.SpanTable] = tableCfg.AnnoTable
-			}
+			ret.AnnoTables = append(ret.AnnoTables, tableCfg.AnnoTable)
+			ret.AnnoTableMap[tableCfg.SpanTable] = tableCfg.AnnoTable
 		}
 	}
 	for _, tenant := range tenants {

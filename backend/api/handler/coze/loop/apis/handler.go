@@ -13,60 +13,54 @@ import (
 	"github.com/cloudwego/kitex/client/callopt"
 	"github.com/cloudwego/kitex/pkg/endpoint"
 	"github.com/cloudwego/kitex/pkg/kerrors"
-	"github.com/coze-dev/coze-loop/backend/infra/i18n"
-	cachemw "github.com/coze-dev/coze-loop/backend/infra/middleware/ctxcache"
-	logmw "github.com/coze-dev/coze-loop/backend/infra/middleware/logs"
-	"github.com/coze-dev/coze-loop/backend/infra/middleware/session"
-	"github.com/coze-dev/coze-loop/backend/infra/middleware/validator"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/dataset"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/tag"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/eval_set"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/eval_target"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/evaluator"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/expt"
-	evalopen "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/openapi"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/auth"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/authn"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/file"
-	foundationopenapi "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/openapi"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/space"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/user"
-	llmmanage "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/llm/manage"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/llm/runtime"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/observability/metric"
-	traceopenapi "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/observability/openapi"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/observability/task"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/observability/trace"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/prompt/debug"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/prompt/execute"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/prompt/manage"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/prompt/openapi"
-	"github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/data/lodataset"
-	"github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/data/lotag"
-	"github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/evaluation/loeval_set"
-	"github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/evaluation/loeval_target"
-	"github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/evaluation/loevaluator"
-	"github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/evaluation/loexpt"
-	loevalopen "github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/evaluation/loopenapi"
-	"github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/foundation/loauthn"
-	foundationlofile "github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/foundation/lofile"
-	foundationloopenapi "github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/foundation/loopenapi"
-	"github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/foundation/lospace"
-	"github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/foundation/louser"
-	lollmmanage "github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/llm/lomanage"
-	"github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/observability/lometric"
-	looptraceopenapi "github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/observability/loopenapi"
-	"github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/observability/lotask"
-	"github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/observability/lotrace"
-	"github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/prompt/lodebug"
-	"github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/prompt/lomanage"
-	"github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/prompt/loopenapi"
-	dataapp "github.com/coze-dev/coze-loop/backend/modules/data/application"
-	evalapp "github.com/coze-dev/coze-loop/backend/modules/evaluation/application"
-	"github.com/coze-dev/coze-loop/backend/modules/foundation/pkg/errno"
-	obapp "github.com/coze-dev/coze-loop/backend/modules/observability/application"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/goroutine"
+
+	"code.byted.org/flowdevops/cozeloop/backend/infra/i18n"
+	cachemw "code.byted.org/flowdevops/cozeloop/backend/infra/middleware/ctxcache"
+	logmw "code.byted.org/flowdevops/cozeloop/backend/infra/middleware/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/middleware/validator"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/dataset"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/tag"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/eval_set"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/eval_target"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/evaluator"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/expt"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/auth"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/authn"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/file"
+	foundationopenapi "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/openapi"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/space"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/user"
+	llmmanage "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/llm/manage"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/llm/runtime"
+	traceopenapi "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/openapi"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/trace"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/debug"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/execute"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/manage"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/openapi"
+	"code.byted.org/flowdevops/cozeloop/backend/loop_gen/coze/loop/data/lodataset"
+	"code.byted.org/flowdevops/cozeloop/backend/loop_gen/coze/loop/data/lotag"
+	"code.byted.org/flowdevops/cozeloop/backend/loop_gen/coze/loop/evaluation/loeval_set"
+	"code.byted.org/flowdevops/cozeloop/backend/loop_gen/coze/loop/evaluation/loeval_target"
+	"code.byted.org/flowdevops/cozeloop/backend/loop_gen/coze/loop/evaluation/loevaluator"
+	"code.byted.org/flowdevops/cozeloop/backend/loop_gen/coze/loop/evaluation/loexpt"
+	"code.byted.org/flowdevops/cozeloop/backend/loop_gen/coze/loop/foundation/loauthn"
+	foundationlofile "code.byted.org/flowdevops/cozeloop/backend/loop_gen/coze/loop/foundation/lofile"
+	foundationloopenapi "code.byted.org/flowdevops/cozeloop/backend/loop_gen/coze/loop/foundation/loopenapi"
+	"code.byted.org/flowdevops/cozeloop/backend/loop_gen/coze/loop/foundation/lospace"
+	"code.byted.org/flowdevops/cozeloop/backend/loop_gen/coze/loop/foundation/louser"
+	lollmmanage "code.byted.org/flowdevops/cozeloop/backend/loop_gen/coze/loop/llm/lomanage"
+	looptraceopenapi "code.byted.org/flowdevops/cozeloop/backend/loop_gen/coze/loop/observability/loopenapi"
+	"code.byted.org/flowdevops/cozeloop/backend/loop_gen/coze/loop/observability/lotrace"
+	"code.byted.org/flowdevops/cozeloop/backend/loop_gen/coze/loop/prompt/lodebug"
+	"code.byted.org/flowdevops/cozeloop/backend/loop_gen/coze/loop/prompt/lomanage"
+	"code.byted.org/flowdevops/cozeloop/backend/loop_gen/coze/loop/prompt/loopenapi"
+	dataapp "code.byted.org/flowdevops/cozeloop/backend/modules/data/application"
+	evalapp "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/application"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/foundation/pkg/errno"
+	obapp "code.byted.org/flowdevops/cozeloop/backend/modules/observability/application"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/goroutine"
 )
 
 type APIHandler struct {
@@ -88,7 +82,6 @@ type EvaluationHandler struct {
 	evaluation.EvaluatorService
 	evaluation.EvaluationSetService
 	evaluation.EvalTargetService
-	evaluation.EvalOpenAPIService
 }
 
 type FoundationHandler struct {
@@ -129,20 +122,17 @@ func NewEvaluationHandler(
 	evaluatorApp evaluation.EvaluatorService,
 	evaluationSetApp evaluation.EvaluationSetService,
 	evalTargetService evaluation.EvalTargetService,
-	evalOpenAPIApp evaluation.EvalOpenAPIService,
 ) *EvaluationHandler {
 	h := &EvaluationHandler{
 		EvaluatorService:       evaluatorApp,
 		IExperimentApplication: exptApp,
 		EvaluationSetService:   evaluationSetApp,
 		EvalTargetService:      evalTargetService,
-		EvalOpenAPIService:     evalOpenAPIApp,
 	}
 	bindLocalCallClient(expt.ExperimentService(h), &localExptSvc, loexpt.NewLocalExperimentService)
 	bindLocalCallClient(evaluator.EvaluatorService(h), &localEvaluatorSvc, loevaluator.NewLocalEvaluatorService)
 	bindLocalCallClient(eval_set.EvaluationSetService(h), &localEvalSetSvc, loeval_set.NewLocalEvaluationSetService)
 	bindLocalCallClient(eval_target.EvalTargetService(h), &localEvalTargetSvc, loeval_target.NewLocalEvalTargetService)
-	bindLocalCallClient(evalopen.EvaluationOpenAPIService(h), &localEvalOpenAPIClient, loevalopen.NewLocalEvaluationOpenAPIService)
 	return h
 }
 
@@ -204,28 +194,20 @@ type ObservabilityHandler struct {
 	obapp.ITraceApplication
 	obapp.ITraceIngestionApplication
 	obapp.IObservabilityOpenAPIApplication
-	obapp.ITaskApplication
-	obapp.IMetricApplication
 }
 
 func NewObservabilityHandler(
 	traceApp obapp.ITraceApplication,
 	ingestApp obapp.ITraceIngestionApplication,
 	openAPIApp obapp.IObservabilityOpenAPIApplication,
-	taskApp obapp.ITaskApplication,
-	metricApp obapp.IMetricApplication,
 ) *ObservabilityHandler {
 	h := &ObservabilityHandler{
 		ITraceApplication:                traceApp,
 		ITraceIngestionApplication:       ingestApp,
 		IObservabilityOpenAPIApplication: openAPIApp,
-		ITaskApplication:                 taskApp,
-		IMetricApplication:               metricApp,
 	}
 	bindLocalCallClient(trace.TraceService(h), &observabilityClient, lotrace.NewLocalTraceService)
 	bindLocalCallClient(traceopenapi.OpenAPIService(h), &observabilityOpenAPIClient, looptraceopenapi.NewLocalOpenAPIService)
-	bindLocalCallClient(task.TaskService(h), &observabilityTaskClient, lotask.NewLocalTaskService)
-	bindLocalCallClient(metric.MetricService(h), &observabilityMetricClient, lometric.NewLocalMetricService)
 	return h
 }
 
@@ -242,7 +224,6 @@ func defaultKiteXMiddlewares() []endpoint.Middleware {
 	return []endpoint.Middleware{
 		logmw.LogTrafficMW,
 		validator.KiteXValidatorMW,
-		session.NewRequestSessionMW(),
 		cachemw.CtxCacheMW,
 	}
 }

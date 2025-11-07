@@ -8,39 +8,37 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/coze-dev/coze-loop/backend/modules/observability/application/convertor"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/component/tenant"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/component/tenant"
 
 	"github.com/samber/lo"
 	"golang.org/x/sync/errgroup"
 
-	"github.com/coze-dev/coze-loop/backend/infra/external/benefit"
-	"github.com/coze-dev/coze-loop/backend/infra/middleware/session"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/observability/domain/common"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/observability/domain/filter"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/observability/domain/span"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/observability/domain/view"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/observability/trace"
-	tconv "github.com/coze-dev/coze-loop/backend/modules/observability/application/convertor/trace"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/application/utils"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/component/config"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/component/metrics"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/component/rpc"
-	commdo "github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/common"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/loop_span"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/repo"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/service"
-	obErrorx "github.com/coze-dev/coze-loop/backend/modules/observability/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/goroutine"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/external/benefit"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/middleware/session"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/domain/common"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/domain/filter"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/domain/span"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/domain/view"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/trace"
+	tconv "code.byted.org/flowdevops/cozeloop/backend/modules/observability/application/convertor/trace"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/application/utils"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/component/config"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/component/metrics"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/component/rpc"
+	commdo "code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/common"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/loop_span"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/repo"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/service"
+	obErrorx "code.byted.org/flowdevops/cozeloop/backend/modules/observability/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/goroutine"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 const (
 	MaxSpanLength         = 500
 	MaxListSpansLimit     = 1000
-	MaxTraceTreeLength    = 10000
 	MaxOApiListSpansLimit = 200
 	QueryLimitDefault     = 100
 )
@@ -97,7 +95,7 @@ func (t *TraceApplication) ListSpans(ctx context.Context, req *trace.ListSpansRe
 	}
 	if err := t.authSvc.CheckWorkspacePermission(ctx,
 		rpc.AuthActionTraceRead,
-		strconv.FormatInt(req.GetWorkspaceID(), 10), false); err != nil {
+		strconv.FormatInt(req.GetWorkspaceID(), 10)); err != nil {
 		return nil, err
 	}
 	sReq, err := t.buildListSpansSvcReq(req)
@@ -173,7 +171,7 @@ func (t *TraceApplication) buildListSpansSvcReq(req *trace.ListSpansRequest) (*s
 		ret.SpanListType = loop_span.SpanListTypeRootSpan
 	}
 	if req.Filters != nil {
-		ret.Filters = convertor.FilterFieldsDTO2DO(req.Filters)
+		ret.Filters = tconv.FilterFieldsDTO2DO(req.Filters)
 		if err := ret.Filters.Validate(); err != nil {
 			return nil, err
 		}
@@ -187,13 +185,10 @@ func (t *TraceApplication) GetTrace(ctx context.Context, req *trace.GetTraceRequ
 	}
 	if err := t.authSvc.CheckWorkspacePermission(ctx,
 		rpc.AuthActionTraceRead,
-		strconv.FormatInt(req.GetWorkspaceID(), 10), false); err != nil {
+		strconv.FormatInt(req.GetWorkspaceID(), 10)); err != nil {
 		return nil, err
 	}
-	sReq, err := t.buildGetTraceSvcReq(req)
-	if err != nil {
-		return nil, errorx.WrapByCode(err, obErrorx.CommercialCommonInvalidParamCodeCode, errorx.WithExtraMsg("Get trace req is invalid"))
-	}
+	sReq := t.buildGetTraceSvcReq(req)
 	sResp, err := t.traceService.GetTrace(ctx, sReq)
 	if err != nil {
 		return nil, err
@@ -242,104 +237,20 @@ func (t *TraceApplication) validateGetTraceReq(ctx context.Context, req *trace.G
 	return nil
 }
 
-func (t *TraceApplication) buildGetTraceSvcReq(req *trace.GetTraceRequest) (*service.GetTraceReq, error) {
+func (t *TraceApplication) buildGetTraceSvcReq(req *trace.GetTraceRequest) *service.GetTraceReq {
 	ret := &service.GetTraceReq{
 		WorkspaceID: req.GetWorkspaceID(),
 		TraceID:     req.GetTraceID(),
 		StartTime:   req.GetStartTime(),
 		EndTime:     req.GetEndTime(),
 		SpanIDs:     req.GetSpanIds(),
-		WithDetail:  true,
 	}
 	platformType := loop_span.PlatformType(req.GetPlatformType())
 	if req.PlatformType == nil {
 		platformType = loop_span.PlatformCozeLoop
 	}
 	ret.PlatformType = platformType
-	return ret, nil
-}
-
-func (t *TraceApplication) SearchTraceTree(ctx context.Context, req *trace.SearchTraceTreeRequest) (*trace.SearchTraceTreeResponse, error) {
-	if err := t.validateSearchTraceTreeReq(ctx, req); err != nil {
-		return nil, err
-	}
-	if err := t.authSvc.CheckWorkspacePermission(ctx,
-		rpc.AuthActionTraceRead,
-		strconv.FormatInt(req.GetWorkspaceID(), 10), false); err != nil {
-		return nil, err
-	}
-	sReq, err := t.buildSearchTraceTreeSvcReq(req)
-	if err != nil {
-		return nil, errorx.WrapByCode(err, obErrorx.CommercialCommonInvalidParamCodeCode, errorx.WithExtraMsg("Get trace req is invalid"))
-	}
-	sResp, err := t.traceService.GetTrace(ctx, sReq)
-	if err != nil {
-		return nil, err
-	}
-	inTokens, outTokens, err := sResp.Spans.Stat(ctx)
-	if err != nil {
-		return nil, errorx.WrapByCode(err, obErrorx.CommercialCommonInternalErrorCodeCode)
-	}
-	logs.CtxInfo(ctx, "SearchTraceTree successfully, spans count %d", len(sResp.Spans))
-	userMap, evalMap, tagMap := t.getAnnoDisplayInfo(ctx,
-		req.GetWorkspaceID(),
-		sResp.Spans.GetUserIDs(),
-		sResp.Spans.GetEvaluatorVersionIDs(),
-		sResp.Spans.GetAnnotationTagIDs())
-	return &trace.SearchTraceTreeResponse{
-		Spans: tconv.SpanListDO2DTO(sResp.Spans, userMap, evalMap, tagMap),
-		TracesAdvanceInfo: &trace.TraceAdvanceInfo{
-			TraceID: sResp.TraceId,
-			Tokens: &trace.TokenCost{
-				Input:  inTokens,
-				Output: outTokens,
-			},
-		},
-	}, nil
-}
-
-func (t *TraceApplication) validateSearchTraceTreeReq(ctx context.Context, req *trace.SearchTraceTreeRequest) error {
-	if req == nil {
-		return errorx.NewByCode(obErrorx.CommercialCommonInvalidParamCodeCode, errorx.WithExtraMsg("no request provided"))
-	} else if req.GetWorkspaceID() <= 0 {
-		return errorx.NewByCode(obErrorx.CommercialCommonInvalidParamCodeCode, errorx.WithExtraMsg("invalid workspace_id"))
-	} else if req.GetTraceID() == "" {
-		return errorx.NewByCode(obErrorx.CommercialCommonInvalidParamCodeCode, errorx.WithExtraMsg("invalid trace_id"))
-	}
-	v := utils.DateValidator{
-		Start:        req.GetStartTime(),
-		End:          req.GetEndTime(),
-		EarliestDays: t.traceConfig.GetTraceDataMaxDurationDay(ctx, req.PlatformType),
-	}
-	newStartTime, newEndTime, err := v.CorrectDate()
-	if err != nil {
-		return err
-	}
-	req.SetStartTime(newStartTime)
-	req.SetEndTime(newEndTime)
-	return nil
-}
-
-func (t *TraceApplication) buildSearchTraceTreeSvcReq(req *trace.SearchTraceTreeRequest) (*service.GetTraceReq, error) {
-	ret := &service.GetTraceReq{
-		WorkspaceID: req.GetWorkspaceID(),
-		TraceID:     req.GetTraceID(),
-		StartTime:   req.GetStartTime(),
-		EndTime:     req.GetEndTime(),
-		WithDetail:  false,
-	}
-	platformType := loop_span.PlatformType(req.GetPlatformType())
-	if req.PlatformType == nil {
-		platformType = loop_span.PlatformCozeLoop
-	}
-	ret.PlatformType = platformType
-	if req.Filters != nil {
-		ret.Filters = tconv.FilterFieldsDTO2DO(req.Filters)
-		if err := ret.Filters.Validate(); err != nil {
-			return nil, err
-		}
-	}
-	return ret, nil
+	return ret
 }
 
 func (t *TraceApplication) BatchGetTracesAdvanceInfo(ctx context.Context, req *trace.BatchGetTracesAdvanceInfoRequest) (*trace.BatchGetTracesAdvanceInfoResponse, error) {
@@ -348,7 +259,7 @@ func (t *TraceApplication) BatchGetTracesAdvanceInfo(ctx context.Context, req *t
 	}
 	if err := t.authSvc.CheckWorkspacePermission(ctx,
 		rpc.AuthActionTraceRead,
-		strconv.FormatInt(req.GetWorkspaceID(), 10), false); err != nil {
+		strconv.FormatInt(req.GetWorkspaceID(), 10)); err != nil {
 		return nil, err
 	}
 	logs.CtxInfo(ctx, "Batch get traces advance info request: %+v", req)
@@ -492,7 +403,7 @@ func (t *TraceApplication) validateIngestTracesInnerReq(ctx context.Context, req
 func (t *TraceApplication) GetTracesMetaInfo(ctx context.Context, req *trace.GetTracesMetaInfoRequest) (*trace.GetTracesMetaInfoResponse, error) {
 	if err := t.authSvc.CheckWorkspacePermission(ctx,
 		rpc.AuthActionTraceRead,
-		strconv.FormatInt(req.GetWorkspaceID(), 10), false); err != nil {
+		strconv.FormatInt(req.GetWorkspaceID(), 10)); err != nil {
 		return nil, err
 	}
 	logs.CtxInfo(ctx, "Get traces meta info request: %+v", req)
@@ -521,8 +432,7 @@ func (t *TraceApplication) GetTracesMetaInfo(ctx context.Context, req *trace.Get
 		fMeta[k].FilterTypes = fTypes
 	}
 	return &trace.GetTracesMetaInfoResponse{
-		FieldMetas:  fMeta,
-		KeySpanType: sResp.KeySpanTypeList,
+		FieldMetas: fMeta,
 	}, nil
 }
 
@@ -532,7 +442,7 @@ func (t *TraceApplication) buildGetTracesMetaInfoReq(req *trace.GetTracesMetaInf
 	}
 	platformType := loop_span.PlatformType(req.GetPlatformType())
 	if req.PlatformType == nil {
-		platformType = loop_span.PlatformDefault
+		platformType = loop_span.PlatformCozeLoop
 	}
 	ret.PlatformType = platformType
 	switch req.GetSpanListType() {
@@ -558,7 +468,7 @@ func (t *TraceApplication) CreateView(ctx context.Context, req *trace.CreateView
 	}
 	if err := t.authSvc.CheckWorkspacePermission(ctx,
 		rpc.AuthActionTraceViewCreate,
-		strconv.FormatInt(req.GetWorkspaceID(), 10), false); err != nil {
+		strconv.FormatInt(req.GetWorkspaceID(), 10)); err != nil {
 		return nil, err
 	}
 	userID := session.UserIDInCtxOrEmpty(ctx)
@@ -646,7 +556,7 @@ func (t *TraceApplication) ListViews(ctx context.Context, req *trace.ListViewsRe
 	}
 	if err := t.authSvc.CheckWorkspacePermission(ctx,
 		rpc.AuthActionTraceViewList,
-		strconv.FormatInt(req.GetWorkspaceID(), 10), false); err != nil {
+		strconv.FormatInt(req.GetWorkspaceID(), 10)); err != nil {
 		return nil, err
 	}
 	systemViews, err := t.getSystemViews(ctx)
@@ -690,7 +600,7 @@ func (t *TraceApplication) getSystemViews(ctx context.Context) ([]*view.View, er
 func (t *TraceApplication) CreateManualAnnotation(ctx context.Context, req *trace.CreateManualAnnotationRequest) (*trace.CreateManualAnnotationResponse, error) {
 	if err := t.authSvc.CheckWorkspacePermission(ctx,
 		rpc.AuthActionAnnotationCreate,
-		req.GetAnnotation().GetWorkspaceID(), false); err != nil {
+		req.GetAnnotation().GetWorkspaceID()); err != nil {
 		return nil, err
 	}
 	platformType := loop_span.PlatformType(req.GetPlatformType())
@@ -726,7 +636,7 @@ func (t *TraceApplication) CreateManualAnnotation(ctx context.Context, req *trac
 func (t *TraceApplication) UpdateManualAnnotation(ctx context.Context, req *trace.UpdateManualAnnotationRequest) (*trace.UpdateManualAnnotationResponse, error) {
 	if err := t.authSvc.CheckWorkspacePermission(ctx,
 		rpc.AuthActionAnnotationCreate,
-		req.GetAnnotation().GetWorkspaceID(), false); err != nil {
+		req.GetAnnotation().GetWorkspaceID()); err != nil {
 		return nil, err
 	}
 	platformType := loop_span.PlatformType(req.GetPlatformType())
@@ -761,7 +671,7 @@ func (t *TraceApplication) UpdateManualAnnotation(ctx context.Context, req *trac
 func (t *TraceApplication) DeleteManualAnnotation(ctx context.Context, req *trace.DeleteManualAnnotationRequest) (*trace.DeleteManualAnnotationResponse, error) {
 	if err := t.authSvc.CheckWorkspacePermission(ctx,
 		rpc.AuthActionAnnotationCreate,
-		strconv.FormatInt(req.GetWorkspaceID(), 10), false); err != nil {
+		strconv.FormatInt(req.GetWorkspaceID(), 10)); err != nil {
 		return nil, err
 	}
 	platformType := loop_span.PlatformType(req.GetPlatformType())
@@ -789,7 +699,7 @@ func (t *TraceApplication) DeleteManualAnnotation(ctx context.Context, req *trac
 func (t *TraceApplication) ListAnnotations(ctx context.Context, req *trace.ListAnnotationsRequest) (*trace.ListAnnotationsResponse, error) {
 	if err := t.authSvc.CheckWorkspacePermission(ctx,
 		rpc.AuthActionTraceRead,
-		strconv.FormatInt(req.GetWorkspaceID(), 10), false); err != nil {
+		strconv.FormatInt(req.GetWorkspaceID(), 10)); err != nil {
 		return nil, err
 	}
 	platformType := loop_span.PlatformType(req.GetPlatformType())
@@ -820,7 +730,7 @@ func (t *TraceApplication) ListAnnotations(ctx context.Context, req *trace.ListA
 func (t *TraceApplication) getAnnoDisplayInfo(ctx context.Context, workspaceId int64, userIds []string, evalIds []int64, tagKeyIds []string,
 ) (userMap map[string]*commdo.UserInfo, evalMap map[int64]*rpc.Evaluator, tagMap map[int64]*rpc.TagInfo) {
 	if len(userIds) == 0 && len(tagKeyIds) == 0 && len(evalIds) == 0 {
-		return userMap, evalMap, tagMap
+		return
 	}
 	g := errgroup.Group{}
 	g.Go(func() error {
@@ -842,7 +752,7 @@ func (t *TraceApplication) getAnnoDisplayInfo(ctx context.Context, workspaceId i
 		return nil
 	})
 	_ = g.Wait()
-	return userMap, evalMap, tagMap
+	return
 }
 
 func (t *TraceApplication) ExportTracesToDataset(ctx context.Context, req *trace.ExportTracesToDatasetRequest) (
@@ -864,7 +774,7 @@ func (t *TraceApplication) ExportTracesToDataset(ctx context.Context, req *trace
 	}
 
 	spaceID := strconv.FormatInt(req.GetWorkspaceID(), 10)
-	if err := t.authSvc.CheckWorkspacePermission(ctx, rpc.AuthActionTraceExport, spaceID, false); err != nil {
+	if err := t.authSvc.CheckWorkspacePermission(ctx, rpc.AuthActionTraceExport, spaceID); err != nil {
 		return nil, err
 	}
 
@@ -901,7 +811,7 @@ func (t *TraceApplication) PreviewExportTracesToDataset(ctx context.Context, req
 	}
 
 	spaceID := strconv.FormatInt(req.GetWorkspaceID(), 10)
-	if err := t.authSvc.CheckWorkspacePermission(ctx, rpc.AuthActionTracePreviewExport, spaceID, false); err != nil {
+	if err := t.authSvc.CheckWorkspacePermission(ctx, rpc.AuthActionTracePreviewExport, spaceID); err != nil {
 		return nil, err
 	}
 
@@ -916,119 +826,4 @@ func (t *TraceApplication) PreviewExportTracesToDataset(ctx context.Context, req
 
 	// 转换响应
 	return tconv.PreviewResponseDO2DTO(serviceResp), nil
-}
-
-func (t *TraceApplication) ChangeEvaluatorScore(ctx context.Context, req *trace.ChangeEvaluatorScoreRequest) (*trace.ChangeEvaluatorScoreResponse, error) {
-	if err := t.validateChangeEvaluatorScoreReq(ctx, req); err != nil {
-		return nil, err
-	}
-	if err := t.authSvc.CheckWorkspacePermission(ctx,
-		rpc.AuthActionTraceTaskCreate,
-		strconv.FormatInt(req.GetWorkspaceID(), 10),
-		false); err != nil {
-		return nil, err
-	}
-
-	sResp, err := t.traceService.ChangeEvaluatorScore(ctx, &service.ChangeEvaluatorScoreRequest{
-		WorkspaceID:  req.WorkspaceID,
-		SpanID:       req.SpanID,
-		StartTime:    req.StartTime,
-		Correction:   req.Correction,
-		PlatformType: loop_span.PlatformType(req.GetPlatformType()),
-		AnnotationID: req.AnnotationID,
-	})
-	if err != nil {
-		return nil, err
-	}
-
-	return &trace.ChangeEvaluatorScoreResponse{
-		Annotation: sResp.Annotation,
-	}, nil
-}
-
-func (t *TraceApplication) validateChangeEvaluatorScoreReq(ctx context.Context, req *trace.ChangeEvaluatorScoreRequest) error {
-	if req == nil {
-		return errorx.NewByCode(obErrorx.CommercialCommonInvalidParamCodeCode, errorx.WithExtraMsg("no request provided"))
-	} else if req.GetWorkspaceID() <= 0 {
-		return errorx.NewByCode(obErrorx.CommercialCommonInvalidParamCodeCode, errorx.WithExtraMsg("invalid workspace_id"))
-	} else if len(req.GetAnnotationID()) <= 0 {
-		return errorx.NewByCode(obErrorx.CommercialCommonInvalidParamCodeCode, errorx.WithExtraMsg("invalid evaluator_record_id"))
-	} else if req.GetStartTime() <= 0 {
-		return errorx.NewByCode(obErrorx.CommercialCommonInvalidParamCodeCode, errorx.WithExtraMsg("invalid start_time"))
-	} else if req.GetCorrection() == nil {
-		return errorx.NewByCode(obErrorx.CommercialCommonInvalidParamCodeCode, errorx.WithExtraMsg("invalid correction"))
-	}
-	return nil
-}
-
-func (t *TraceApplication) ListAnnotationEvaluators(ctx context.Context, req *trace.ListAnnotationEvaluatorsRequest) (*trace.ListAnnotationEvaluatorsResponse, error) {
-	var resp *trace.ListAnnotationEvaluatorsResponse
-	if req == nil {
-		return resp, errorx.NewByCode(obErrorx.CommercialCommonInvalidParamCodeCode, errorx.WithExtraMsg("no request provided"))
-	} else if req.GetWorkspaceID() <= 0 {
-		return resp, errorx.NewByCode(obErrorx.CommercialCommonInvalidParamCodeCode, errorx.WithExtraMsg("invalid workspace_id"))
-	}
-	if err := t.authSvc.CheckWorkspacePermission(ctx,
-		rpc.AuthActionTraceTaskList,
-		strconv.FormatInt(req.GetWorkspaceID(), 10),
-		false); err != nil {
-		return resp, err
-	}
-	sResp, err := t.traceService.ListAnnotationEvaluators(ctx, &service.ListAnnotationEvaluatorsRequest{
-		WorkspaceID: req.WorkspaceID,
-		Name:        req.Name,
-	})
-	if err != nil {
-		return resp, err
-	}
-	return &trace.ListAnnotationEvaluatorsResponse{Evaluators: sResp.Evaluators}, nil
-}
-
-func (t *TraceApplication) ExtractSpanInfo(ctx context.Context, req *trace.ExtractSpanInfoRequest) (*trace.ExtractSpanInfoResponse, error) {
-	var resp *trace.ExtractSpanInfoResponse
-	if err := t.validateExtractSpanInfoReq(ctx, req); err != nil {
-		return resp, err
-	}
-	if err := t.authSvc.CheckWorkspacePermission(ctx,
-		rpc.AuthActionTraceRead,
-		strconv.FormatInt(req.GetWorkspaceID(), 10),
-		false); err != nil {
-		return resp, err
-	}
-	sResp, err := t.traceService.ExtractSpanInfo(ctx, &service.ExtractSpanInfoRequest{
-		WorkspaceID:   req.WorkspaceID,
-		TraceID:       req.TraceID,
-		SpanIds:       req.SpanIds,
-		StartTime:     req.GetStartTime(),
-		EndTime:       req.GetEndTime(),
-		PlatformType:  loop_span.PlatformType(req.GetPlatformType()),
-		FieldMappings: tconv.ConvertFieldMappingsDTO2DO(req.GetFieldMappings()),
-	})
-	if err != nil {
-		return resp, err
-	}
-	return &trace.ExtractSpanInfoResponse{SpanInfos: sResp.SpanInfos}, nil
-}
-
-func (t *TraceApplication) validateExtractSpanInfoReq(ctx context.Context, req *trace.ExtractSpanInfoRequest) error {
-	if req == nil {
-		return errorx.NewByCode(obErrorx.CommercialCommonInvalidParamCodeCode, errorx.WithExtraMsg("no request provided"))
-	} else if req.GetWorkspaceID() <= 0 {
-		return errorx.NewByCode(obErrorx.CommercialCommonInvalidParamCodeCode, errorx.WithExtraMsg("invalid workspace_id"))
-	} else if len(req.SpanIds) > MaxSpanLength {
-		return errorx.NewByCode(obErrorx.CommercialCommonInvalidParamCodeCode, errorx.WithExtraMsg("span_ids length exceeds the limit"))
-	}
-	v := utils.DateValidator{
-		Start:        req.GetStartTime(),
-		End:          req.GetEndTime(),
-		EarliestDays: t.traceConfig.GetTraceDataMaxDurationDay(ctx, req.PlatformType),
-	}
-
-	if newStartTime, newEndTime, err := v.CorrectDate(); err != nil {
-		return err
-	} else {
-		req.SetStartTime(lo.ToPtr(newStartTime - time.Minute.Milliseconds()))
-		req.SetEndTime(lo.ToPtr(newEndTime + time.Minute.Milliseconds()))
-	}
-	return nil
 }

@@ -7,7 +7,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/prompt/domain/prompt"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/domain/prompt"
 )
 
 //go:generate mockgen -destination=mocks/config_provider.go -package=mocks . IConfigProvider

@@ -7,13 +7,13 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/auth"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/auth/authservice"
-	authentity "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/domain/auth"
-	"github.com/coze-dev/coze-loop/backend/modules/llm/domain/component/rpc"
-	llm_errorx "github.com/coze-dev/coze-loop/backend/modules/llm/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/auth"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/auth/authservice"
+	authentity "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/domain/auth"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/llm/domain/component/rpc"
+	llm_errorx "code.byted.org/flowdevops/cozeloop/backend/modules/llm/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
 )
 
 type AuthRPCAdapter struct {

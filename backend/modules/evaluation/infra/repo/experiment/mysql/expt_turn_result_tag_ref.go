@@ -9,23 +9,23 @@ import (
 	"gorm.io/gorm"
 	"gorm.io/plugin/dbresolver"
 
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/experiment/mysql/gorm_gen/model"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/experiment/mysql/gorm_gen/query"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/pkg/contexts"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/json"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/experiment/mysql/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/experiment/mysql/gorm_gen/query"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/pkg/contexts"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/json"
 )
 
 //go:generate mockgen -destination=mocks/expt_turn_result_tag_ref.go -package=mocks . IExptTurnResultTagRefDAO
 type IExptTurnResultTagRefDAO interface {
 	Create(ctx context.Context, refs []*model.ExptTurnResultTagRef) error
 	UpdateCompleteCount(ctx context.Context, exptID, spaceID, tagKeyID int64, opts ...db.Option) error
-	Delete(ctx context.Context, exptID, spaceID, tagKeyID int64, opts ...db.Option) error
+	Delete(ctx context.Context, exptID int64, spaceID int64, tagKeyID int64, opts ...db.Option) error
 
-	GetByExptID(ctx context.Context, exptID, spaceID int64) ([]*model.ExptTurnResultTagRef, error)
+	GetByExptID(ctx context.Context, exptID int64, spaceID int64) ([]*model.ExptTurnResultTagRef, error)
 	BatchGetByExptIDs(ctx context.Context, exptIDs []int64, spaceID int64) ([]*model.ExptTurnResultTagRef, error)
-	GetByTagKeyID(ctx context.Context, exptID, spaceID, tagKeyID int64) (*model.ExptTurnResultTagRef, error)
+	GetByTagKeyID(ctx context.Context, exptID int64, spaceID int64, tagKeyID int64) (*model.ExptTurnResultTagRef, error)
 }
 
 func NewExptTurnResultTagRefDAO(db db.Provider) IExptTurnResultTagRefDAO {
@@ -40,7 +40,7 @@ type exptTurnResultTagRefDAO struct {
 	query *query.Query
 }
 
-func (e exptTurnResultTagRefDAO) GetByTagKeyID(ctx context.Context, exptID, spaceID, tagKeyID int64) (*model.ExptTurnResultTagRef, error) {
+func (e exptTurnResultTagRefDAO) GetByTagKeyID(ctx context.Context, exptID int64, spaceID int64, tagKeyID int64) (*model.ExptTurnResultTagRef, error) {
 	db := e.db.NewSession(ctx)
 	if contexts.CtxWriteDB(ctx) {
 		db = db.Clauses(dbresolver.Write)
@@ -80,7 +80,7 @@ func (e exptTurnResultTagRefDAO) Create(ctx context.Context, refs []*model.ExptT
 	return nil
 }
 
-func (e exptTurnResultTagRefDAO) Delete(ctx context.Context, exptID, spaceID, tagKeyID int64, opts ...db.Option) error {
+func (e exptTurnResultTagRefDAO) Delete(ctx context.Context, exptID int64, spaceID int64, tagKeyID int64, opts ...db.Option) error {
 	// 硬删除 可能删除后再关联
 	po := &model.ExptTurnResultTagRef{}
 	db := e.db.NewSession(ctx, opts...)
@@ -93,7 +93,7 @@ func (e exptTurnResultTagRefDAO) Delete(ctx context.Context, exptID, spaceID, ta
 	return nil
 }
 
-func (e exptTurnResultTagRefDAO) GetByExptID(ctx context.Context, exptID, spaceID int64) ([]*model.ExptTurnResultTagRef, error) {
+func (e exptTurnResultTagRefDAO) GetByExptID(ctx context.Context, exptID int64, spaceID int64) ([]*model.ExptTurnResultTagRef, error) {
 	ref := e.query.ExptTurnResultTagRef
 	query := ref.WithContext(ctx)
 

@@ -4,8 +4,8 @@
 package convertor
 
 import (
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/infra/repo/mysql/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/infra/repo/mysql/gorm_gen/model"
 )
 
 // PromptLabelDO2PO converts PromptLabel DO to PO

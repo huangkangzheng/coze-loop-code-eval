@@ -7,19 +7,19 @@ import (
 	"strconv"
 
 	"github.com/bytedance/gg/gptr"
-	"github.com/coze-dev/coze-loop/backend/infra/middleware/session"
-	dataset_domain "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/domain/dataset"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/domain/common"
-	eval_set_domain "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/domain/eval_set"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/eval_set"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/evaluationsetservice"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/component/rpc"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/infra/rpc/dataset"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/pkg/rpcerror"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/middleware/session"
+	dataset_domain "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/domain/dataset"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/common"
+	eval_set_domain "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/eval_set"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/eval_set"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/evaluationsetservice"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/component/rpc"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/infra/rpc/dataset"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/pkg/rpcerror"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 	"github.com/samber/lo"
 )
 
@@ -42,26 +42,20 @@ func (d *EvaluationSetProvider) CreateDataset(ctx context.Context, dataset *enti
 	if dataset.Name == "" {
 		return 0, errorx.NewByCode(errno.CommonInvalidParamCode, errorx.WithExtraMsg("dataset name is required"))
 	}
-	var sessionInfo *common.Session
-	if dataset.Seesion == nil {
-		userIDStr, _ := session.UserIDInCtx(ctx)
-		userID, err := strconv.ParseInt(userIDStr, 10, 64)
-		if err != nil {
-			return 0, errorx.NewByCode(errno.CommonInvalidParamCode, errorx.WithExtraMsg("userid is required"))
-		}
-		sessionInfo = &common.Session{
-			UserID: gptr.Of(userID),
-		}
-	} else {
-		sessionInfo = dataset.Seesion
-	}
 
+	userIDStr, _ := session.UserIDInCtx(ctx)
+	userID, err := strconv.ParseInt(userIDStr, 10, 64)
+	if err != nil {
+		return 0, errorx.NewByCode(errno.CommonInvalidParamCode, errorx.WithExtraMsg("userid is required"))
+	}
 	// 构造请求
 	req := &eval_set.CreateEvaluationSetRequest{
 		WorkspaceID: dataset.WorkspaceID,
 		Name:        &dataset.Name,
 		Description: &dataset.Description,
-		Session:     sessionInfo,
+		Session: &common.Session{
+			UserID: lo.ToPtr(userID),
+		},
 	}
 
 	// 设置BizCategory
@@ -74,6 +68,7 @@ func (d *EvaluationSetProvider) CreateDataset(ctx context.Context, dataset *enti
 	if len(dataset.DatasetVersion.DatasetSchema.FieldSchemas) > 0 {
 		req.EvaluationSetSchema = datasetSchemaDO2DTO(&dataset.DatasetVersion.DatasetSchema)
 	}
+
 	resp, err := d.client.CreateEvaluationSet(ctx, req)
 	if err != nil {
 		logs.CtxError(ctx, "CreateEvaluationSet failed, workspace_id=%d, err=%#v", dataset.WorkspaceID, err)
@@ -139,11 +134,6 @@ func (d *EvaluationSetProvider) GetDataset(ctx context.Context, workspaceID, dat
 	dataset := evaluationSetDTO2DO(resp.EvaluationSet)
 	logs.CtxInfo(ctx, "GetDataset success, workspace_id=%d, dataset_id=%d", workspaceID, datasetID)
 	return dataset, nil
-}
-
-// SearchDatasets 搜索数据集
-func (d *EvaluationSetProvider) SearchDatasets(ctx context.Context, workspaceID int64, datasetID int64, category entity.DatasetCategory, name string) ([]*entity.Dataset, error) {
-	return nil, nil
 }
 
 // ClearDatasetItems 清空数据集项

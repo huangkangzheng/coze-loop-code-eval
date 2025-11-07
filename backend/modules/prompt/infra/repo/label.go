@@ -8,17 +8,17 @@ import (
 
 	"gorm.io/gorm"
 
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	"github.com/coze-dev/coze-loop/backend/infra/idgen"
-	"github.com/coze-dev/coze-loop/backend/infra/metrics"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/domain/repo"
-	metricsinfra "github.com/coze-dev/coze-loop/backend/modules/prompt/infra/metrics"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/infra/repo/mysql"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/infra/repo/mysql/convertor"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/infra/repo/mysql/gorm_gen/model"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/infra/repo/redis"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/idgen"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/metrics"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/repo"
+	metricsinfra "code.byted.org/flowdevops/cozeloop/backend/modules/prompt/infra/metrics"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/infra/repo/mysql"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/infra/repo/mysql/convertor"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/infra/repo/mysql/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/infra/repo/redis"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 type LabelRepoImpl struct {

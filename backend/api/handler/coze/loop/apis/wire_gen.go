@@ -8,41 +8,40 @@ package apis
 
 import (
 	"context"
+
 	"github.com/cloudwego/kitex/pkg/endpoint"
-	"github.com/coze-dev/coze-loop/backend/infra/ck"
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	"github.com/coze-dev/coze-loop/backend/infra/external/audit"
-	"github.com/coze-dev/coze-loop/backend/infra/external/benefit"
-	"github.com/coze-dev/coze-loop/backend/infra/fileserver"
-	"github.com/coze-dev/coze-loop/backend/infra/idgen"
-	"github.com/coze-dev/coze-loop/backend/infra/limiter"
-	"github.com/coze-dev/coze-loop/backend/infra/metrics"
-	"github.com/coze-dev/coze-loop/backend/infra/mq"
-	"github.com/coze-dev/coze-loop/backend/infra/redis"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/apis/promptexecuteservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/dataset/datasetservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/tag/tagservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/evaluationsetservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/evaluatorservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/experimentservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/auth/authservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/file/fileservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/user/userservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/llm/runtime/llmruntimeservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/prompt/promptmanageservice"
-	"github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/foundation/loauth"
-	application5 "github.com/coze-dev/coze-loop/backend/modules/data/application"
-	conf2 "github.com/coze-dev/coze-loop/backend/modules/data/infra/conf"
-	"github.com/coze-dev/coze-loop/backend/modules/data/infra/rpc/foundation"
-	application4 "github.com/coze-dev/coze-loop/backend/modules/evaluation/application"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/rpc/data"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/rpc/prompt"
-	"github.com/coze-dev/coze-loop/backend/modules/foundation/application"
-	application3 "github.com/coze-dev/coze-loop/backend/modules/llm/application"
-	application6 "github.com/coze-dev/coze-loop/backend/modules/observability/application"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/task/service/taskexe/processor"
-	application2 "github.com/coze-dev/coze-loop/backend/modules/prompt/application"
-	"github.com/coze-dev/coze-loop/backend/pkg/conf"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/ck"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/external/audit"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/external/benefit"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/fileserver"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/idgen"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/limiter"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/metrics"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/mq"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/redis"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/apis/promptexecuteservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/dataset/datasetservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/tag/tagservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/evaluationsetservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/evaluatorservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/auth/authservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/file/fileservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/user/userservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/llm/runtime/llmruntimeservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/promptmanageservice"
+	"code.byted.org/flowdevops/cozeloop/backend/loop_gen/coze/loop/foundation/loauth"
+	application5 "code.byted.org/flowdevops/cozeloop/backend/modules/data/application"
+	conf2 "code.byted.org/flowdevops/cozeloop/backend/modules/data/infra/conf"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/infra/rpc/foundation"
+	application4 "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/application"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/rpc/data"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/rpc/prompt"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/foundation/application"
+	application3 "code.byted.org/flowdevops/cozeloop/backend/modules/llm/application"
+	application6 "code.byted.org/flowdevops/cozeloop/backend/modules/observability/application"
+	application2 "code.byted.org/flowdevops/cozeloop/backend/modules/prompt/application"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/conf"
 	"github.com/google/wire"
 )
 
@@ -128,11 +127,7 @@ func InitEvaluationHandler(ctx context.Context, idgen2 idgen.IIDGenerator, db2 d
 	if err != nil {
 		return nil, err
 	}
-	evalOpenAPIService, err := application4.InitEvalOpenAPIApplication(ctx, configFactory, mqFactory, cmdable, idgen2, db2, promptClient, pec, authClient, meter, client, userClient, llmClient, tagClient, limiterFactory, objectStorage, auditClient, benefitSvc, ckDb)
-	if err != nil {
-		return nil, err
-	}
-	evaluationHandler := NewEvaluationHandler(iExperimentApplication, evaluatorService, evaluationSetService, evalTargetService, evalOpenAPIService)
+	evaluationHandler := NewEvaluationHandler(iExperimentApplication, evaluatorService, evaluationSetService, evalTargetService)
 	return evaluationHandler, nil
 }
 
@@ -154,8 +149,8 @@ func InitDataHandler(ctx context.Context, idgen2 idgen.IIDGenerator, db2 db.Prov
 	return dataHandler, nil
 }
 
-func InitObservabilityHandler(ctx context.Context, db2 db.Provider, ckDb ck.Provider, meter metrics.Meter, mqFactory mq.IFactory, configFactory conf.IConfigLoaderFactory, idgen2 idgen.IIDGenerator, benefit2 benefit.IBenefitService, fileClient fileservice.Client, authCli authservice.Client, userClient userservice.Client, evalClient evaluatorservice.Client, evalSetClient evaluationsetservice.Client, tagClient tagservice.Client, limiterFactory limiter.IRateLimiterFactory, datasetClient datasetservice.Client, redis2 redis.Cmdable, experimentClient experimentservice.Client, taskProcessor processor.TaskProcessor, aid int32) (*ObservabilityHandler, error) {
-	iTraceApplication, err := application6.InitTraceApplication(db2, ckDb, redis2, meter, mqFactory, configFactory, idgen2, fileClient, benefit2, authCli, userClient, evalClient, evalSetClient, tagClient, datasetClient)
+func InitObservabilityHandler(ctx context.Context, db2 db.Provider, ckDb ck.Provider, meter metrics.Meter, mqFactory mq.IFactory, configFactory conf.IConfigLoaderFactory, idgen2 idgen.IIDGenerator, benefit2 benefit.IBenefitService, fileClient fileservice.Client, authCli authservice.Client, userClient userservice.Client, evalClient evaluatorservice.Client, evalSetClient evaluationsetservice.Client, tagClient tagservice.Client, limiterFactory limiter.IRateLimiterFactory, datasetClient datasetservice.Client) (*ObservabilityHandler, error) {
+	iTraceApplication, err := application6.InitTraceApplication(db2, ckDb, meter, mqFactory, configFactory, idgen2, fileClient, benefit2, authCli, userClient, evalClient, evalSetClient, tagClient, datasetClient)
 	if err != nil {
 		return nil, err
 	}
@@ -163,19 +158,11 @@ func InitObservabilityHandler(ctx context.Context, db2 db.Provider, ckDb ck.Prov
 	if err != nil {
 		return nil, err
 	}
-	iObservabilityOpenAPIApplication, err := application6.InitOpenAPIApplication(mqFactory, configFactory, fileClient, ckDb, benefit2, limiterFactory, authCli, meter, db2, redis2, idgen2, evalClient)
+	iObservabilityOpenAPIApplication, err := application6.InitOpenAPIApplication(mqFactory, configFactory, fileClient, ckDb, benefit2, limiterFactory, authCli, meter)
 	if err != nil {
 		return nil, err
 	}
-	iTaskApplication, err := application6.InitTaskApplication(db2, idgen2, configFactory, benefit2, ckDb, redis2, mqFactory, userClient, authCli, evalClient, evalSetClient, experimentClient, datasetClient, fileClient, taskProcessor, aid)
-	if err != nil {
-		return nil, err
-	}
-	iMetricApplication, err := application6.InitMetricApplication(ckDb, configFactory, fileClient, benefit2, authCli)
-	if err != nil {
-		return nil, err
-	}
-	observabilityHandler := NewObservabilityHandler(iTraceApplication, iTraceIngestionApplication, iObservabilityOpenAPIApplication, iTaskApplication, iMetricApplication)
+	observabilityHandler := NewObservabilityHandler(iTraceApplication, iTraceIngestionApplication, iObservabilityOpenAPIApplication)
 	return observabilityHandler, nil
 }
 
@@ -192,12 +179,12 @@ var (
 		NewPromptHandler, application2.InitPromptManageApplication, application2.InitPromptDebugApplication, application2.InitPromptExecuteApplication, application2.InitPromptOpenAPIApplication,
 	)
 	evaluationSet = wire.NewSet(
-		NewEvaluationHandler, data.NewDatasetRPCAdapter, prompt.NewPromptRPCAdapter, application4.InitExperimentApplication, application4.InitEvaluatorApplication, application4.InitEvaluationSetApplication, application4.InitEvalTargetApplication, application4.InitEvalOpenAPIApplication,
+		NewEvaluationHandler, data.NewDatasetRPCAdapter, prompt.NewPromptRPCAdapter, application4.InitExperimentApplication, application4.InitEvaluatorApplication, application4.InitEvaluationSetApplication, application4.InitEvalTargetApplication,
 	)
 	dataSet = wire.NewSet(
 		NewDataHandler, application5.InitDatasetApplication, application5.InitTagApplication, foundation.NewAuthRPCProvider, conf2.NewConfigerFactory,
 	)
 	observabilitySet = wire.NewSet(
-		NewObservabilityHandler, application6.InitTraceApplication, application6.InitTraceIngestionApplication, application6.InitOpenAPIApplication, application6.InitTaskApplication, application6.InitMetricApplication,
+		NewObservabilityHandler, application6.InitTraceApplication, application6.InitTraceIngestionApplication, application6.InitOpenAPIApplication,
 	)
 )

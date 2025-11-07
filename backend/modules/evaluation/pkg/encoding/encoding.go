@@ -11,7 +11,7 @@ import (
 	"github.com/bytedance/sonic"
 	"github.com/google/uuid"
 
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 func Encode(ctx context.Context, val interface{}) (res string) {

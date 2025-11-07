@@ -6,20 +6,20 @@ package service
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/infra/middleware/session"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/component/config"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/component/metrics"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/component/mq"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/component/rpc"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/component/tenant"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/loop_span"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/repo"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/service/trace/span_processor"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/middleware/session"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/component/config"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/component/metrics"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/component/mq"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/component/rpc"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/component/tenant"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/loop_span"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/repo"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/service/trace/span_processor"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 	"github.com/samber/lo"
 )
 
@@ -217,7 +217,6 @@ func (r *TraceExportServiceImpl) createOrUpdateDataset(ctx context.Context, work
 			*config.DatasetName,
 			category,
 			config.DatasetSchema,
-			nil, nil,
 		))
 		if err != nil {
 			return nil, err
@@ -241,7 +240,6 @@ func (r *TraceExportServiceImpl) createOrUpdateDataset(ctx context.Context, work
 				"",
 				category,
 				config.DatasetSchema,
-				nil, nil,
 			)); err != nil {
 				return nil, err
 			}
@@ -437,7 +435,7 @@ func (r *TraceExportServiceImpl) buildDatasetItems(ctx context.Context, spans []
 func (r *TraceExportServiceImpl) buildItem(ctx context.Context, span *loop_span.Span, i int, fieldMappings []entity.FieldMapping, workspaceID int64,
 	dataset *entity.Dataset,
 ) *entity.DatasetItem {
-	item := entity.NewDatasetItem(workspaceID, dataset.ID, span, nil)
+	item := entity.NewDatasetItem(workspaceID, dataset.ID, span)
 	for _, mapping := range fieldMappings {
 		value, err := span.ExtractByJsonpath(ctx, mapping.TraceFieldKey, mapping.TraceFieldJsonpath)
 		if err != nil {
@@ -479,7 +477,6 @@ func (r *TraceExportServiceImpl) buildPreviewDataset(ctx context.Context, worksp
 		"",
 		category,
 		schema,
-		nil, nil,
 	)
 	if config.DatasetID != nil {
 		dataset.ID = *config.DatasetID
@@ -491,7 +488,7 @@ func (r *TraceExportServiceImpl) buildPreviewDataset(ctx context.Context, worksp
 }
 
 func (r *TraceExportServiceImpl) getDatasetProvider(category entity.DatasetCategory) rpc.IDatasetProvider {
-	return r.DatasetServiceAdaptor.GetDatasetProvider(category)
+	return r.DatasetServiceAdaptor.getDatasetProvider(category)
 }
 
 type DatasetServiceAdaptor struct {
@@ -509,7 +506,7 @@ func (d *DatasetServiceAdaptor) Register(category entity.DatasetCategory, provid
 	d.datasetServiceMap[category] = provider
 }
 
-func (d *DatasetServiceAdaptor) GetDatasetProvider(category entity.DatasetCategory) rpc.IDatasetProvider {
+func (d *DatasetServiceAdaptor) getDatasetProvider(category entity.DatasetCategory) rpc.IDatasetProvider {
 	datasetProvider, ok := d.datasetServiceMap[category]
 	if !ok {
 		return rpc.NoopDatasetProvider

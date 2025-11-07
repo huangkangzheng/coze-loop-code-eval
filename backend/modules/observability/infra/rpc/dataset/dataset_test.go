@@ -12,14 +12,14 @@ import (
 	"go.uber.org/mock/gomock"
 
 	"github.com/bytedance/gg/gptr"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/dataset"
-	dataset_domain "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/domain/dataset"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/infra/rpc/dataset/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/dataset"
+	dataset_domain "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/domain/dataset"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/infra/rpc/dataset/mocks"
 )
 
 //go:generate mockgen -source=dataset.go -destination=mocks/mock_dataset.go
-//go:generate mockgen -package=mocks -destination=mocks/mock_datasetservice_client.go github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/datasetservice Client
+//go:generate mockgen -package=mocks -destination=mocks/mock_datasetservice_client.go code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/datasetservice Client
 
 // Test helper functions
 func createTestDataset() *entity.Dataset {

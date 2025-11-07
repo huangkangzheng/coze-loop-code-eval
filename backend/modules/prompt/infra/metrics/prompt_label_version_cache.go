@@ -10,8 +10,8 @@ import (
 
 	"github.com/cloudwego/kitex/pkg/utils/kitexutil"
 
-	"github.com/coze-dev/coze-loop/backend/infra/metrics"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/metrics"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 const (

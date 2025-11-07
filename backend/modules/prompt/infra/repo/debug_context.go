@@ -6,11 +6,11 @@ package repo
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/infra/idgen"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/domain/repo"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/infra/repo/mysql"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/infra/repo/mysql/convertor"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/idgen"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/repo"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/infra/repo/mysql"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/infra/repo/mysql/convertor"
 )
 
 type DebugContextRepoImpl struct {

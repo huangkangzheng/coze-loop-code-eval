@@ -8,61 +8,57 @@ package application
 
 import (
 	"context"
-	"github.com/coze-dev/coze-loop/backend/infra/ck"
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	"github.com/coze-dev/coze-loop/backend/infra/external/audit"
-	"github.com/coze-dev/coze-loop/backend/infra/external/benefit"
-	"github.com/coze-dev/coze-loop/backend/infra/fileserver"
-	"github.com/coze-dev/coze-loop/backend/infra/idgen"
-	"github.com/coze-dev/coze-loop/backend/infra/limiter"
-	"github.com/coze-dev/coze-loop/backend/infra/lock"
-	"github.com/coze-dev/coze-loop/backend/infra/metrics"
-	"github.com/coze-dev/coze-loop/backend/infra/mq"
-	"github.com/coze-dev/coze-loop/backend/infra/platestwrite"
-	"github.com/coze-dev/coze-loop/backend/infra/redis"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/apis/promptexecuteservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/dataset/datasetservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/tag/tagservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/auth/authservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/file/fileservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/user/userservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/llm/runtime/llmruntimeservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/prompt/promptmanageservice"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component"
-	metrics5 "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/metrics"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/rpc"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/userinfo"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/service"
-	metrics3 "github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/metrics/eval_target"
-	metrics4 "github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/metrics/evaluation_set"
-	evaluator2 "github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/metrics/evaluator"
-	metrics2 "github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/metrics/experiment"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/metrics/openapi"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/mq/rocket/producer"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/evaluator"
-	mysql2 "github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/evaluator/mysql"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/experiment"
-	ck2 "github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/experiment/ck"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/experiment/mysql"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/experiment/redis/dao"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/idem"
-	redis2 "github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/idem/redis"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/target"
-	mysql3 "github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/target/mysql"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/rpc/agent"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/rpc/data"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/rpc/foundation"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/rpc/llm"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/rpc/notify"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/rpc/prompt"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/rpc/tag"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/runtime"
-	conf2 "github.com/coze-dev/coze-loop/backend/modules/evaluation/pkg/conf"
-	"github.com/coze-dev/coze-loop/backend/pkg/conf"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/ck"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/external/audit"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/external/benefit"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/fileserver"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/idgen"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/limiter"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/lock"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/metrics"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/mq"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/platestwrite"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/redis"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/apis/promptexecuteservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/dataset/datasetservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/tag/tagservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/auth/authservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/file/fileservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/user/userservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/llm/runtime/llmruntimeservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/promptmanageservice"
+	metrics5 "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/metrics"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/rpc"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/userinfo"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/service"
+	metrics3 "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/metrics/eval_target"
+	metrics4 "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/metrics/evaluation_set"
+	evaluator2 "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/metrics/evaluator"
+	metrics2 "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/metrics/experiment"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/mq/rocket/producer"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/evaluator"
+	mysql2 "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/evaluator/mysql"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/experiment"
+	ck2 "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/experiment/ck"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/experiment/mysql"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/experiment/redis/dao"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/idem"
+	redis2 "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/idem/redis"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/target"
+	mysql3 "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/target/mysql"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/rpc/agent"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/rpc/data"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/rpc/foundation"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/rpc/llm"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/rpc/notify"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/rpc/prompt"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/rpc/tag"
+	conf2 "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/pkg/conf"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/conf"
 	"github.com/google/wire"
-	"github.com/sirupsen/logrus"
 )
 
 // Injectors from wire.go:
@@ -89,12 +85,7 @@ func InitExperimentApplication(ctx context.Context, idgen2 idgen.IIDGenerator, d
 	idempotentService := idem.NewIdempotentService(iIdemDAO)
 	illmProvider := llm.NewLLMRPCProvider(llmcli)
 	evaluatorExecMetrics := evaluator2.NewEvaluatorMetrics(meter)
-	logger := NewLogger()
-	sandboxConfig := NewSandboxConfig()
-	iRuntimeFactory := NewRuntimeFactory(logger, sandboxConfig)
-	iRuntimeManager := NewRuntimeManagerFromFactory(iRuntimeFactory, logger)
-	codeBuilderFactory := service.NewCodeBuilderFactory()
-	v := NewEvaluatorSourceServices(illmProvider, evaluatorExecMetrics, iConfiger, iRuntimeManager, codeBuilderFactory)
+	v := NewEvaluatorSourceServices(illmProvider, evaluatorExecMetrics, iConfiger)
 	serviceEvaluatorService := service.NewEvaluatorServiceImpl(idgen2, rateLimiter, rmqFactory, iEvaluatorRepo, iEvaluatorRecordRepo, idempotentService, iConfiger, v)
 	exptEventPublisher, err := producer.NewExptEventPublisher(ctx, configFactory, rmqFactory)
 	if err != nil {
@@ -145,9 +136,7 @@ func InitExperimentApplication(ctx context.Context, idgen2 idgen.IIDGenerator, d
 	iExptManager := service.NewExptManager(exptResultService, iExperimentRepo, iExptRunLogRepo, iExptStatsRepo, iExptItemResultRepo, iExptTurnResultRepo, componentIConfiger, quotaRepo, iLocker, idempotentService, exptEventPublisher, auditClient, idgen2, exptMetric, iLatestWriteTracker, evaluationSetVersionService, iEvaluationSetService, iEvalTargetService, serviceEvaluatorService, benefitSvc, exptAggrResultService)
 	schedulerModeFactory := service.NewSchedulerModeFactory(iExptManager, iExptItemResultRepo, iExptStatsRepo, iExptTurnResultRepo, idgen2, evaluationSetItemService, iExperimentRepo, idempotentService, componentIConfiger, exptEventPublisher, evaluatorRecordService, exptResultService)
 	exptSchedulerEvent := service.NewExptSchedulerSvc(iExptManager, iExperimentRepo, iExptItemResultRepo, iExptTurnResultRepo, iExptStatsRepo, iExptRunLogRepo, idempotentService, componentIConfiger, quotaRepo, iLocker, exptEventPublisher, auditClient, exptMetric, exptResultService, idgen2, evaluationSetItemService, schedulerModeFactory)
-	iEvalAsyncDAO := dao.NewEvalAsyncDAO(cmdable)
-	iEvalAsyncRepo := experiment.NewEvalAsyncRepo(iEvalAsyncDAO)
-	exptItemEvalEvent := service.NewExptRecordEvalService(iExptManager, componentIConfiger, exptEventPublisher, iExptItemResultRepo, iExptTurnResultRepo, iExptStatsRepo, iExperimentRepo, quotaRepo, iLocker, idempotentService, auditClient, exptMetric, exptResultService, iEvalTargetService, evaluationSetItemService, evaluatorRecordService, serviceEvaluatorService, idgen2, benefitSvc, iEvalAsyncRepo)
+	exptItemEvalEvent := service.NewExptRecordEvalService(iExptManager, componentIConfiger, exptEventPublisher, iExptItemResultRepo, iExptTurnResultRepo, iExptStatsRepo, iExperimentRepo, quotaRepo, iLocker, idempotentService, auditClient, exptMetric, exptResultService, iEvalTargetService, evaluationSetItemService, evaluatorRecordService, serviceEvaluatorService, idgen2, benefitSvc)
 	iAuthProvider := foundation.NewAuthRPCProvider(authClient)
 	iExptAnnotateService := service.NewExptAnnotateService(db2, iExptAnnotateRepo, iExptTurnResultRepo, exptEventPublisher, evaluationSetItemService, iExperimentRepo, exptResultService, iExptTurnResultFilterRepo, iExptAggrResultRepo)
 	exptResultExportRecordDAO := mysql.NewExptResultExportRecordDAO(db2)
@@ -178,12 +167,7 @@ func InitEvaluatorApplication(ctx context.Context, idgen2 idgen.IIDGenerator, au
 	idempotentService := idem.NewIdempotentService(iIdemDAO)
 	illmProvider := llm.NewLLMRPCProvider(llmClient)
 	evaluatorExecMetrics := evaluator2.NewEvaluatorMetrics(meter)
-	logger := NewLogger()
-	sandboxConfig := NewSandboxConfig()
-	iRuntimeFactory := NewRuntimeFactory(logger, sandboxConfig)
-	iRuntimeManager := NewRuntimeManagerFromFactory(iRuntimeFactory, logger)
-	codeBuilderFactory := service.NewCodeBuilderFactory()
-	v := NewEvaluatorSourceServices(illmProvider, evaluatorExecMetrics, iConfiger, iRuntimeManager, codeBuilderFactory)
+	v := NewEvaluatorSourceServices(illmProvider, evaluatorExecMetrics, iConfiger)
 	evaluatorService := service.NewEvaluatorServiceImpl(idgen2, rateLimiter, rmqFactory, iEvaluatorRepo, iEvaluatorRecordRepo, idempotentService, iConfiger, v)
 	exptEventPublisher, err := producer.NewExptEventPublisher(ctx, configFactory, rmqFactory)
 	if err != nil {
@@ -200,7 +184,7 @@ func InitEvaluatorApplication(ctx context.Context, idgen2 idgen.IIDGenerator, au
 	iExperimentRepo := experiment.NewExptRepo(iExptDAO, iExptEvaluatorRefDAO, idgen2)
 	evaluatorRecordService := service.NewEvaluatorRecordServiceImpl(idgen2, iEvaluatorRecordRepo, exptEventPublisher, evaluatorEventPublisher, userInfoService, iExperimentRepo)
 	iFileProvider := foundation.NewFileRPCProvider(fileClient)
-	evaluationEvaluatorService := NewEvaluatorHandlerImpl(idgen2, iConfiger, iAuthProvider, evaluatorService, evaluatorRecordService, evaluatorExecMetrics, userInfoService, auditClient, benefitSvc, iFileProvider, v)
+	evaluationEvaluatorService := NewEvaluatorHandlerImpl(idgen2, iConfiger, iAuthProvider, evaluatorService, evaluatorRecordService, evaluatorExecMetrics, userInfoService, auditClient, benefitSvc, iFileProvider)
 	return evaluationEvaluatorService, nil
 }
 
@@ -229,39 +213,8 @@ func InitEvalTargetApplication(ctx context.Context, idgen2 idgen.IIDGenerator, d
 	iPromptRPCAdapter := prompt.NewPromptRPCAdapter(client, executeClient)
 	v := NewSourceTargetOperators(iPromptRPCAdapter)
 	iEvalTargetService := service.NewEvalTargetServiceImpl(iEvalTargetRepo, idgen2, evalTargetMetrics, v)
-	iEvalAsyncDAO := dao.NewEvalAsyncDAO(cmdable)
-	iEvalAsyncRepo := experiment.NewEvalAsyncRepo(iEvalAsyncDAO)
-	evalTargetService := NewEvalTargetHandlerImpl(iAuthProvider, iEvalTargetService, v, iEvalAsyncRepo)
+	evalTargetService := NewEvalTargetHandlerImpl(iAuthProvider, iEvalTargetService, v)
 	return evalTargetService
-}
-
-func InitEvalOpenAPIApplication(ctx context.Context, configFactory conf.IConfigLoaderFactory, rmqFactory mq.IFactory, cmdable redis.Cmdable, idgen2 idgen.IIDGenerator, db2 db.Provider, client promptmanageservice.Client, executeClient promptexecuteservice.Client, authClient authservice.Client, meter metrics.Meter, dataClient datasetservice.Client, userClient userservice.Client, llmClient llmruntimeservice.Client, tagClient tagservice.Client, limiterFactory limiter.IRateLimiterFactory, objectStorage fileserver.ObjectStorage, auditClient audit.IAuditService, benefitService benefit.IBenefitService, ckProvider ck.Provider) (IEvalOpenAPIApplication, error) {
-	iEvalAsyncDAO := dao.NewEvalAsyncDAO(cmdable)
-	iEvalAsyncRepo := experiment.NewEvalAsyncRepo(iEvalAsyncDAO)
-	exptEventPublisher, err := producer.NewExptEventPublisher(ctx, configFactory, rmqFactory)
-	if err != nil {
-		return nil, err
-	}
-	evalTargetDAO := mysql3.NewEvalTargetDAO(db2)
-	evalTargetVersionDAO := mysql3.NewEvalTargetVersionDAO(db2)
-	evalTargetRecordDAO := mysql3.NewEvalTargetRecordDAO(db2)
-	iLatestWriteTracker := platestwrite.NewLatestWriteTracker(cmdable)
-	iEvalTargetRepo := target.NewEvalTargetRepo(idgen2, db2, evalTargetDAO, evalTargetVersionDAO, evalTargetRecordDAO, iLatestWriteTracker)
-	evalTargetMetrics := metrics3.NewEvalTargetMetrics(meter)
-	iPromptRPCAdapter := prompt.NewPromptRPCAdapter(client, executeClient)
-	v := NewSourceTargetOperators(iPromptRPCAdapter)
-	iEvalTargetService := service.NewEvalTargetServiceImpl(iEvalTargetRepo, idgen2, evalTargetMetrics, v)
-	iAuthProvider := foundation.NewAuthRPCProvider(authClient)
-	iDatasetRPCAdapter := data.NewDatasetRPCAdapter(dataClient)
-	iEvaluationSetService := service.NewEvaluationSetServiceImpl(iDatasetRPCAdapter)
-	evaluationSetVersionService := service.NewEvaluationSetVersionServiceImpl(iDatasetRPCAdapter)
-	evaluationSetItemService := service.NewEvaluationSetItemServiceImpl(iDatasetRPCAdapter)
-	evaluationSetSchemaService := service.NewEvaluationSetSchemaServiceImpl(iDatasetRPCAdapter)
-	openAPIEvaluationMetrics := openapi.NewEvaluationOApiMetrics(meter)
-	iUserProvider := foundation.NewUserRPCProvider(userClient)
-	userInfoService := userinfo.NewUserInfoServiceImpl(iUserProvider)
-	v2 := NewEvalOpenAPIApplication(iEvalAsyncRepo, exptEventPublisher, iEvalTargetService, iAuthProvider, iEvaluationSetService, evaluationSetVersionService, evaluationSetItemService, evaluationSetSchemaService, openAPIEvaluationMetrics, userInfoService)
-	return v2, nil
 }
 
 // wire.go:
@@ -275,14 +228,9 @@ var (
 		targetDomainService,
 		evaluatorDomainService,
 		flagSet,
-		evalAsyncRepoSet,
 	)
 
-	evaluatorDomainService = wire.NewSet(service.NewEvaluatorServiceImpl, service.NewEvaluatorRecordServiceImpl, NewEvaluatorSourceServices, llm.NewLLMRPCProvider, NewRuntimeFactory,
-		NewRuntimeManagerFromFactory,
-		NewSandboxConfig,
-		NewLogger, service.NewCodeBuilderFactory, evaluator.NewEvaluatorRepo, evaluator.NewEvaluatorRecordRepo, mysql2.NewEvaluatorDAO, mysql2.NewEvaluatorVersionDAO, mysql2.NewEvaluatorRecordDAO, evaluator.NewRateLimiterImpl, conf2.NewEvaluatorConfiger, evaluator2.NewEvaluatorMetrics, producer.NewEvaluatorEventPublisher,
-	)
+	evaluatorDomainService = wire.NewSet(service.NewEvaluatorServiceImpl, service.NewEvaluatorRecordServiceImpl, NewEvaluatorSourceServices, llm.NewLLMRPCProvider, evaluator.NewEvaluatorRepo, evaluator.NewEvaluatorRecordRepo, mysql2.NewEvaluatorDAO, mysql2.NewEvaluatorVersionDAO, mysql2.NewEvaluatorRecordDAO, evaluator.NewRateLimiterImpl, conf2.NewEvaluatorConfiger, evaluator2.NewEvaluatorMetrics, producer.NewEvaluatorEventPublisher)
 
 	evaluatorSet = wire.NewSet(
 		NewEvaluatorHandlerImpl, foundation.NewAuthRPCProvider, foundation.NewFileRPCProvider, foundation.NewUserRPCProvider, userinfo.NewUserInfoServiceImpl, idem.NewIdempotentService, redis2.NewIdemDAO, producer.NewExptEventPublisher, evaluatorDomainService,
@@ -301,14 +249,6 @@ var (
 	evalTargetSet = wire.NewSet(
 		NewEvalTargetHandlerImpl, metrics3.NewEvalTargetMetrics, foundation.NewAuthRPCProvider, targetDomainService,
 		flagSet,
-		evalAsyncRepoSet,
-	)
-
-	evalAsyncRepoSet = wire.NewSet(experiment.NewEvalAsyncRepo, dao.NewEvalAsyncDAO)
-
-	evalOpenAPISet = wire.NewSet(
-		NewEvalOpenAPIApplication,
-		targetDomainService, metrics3.NewEvalTargetMetrics, flagSet, producer.NewExptEventPublisher, evalAsyncRepoSet, service.NewEvaluationSetServiceImpl, service.NewEvaluationSetVersionServiceImpl, service.NewEvaluationSetItemServiceImpl, service.NewEvaluationSetSchemaServiceImpl, data.NewDatasetRPCAdapter, openapi.NewEvaluationOApiMetrics, foundation.NewAuthRPCProvider, foundation.NewUserRPCProvider, userinfo.NewUserInfoServiceImpl,
 	)
 )
 
@@ -320,43 +260,6 @@ func NewLock(cmdable redis.Cmdable) lock.ILocker {
 	return lock.NewRedisLockerWithHolder(cmdable, "evaluation")
 }
 
-// NewSandboxConfig 创建默认沙箱配置
-func NewSandboxConfig() *entity.SandboxConfig {
-	return entity.DefaultSandboxConfig()
-}
-
-// NewLogger 创建默认日志记录器
-func NewLogger() *logrus.Logger {
-	logger := logrus.New()
-	logger.SetLevel(logrus.InfoLevel)
-	return logger
-}
-
-// NewRuntimeFactory 创建运行时工厂
-func NewRuntimeFactory(logger *logrus.Logger, sandboxConfig *entity.SandboxConfig) component.IRuntimeFactory {
-	return runtime.NewRuntimeFactory(logger, sandboxConfig)
-}
-
-// NewRuntimeManagerFromFactory 从工厂创建运行时管理器
-func NewRuntimeManagerFromFactory(factory component.IRuntimeFactory, logger *logrus.Logger) component.IRuntimeManager {
-	return runtime.NewRuntimeManager(factory, logger)
-}
-
-func NewEvaluatorSourceServices(
-	llmProvider rpc.ILLMProvider,
-	metric metrics5.EvaluatorExecMetrics,
-	config conf2.IConfiger,
-	runtimeManager component.IRuntimeManager,
-	codeBuilderFactory service.CodeBuilderFactory,
-) map[entity.EvaluatorType]service.EvaluatorSourceService {
-
-	codeBuilderFactory.SetRuntimeManager(runtimeManager)
-
-	services := []service.EvaluatorSourceService{service.NewEvaluatorSourcePromptServiceImpl(llmProvider, metric, config), service.NewEvaluatorSourceCodeServiceImpl(runtimeManager, codeBuilderFactory, metric)}
-
-	serviceMap := make(map[entity.EvaluatorType]service.EvaluatorSourceService)
-	for _, svc := range services {
-		serviceMap[svc.EvaluatorType()] = svc
-	}
-	return serviceMap
+func NewEvaluatorSourceServices(llmProvider rpc.ILLMProvider, metric metrics5.EvaluatorExecMetrics, config conf2.IConfiger) []service.EvaluatorSourceService {
+	return []service.EvaluatorSourceService{service.NewEvaluatorSourcePromptServiceImpl(llmProvider, metric, config)}
 }

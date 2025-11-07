@@ -108,7 +108,7 @@ export function LoginPanel({ loading, onLogin, onRegister }: Props) {
           <span> · </span>
           <Text
             link={{
-              href: 'https://github.com/coze-dev/coze-loop?tab=Apache-2.0-1-ov-file',
+              href: 'https://code.byted.org/flowdevops/cozeloop?tab=Apache-2.0-1-ov-file',
               target: '_blank',
             }}
           >
@@ -117,7 +117,7 @@ export function LoginPanel({ loading, onLogin, onRegister }: Props) {
           <span> | </span>
           <Text
             link={{
-              href: 'https://github.com/coze-dev/coze-loop',
+              href: 'https://code.byted.org/flowdevops/cozeloop',
               target: '_blank',
             }}
             icon={

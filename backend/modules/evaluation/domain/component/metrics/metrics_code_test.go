@@ -8,8 +8,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	code "github.com/coze-dev/coze-loop/backend/pkg/errorx/code"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	code "code.byted.org/flowdevops/cozeloop/backend/pkg/errorx/code"
 )
 
 // simpleBizErr implements github.com/cloudwego/kitex/pkg/kerrors.BizStatusErrorIface

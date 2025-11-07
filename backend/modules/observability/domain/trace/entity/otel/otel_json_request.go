@@ -11,7 +11,7 @@ import (
 	"github.com/bytedance/sonic"
 	v1 "go.opentelemetry.io/proto/otlp/trace/v1"
 
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 // ExportTraceServiceRequest Internal struct, compared to PB struct: TraceID & SpanID & ParentSpanId is string, int64/uint64 -> string, can support otel json source data

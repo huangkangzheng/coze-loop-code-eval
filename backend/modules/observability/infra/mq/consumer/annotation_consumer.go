@@ -7,14 +7,14 @@ import (
 	"context"
 	"time"
 
-	"github.com/coze-dev/coze-loop/backend/infra/mq"
-	obapp "github.com/coze-dev/coze-loop/backend/modules/observability/application"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/component/config"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity"
-	"github.com/coze-dev/coze-loop/backend/pkg/conf"
-	"github.com/coze-dev/coze-loop/backend/pkg/json"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/conv"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/mq"
+	obapp "code.byted.org/flowdevops/cozeloop/backend/modules/observability/application"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/component/config"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/conf"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/json"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/conv"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 type AnnotationConsumer struct {

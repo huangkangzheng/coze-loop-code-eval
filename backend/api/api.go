@@ -11,34 +11,32 @@ import (
 	"github.com/cloudwego/hertz/pkg/app/server"
 	"github.com/cloudwego/hertz/pkg/app/server/binding"
 	"github.com/cloudwego/hertz/pkg/app/server/render"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/task/service/taskexe/processor"
 
-	"github.com/coze-dev/coze-loop/backend/api/handler/coze/loop/apis"
-	"github.com/coze-dev/coze-loop/backend/infra/ck"
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	"github.com/coze-dev/coze-loop/backend/infra/external/audit"
-	"github.com/coze-dev/coze-loop/backend/infra/external/benefit"
-	"github.com/coze-dev/coze-loop/backend/infra/fileserver"
-	"github.com/coze-dev/coze-loop/backend/infra/i18n"
-	"github.com/coze-dev/coze-loop/backend/infra/idgen"
-	"github.com/coze-dev/coze-loop/backend/infra/limiter"
-	"github.com/coze-dev/coze-loop/backend/infra/metrics"
-	"github.com/coze-dev/coze-loop/backend/infra/middleware/validator"
-	"github.com/coze-dev/coze-loop/backend/infra/mq"
-	"github.com/coze-dev/coze-loop/backend/infra/redis"
-	"github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/data/lodataset"
-	"github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/data/lotag"
-	"github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/evaluation/loeval_set"
-	"github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/evaluation/loevaluator"
-	"github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/evaluation/loexpt"
-	"github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/foundation/loauth"
-	"github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/foundation/lofile"
-	"github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/foundation/louser"
-	"github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/llm/loruntime"
-	"github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/prompt/loexecute"
-	"github.com/coze-dev/coze-loop/backend/loop_gen/coze/loop/prompt/lomanage"
-	"github.com/coze-dev/coze-loop/backend/pkg/conf"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/js_conv"
+	"code.byted.org/flowdevops/cozeloop/backend/api/handler/coze/loop/apis"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/ck"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/external/audit"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/external/benefit"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/fileserver"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/i18n"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/idgen"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/limiter"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/metrics"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/middleware/validator"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/mq"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/redis"
+	"code.byted.org/flowdevops/cozeloop/backend/loop_gen/coze/loop/data/lodataset"
+	"code.byted.org/flowdevops/cozeloop/backend/loop_gen/coze/loop/data/lotag"
+	"code.byted.org/flowdevops/cozeloop/backend/loop_gen/coze/loop/evaluation/loeval_set"
+	"code.byted.org/flowdevops/cozeloop/backend/loop_gen/coze/loop/evaluation/loevaluator"
+	"code.byted.org/flowdevops/cozeloop/backend/loop_gen/coze/loop/foundation/loauth"
+	"code.byted.org/flowdevops/cozeloop/backend/loop_gen/coze/loop/foundation/lofile"
+	"code.byted.org/flowdevops/cozeloop/backend/loop_gen/coze/loop/foundation/louser"
+	"code.byted.org/flowdevops/cozeloop/backend/loop_gen/coze/loop/llm/loruntime"
+	"code.byted.org/flowdevops/cozeloop/backend/loop_gen/coze/loop/prompt/loexecute"
+	"code.byted.org/flowdevops/cozeloop/backend/loop_gen/coze/loop/prompt/lomanage"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/conf"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/js_conv"
 )
 
 func Init(
@@ -117,10 +115,6 @@ func Init(
 		lotag.NewLocalTagService(dataHandler.TagService),
 		limiterFactory,
 		lodataset.NewLocalDatasetService(dataHandler.IDatasetApplication),
-		cmdable,
-		loexpt.NewLocalExperimentService(evaluationHandler.IExperimentApplication),
-		processor.TaskProcessor{},
-		0,
 	)
 	if err != nil {
 		return nil, err

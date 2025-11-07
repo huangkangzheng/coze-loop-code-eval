@@ -4,9 +4,9 @@
 package tag
 
 import (
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	"github.com/coze-dev/coze-loop/backend/infra/idgen"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/tag/repo"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/idgen"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/tag/repo"
 )
 
 type TagRepoImpl struct {

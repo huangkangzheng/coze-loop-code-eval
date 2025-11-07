@@ -12,15 +12,15 @@ import (
 	"github.com/bytedance/gg/gptr"
 	"go.uber.org/mock/gomock"
 
-	"github.com/coze-dev/coze-loop/backend/infra/db/mocks"
-	idgenmock "github.com/coze-dev/coze-loop/backend/infra/idgen/mocks"
-	lockmocks "github.com/coze-dev/coze-loop/backend/infra/lock/mocks"
-	confmocks "github.com/coze-dev/coze-loop/backend/modules/data/domain/component/conf/mocks"
-	vfsmocks "github.com/coze-dev/coze-loop/backend/modules/data/domain/component/vfs/mocks"
-	mock_mq "github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/component/mq/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/entity"
-	mock_repo "github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/repo/mocks"
-	common_entity "github.com/coze-dev/coze-loop/backend/modules/data/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db/mocks"
+	idgenmock "code.byted.org/flowdevops/cozeloop/backend/infra/idgen/mocks"
+	lockmocks "code.byted.org/flowdevops/cozeloop/backend/infra/lock/mocks"
+	confmocks "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/component/conf/mocks"
+	vfsmocks "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/component/vfs/mocks"
+	mock_mq "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/component/mq/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/entity"
+	mock_repo "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/repo/mocks"
+	common_entity "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/entity"
 )
 
 func TestDatasetServiceImpl_GetIOJob(t *testing.T) {

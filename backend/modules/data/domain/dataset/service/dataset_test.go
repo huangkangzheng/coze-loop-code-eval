@@ -13,12 +13,12 @@ import (
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/component/conf"
-	confmocks "github.com/coze-dev/coze-loop/backend/modules/data/domain/component/conf/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/entity"
-	mock_repo "github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/repo/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/data/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/modules/data/pkg/pagination"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/component/conf"
+	confmocks "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/component/conf/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/entity"
+	mock_repo "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/repo/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/pkg/pagination"
 )
 
 func TestDatasetServiceImpl_CreateDataset(t *testing.T) {
@@ -44,7 +44,7 @@ func TestDatasetServiceImpl_CreateDataset(t *testing.T) {
 		wantErr  bool
 	}{
 		{
-			name:    "成功创建数据集",
+			name: "成功创建数据集",
 			dataset: &entity.Dataset{
 				// 填充数据集信息
 			},
@@ -68,7 +68,7 @@ func TestDatasetServiceImpl_CreateDataset(t *testing.T) {
 			wantErr: false,
 		},
 		{
-			name:    "校验失败",
+			name: "校验失败",
 			dataset: &entity.Dataset{
 				// 填充数据集信息
 			},
@@ -86,7 +86,7 @@ func TestDatasetServiceImpl_CreateDataset(t *testing.T) {
 			wantErr: true,
 		},
 		{
-			name:    "创建数据集失败",
+			name: "创建数据集失败",
 			dataset: &entity.Dataset{
 				// 填充数据集信息
 			},

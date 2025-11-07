@@ -16,7 +16,7 @@ import (
 
 	"gorm.io/plugin/dbresolver"
 
-	"github.com/coze-dev/coze-loop/backend/modules/foundation/infra/repo/mysql/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/foundation/infra/repo/mysql/gorm_gen/model"
 )
 
 func newAPIKey(db *gorm.DB, opts ...gen.DOOption) aPIKey {

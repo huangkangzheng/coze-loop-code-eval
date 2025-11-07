@@ -4,13 +4,13 @@
 package dataset
 
 import (
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	"github.com/coze-dev/coze-loop/backend/infra/idgen"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/repo"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/data/infra/repo/dataset/item_dao"
-	"github.com/coze-dev/coze-loop/backend/modules/data/infra/repo/dataset/mysql"
-	"github.com/coze-dev/coze-loop/backend/modules/data/infra/repo/dataset/redis"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/idgen"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/repo"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/infra/repo/dataset/item_dao"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/infra/repo/dataset/mysql"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/infra/repo/dataset/redis"
 )
 
 type DatasetRepo struct {

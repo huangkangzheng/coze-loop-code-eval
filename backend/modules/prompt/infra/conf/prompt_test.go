@@ -10,8 +10,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 
-	"github.com/coze-dev/coze-loop/backend/pkg/conf"
-	confmocks "github.com/coze-dev/coze-loop/backend/pkg/conf/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/conf"
+	confmocks "code.byted.org/flowdevops/cozeloop/backend/pkg/conf/mocks"
 )
 
 func TestPromptConfigProvider_GetPTaaSMaxQPSByPromptKey(t *testing.T) {

@@ -6,7 +6,7 @@ package workspace
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/observability/domain/span"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/domain/span"
 )
 
 //go:generate mockgen -destination=mocks/workspace_provider.go -package=mocks . IWorkSpaceProvider

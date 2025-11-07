@@ -13,15 +13,15 @@ import (
 	"github.com/bytedance/gg/gptr"
 	"github.com/stretchr/testify/assert"
 
-	mock_audit "github.com/coze-dev/coze-loop/backend/infra/external/audit/mocks"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/dataset"
-	domain_dataset "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/domain/dataset"
-	mock_auth "github.com/coze-dev/coze-loop/backend/modules/data/domain/component/rpc/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/entity"
-	mock_repo "github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/repo/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/service"
-	mock_dataset "github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/service/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/data/pkg/pagination"
+	mock_audit "code.byted.org/flowdevops/cozeloop/backend/infra/external/audit/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/dataset"
+	domain_dataset "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/domain/dataset"
+	mock_auth "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/component/rpc/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/entity"
+	mock_repo "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/repo/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/service"
+	mock_dataset "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/service/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/pkg/pagination"
 )
 
 func TestDatasetApplicationImpl_BatchCreateDatasetItems(t *testing.T) {

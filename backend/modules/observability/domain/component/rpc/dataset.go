@@ -6,9 +6,9 @@ package rpc
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
 )
 
 //go:generate mockgen -destination=mocks/dataset_provider_mock.go -package=mocks . IDatasetProvider
@@ -17,7 +17,6 @@ type IDatasetProvider interface {
 	UpdateDatasetSchema(ctx context.Context, dataset *entity.Dataset) error
 	GetDataset(ctx context.Context, workspaceID, datasetID int64, category entity.DatasetCategory) (*entity.Dataset, error)
 	ClearDatasetItems(ctx context.Context, workspaceID, datasetID int64, category entity.DatasetCategory) error
-	SearchDatasets(ctx context.Context, workspaceID int64, datasetID int64, category entity.DatasetCategory, name string) ([]*entity.Dataset, error)
 	AddDatasetItems(ctx context.Context, datasetID int64, category entity.DatasetCategory, items []*entity.DatasetItem) ([]*entity.DatasetItem, []entity.ItemErrorGroup, error)
 	ValidateDatasetItems(ctx context.Context, dataset *entity.Dataset, items []*entity.DatasetItem, ignoreCurrentCount *bool) ([]*entity.DatasetItem, []entity.ItemErrorGroup, error)
 }
@@ -54,8 +53,4 @@ func (d *noopDatasetProvider) AddDatasetItems(ctx context.Context, datasetID int
 // ValidateDatasetItems 验证数据集项
 func (d *noopDatasetProvider) ValidateDatasetItems(ctx context.Context, dataset *entity.Dataset, items []*entity.DatasetItem, ignoreCurrentCount *bool) ([]*entity.DatasetItem, []entity.ItemErrorGroup, error) {
 	return nil, nil, errorx.NewByCode(errno.CommonInvalidParamCode, errorx.WithExtraMsg("dataset category is invalid"))
-}
-
-func (d *noopDatasetProvider) SearchDatasets(ctx context.Context, workspaceID int64, datasetID int64, category entity.DatasetCategory, name string) ([]*entity.Dataset, error) {
-	return nil, errorx.NewByCode(errno.CommonInvalidParamCode, errorx.WithExtraMsg("dataset category is invalid"))
 }

@@ -13,7 +13,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/sirupsen/logrus"
 
-	"github.com/coze-dev/coze-loop/backend/pkg/consts"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/consts"
 )
 
 var logger Logger = newDefaultLogger()
@@ -102,7 +102,7 @@ func (l *defaultLogger) GetLogID(ctx context.Context) string {
 }
 
 func (l *defaultLogger) SetLogID(ctx context.Context, logID string) context.Context {
-	ctx = context.WithValue(ctx, consts.CtxKeyLogID, logID) //nolint:staticcheck
+	ctx = context.WithValue(ctx, consts.CtxKeyLogID, logID) //nolint:staticcheck,SA1029
 	return ctx
 }
 

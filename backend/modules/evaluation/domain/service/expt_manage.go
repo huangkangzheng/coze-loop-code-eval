@@ -6,7 +6,7 @@ package service
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
 )
 
 //go:generate  mockgen -destination  ./mocks/expt_manage.go  --package mocks . IExptManager
@@ -45,7 +45,7 @@ type IExptExecutionManager interface {
 	Invoke(ctx context.Context, invokeExptReq *entity.InvokeExptReq) error
 	Finish(ctx context.Context, exptID *entity.Experiment, exptRunID int64, session *entity.Session) error
 
-	PendRun(ctx context.Context, exptID, exptRunID, spaceID int64, session *entity.Session) error
+	PendRun(ctx context.Context, exptID, exptRunID int64, spaceID int64, session *entity.Session) error
 	PendExpt(ctx context.Context, exptID, spaceID int64, session *entity.Session, opts ...entity.CompleteExptOptionFn) error
 
 	CompleteRun(ctx context.Context, exptID, exptRunID int64, mode entity.ExptRunMode, spaceID int64, session *entity.Session, opts ...entity.CompleteExptOptionFn) error

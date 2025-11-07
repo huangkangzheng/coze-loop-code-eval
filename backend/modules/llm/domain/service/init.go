@@ -4,10 +4,10 @@
 package service
 
 import (
-	"github.com/coze-dev/coze-loop/backend/infra/idgen"
-	"github.com/coze-dev/coze-loop/backend/modules/llm/domain/component/conf"
-	"github.com/coze-dev/coze-loop/backend/modules/llm/domain/repo"
-	"github.com/coze-dev/coze-loop/backend/modules/llm/domain/service/llmfactory"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/idgen"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/llm/domain/component/conf"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/llm/domain/repo"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/llm/domain/service/llmfactory"
 )
 
 func NewRuntime(

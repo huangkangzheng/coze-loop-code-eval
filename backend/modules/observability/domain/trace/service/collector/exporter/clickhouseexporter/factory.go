@@ -6,9 +6,9 @@ package clickhouseexporter
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/collector/component"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/collector/exporter"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/repo"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/collector/component"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/collector/exporter"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/repo"
 )
 
 const (

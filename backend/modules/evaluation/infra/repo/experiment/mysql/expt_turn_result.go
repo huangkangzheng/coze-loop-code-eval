@@ -11,14 +11,14 @@ import (
 	"gorm.io/gorm/clause"
 	"gorm.io/plugin/dbresolver"
 
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/experiment/mysql/gorm_gen/model"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/experiment/mysql/gorm_gen/query"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/pkg/contexts"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/json"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/experiment/mysql/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/experiment/mysql/gorm_gen/query"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/pkg/contexts"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/json"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 //go:generate  mockgen -destination=mocks/expt_turn_result.go  -package mocks . ExptTurnResultDAO
@@ -26,7 +26,7 @@ type ExptTurnResultDAO interface {
 	ListTurnResult(ctx context.Context, spaceID, exptID int64, filter *entity.ExptTurnResultFilter, page entity.Page, desc bool, opts ...db.Option) ([]*model.ExptTurnResult, int64, error)
 	ListTurnResultByItemIDs(ctx context.Context, spaceID, exptID int64, itemIDs []int64, page entity.Page, desc bool, opts ...db.Option) ([]*model.ExptTurnResult, int64, error)
 	BatchGet(ctx context.Context, spaceID, exptID int64, itemIDs []int64, opts ...db.Option) ([]*model.ExptTurnResult, error)
-	Get(ctx context.Context, spaceID, exptID, itemID, turnID int64, opts ...db.Option) (*model.ExptTurnResult, error)
+	Get(ctx context.Context, spaceID int64, exptID int64, itemID, turnID int64, opts ...db.Option) (*model.ExptTurnResult, error)
 	CreateTurnEvaluatorRefs(ctx context.Context, turnResults []*model.ExptTurnEvaluatorResultRef, opts ...db.Option) error
 	BatchCreateNX(ctx context.Context, turnResults []*model.ExptTurnResult, opts ...db.Option) error
 	GetItemTurnResults(ctx context.Context, exptID, itemID, spaceID int64, opts ...db.Option) ([]*model.ExptTurnResult, error)
@@ -168,7 +168,7 @@ func (dao *ExptTurnResultDAOImpl) CreateTurnEvaluatorRefs(ctx context.Context, r
 	return nil
 }
 
-func (dao *ExptTurnResultDAOImpl) BatchGet(ctx context.Context, spaceID, exptID int64, itemIDs []int64, opts ...db.Option) ([]*model.ExptTurnResult, error) {
+func (dao *ExptTurnResultDAOImpl) BatchGet(ctx context.Context, spaceID int64, exptID int64, itemIDs []int64, opts ...db.Option) ([]*model.ExptTurnResult, error) {
 	db := dao.provider.NewSession(ctx, opts...)
 	q := query.Use(db).ExptTurnResult
 	finds, err := q.WithContext(ctx).Where(q.SpaceID.Eq(spaceID), q.ExptID.Eq(exptID), q.ItemID.In(itemIDs...)).Find()
@@ -178,7 +178,7 @@ func (dao *ExptTurnResultDAOImpl) BatchGet(ctx context.Context, spaceID, exptID 
 	return finds, nil
 }
 
-func (dao *ExptTurnResultDAOImpl) Get(ctx context.Context, spaceID, exptID, itemID, turnID int64, opts ...db.Option) (*model.ExptTurnResult, error) {
+func (dao *ExptTurnResultDAOImpl) Get(ctx context.Context, spaceID int64, exptID int64, itemID, turnID int64, opts ...db.Option) (*model.ExptTurnResult, error) {
 	db := dao.provider.NewSession(ctx, opts...)
 	q := query.Use(db).ExptTurnResult
 	find, err := q.WithContext(ctx).Where(q.SpaceID.Eq(spaceID), q.ExptID.Eq(exptID), q.ItemID.Eq(itemID), q.TurnID.Eq(turnID)).First()

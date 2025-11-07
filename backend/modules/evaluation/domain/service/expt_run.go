@@ -6,7 +6,7 @@ package service
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
 )
 
 //go:generate  mockgen -destination  ./mocks/expt_run.go  --package mocks . ExptSchedulerEvent,ExptItemEvalEvent,QuotaService
@@ -19,6 +19,6 @@ type ExptItemEvalEvent interface {
 }
 
 type QuotaService interface {
-	AllowExptRun(ctx context.Context, exptID, spaceID int64, session *entity.Session) error
-	ReleaseExptRun(ctx context.Context, exptID, spaceID int64, session *entity.Session) error
+	AllowExptRun(ctx context.Context, exptID int64, spaceID int64, session *entity.Session) error
+	ReleaseExptRun(ctx context.Context, exptID int64, spaceID int64, session *entity.Session) error
 }

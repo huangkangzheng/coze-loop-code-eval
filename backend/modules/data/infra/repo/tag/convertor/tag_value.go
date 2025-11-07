@@ -4,9 +4,9 @@
 package convertor
 
 import (
-	entity2 "github.com/coze-dev/coze-loop/backend/modules/data/domain/tag/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/data/infra/repo/tag/mysql/gorm_gen/model"
-	"github.com/coze-dev/coze-loop/backend/modules/data/pkg/consts"
+	entity2 "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/tag/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/infra/repo/tag/mysql/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/pkg/consts"
 )
 
 func TagValuePO2DO(val *model.TagValue) *entity2.TagValue {

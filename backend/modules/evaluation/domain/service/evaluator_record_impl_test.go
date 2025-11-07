@@ -13,13 +13,13 @@ import (
 	"github.com/stretchr/testify/assert" // 新增 testify/assert
 	"go.uber.org/mock/gomock"
 
-	idgenmocks "github.com/coze-dev/coze-loop/backend/infra/idgen/mocks"
-	"github.com/coze-dev/coze-loop/backend/infra/middleware/session"
-	userinfo_mocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/userinfo/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/events/mocks"
-	repo_mocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/repo/mocks" // 假设gomock生成的mock在此路径
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
+	idgenmocks "code.byted.org/flowdevops/cozeloop/backend/infra/idgen/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/middleware/session"
+	userinfo_mocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/userinfo/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/events/mocks"
+	repo_mocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/repo/mocks" // 假设gomock生成的mock在此路径
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
 )
 
 // TestEvaluatorRecordServiceImpl_CorrectEvaluatorRecord 用于测试 CorrectEvaluatorRecord 方法
@@ -211,7 +211,7 @@ func TestEvaluatorRecordServiceImpl_CorrectEvaluatorRecord(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-		tt := tt                            // capture range variable
+		tt := tt // capture range variable
 		t.Run(tt.name, func(t *testing.T) { // 使用 t.Run
 			ctrl := gomock.NewController(t)
 			defer ctrl.Finish()

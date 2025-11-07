@@ -9,11 +9,11 @@ import (
 
 	"github.com/samber/lo"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/tag"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/tag/tagservice"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/rpc"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/tag"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/tag/tagservice"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/rpc"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 type TagRPCAdapter struct {
@@ -26,7 +26,7 @@ func NewTagRPCProvider(client tagservice.Client) rpc.ITagRPCAdapter {
 	}
 }
 
-func (t *TagRPCAdapter) GetTagInfo(ctx context.Context, workspaceID, tagID int64) (*entity.TagInfo, error) {
+func (t *TagRPCAdapter) GetTagInfo(ctx context.Context, workspaceID int64, tagID int64) (*entity.TagInfo, error) {
 	res, err := t.client.BatchGetTags(ctx, &tag.BatchGetTagsRequest{
 		WorkspaceID: workspaceID,
 		TagKeyIds:   []int64{tagID},

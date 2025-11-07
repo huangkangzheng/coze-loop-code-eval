@@ -16,20 +16,20 @@ import (
 	"github.com/bytedance/gg/gptr"
 	"github.com/bytedance/gg/gslice"
 
-	"github.com/coze-dev/coze-loop/backend/infra/idgen"
-	"github.com/coze-dev/coze-loop/backend/infra/platestwrite"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/metrics"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/rpc"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/events"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/repo"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/pkg/contexts"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/json"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/goroutine"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/maps"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/idgen"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/platestwrite"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/metrics"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/rpc"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/events"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/repo"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/pkg/contexts"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/json"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/goroutine"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/maps"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 func NewExptResultService(
@@ -94,7 +94,7 @@ type ExptResultServiceImpl struct {
 	publisher events.ExptEventPublisher
 }
 
-func (e ExptResultServiceImpl) GetExptItemTurnResults(ctx context.Context, exptID, itemID, spaceID int64, session *entity.Session) ([]*entity.ExptTurnResult, error) {
+func (e ExptResultServiceImpl) GetExptItemTurnResults(ctx context.Context, exptID, itemID int64, spaceID int64, session *entity.Session) ([]*entity.ExptTurnResult, error) {
 	turnResults, err := e.ExptTurnResultRepo.GetItemTurnResults(ctx, exptID, itemID, spaceID)
 	if err != nil {
 		return nil, err
@@ -127,7 +127,7 @@ func (e ExptResultServiceImpl) GetExptItemTurnResults(ctx context.Context, exptI
 	return res, nil
 }
 
-func (e ExptResultServiceImpl) RecordItemRunLogs(ctx context.Context, exptID, exptRunID, itemID, spaceID int64) ([]*entity.ExptTurnEvaluatorResultRef, error) {
+func (e ExptResultServiceImpl) RecordItemRunLogs(ctx context.Context, exptID, exptRunID int64, itemID int64, spaceID int64) ([]*entity.ExptTurnEvaluatorResultRef, error) {
 	itemRunLog, err := e.ExptItemResultRepo.GetItemRunLog(ctx, exptID, exptRunID, itemID, spaceID)
 	if err != nil {
 		return nil, err
@@ -532,16 +532,17 @@ func (e ExptResultServiceImpl) getColumnEvaluators(ctx context.Context, spaceID 
 
 	columnEvaluators := make([]*entity.ColumnEvaluator, 0)
 	for _, e := range evaluatorVersions {
-		if (e.EvaluatorType == entity.EvaluatorTypePrompt && e.PromptEvaluatorVersion == nil) || (e.EvaluatorType == entity.EvaluatorTypeCode && e.CodeEvaluatorVersion == nil) || !gslice.Contains(evaluatorVersionIDs, e.GetEvaluatorVersionID()) {
+		evaluatorVersion := e.GetEvaluatorVersion()
+		if evaluatorVersion == nil || !gslice.Contains(evaluatorVersionIDs, evaluatorVersion.GetID()) {
 			continue
 		}
 
 		columnEvaluator := &entity.ColumnEvaluator{
-			EvaluatorVersionID: e.GetEvaluatorVersionID(),
+			EvaluatorVersionID: evaluatorVersion.GetID(),
 			EvaluatorID:        e.ID,
 			EvaluatorType:      e.EvaluatorType,
 			Name:               gptr.Of(e.Name),
-			Version:            gptr.Of(e.GetVersion()),
+			Version:            gptr.Of(e.GetEvaluatorVersion().GetVersion()),
 			Description:        gptr.Of(e.Description),
 		}
 		columnEvaluators = append(columnEvaluators, columnEvaluator)
@@ -575,7 +576,7 @@ func (e ExptResultServiceImpl) getColumnEvaluators(ctx context.Context, spaceID 
 	return columnEvaluators, exptColumnEvaluators, nil
 }
 
-func (e ExptResultServiceImpl) getColumnEvalSetFields(ctx context.Context, spaceID, evalSetID, evalSetVersionID int64) ([]*entity.ColumnEvalSetField, error) {
+func (e ExptResultServiceImpl) getColumnEvalSetFields(ctx context.Context, spaceID int64, evalSetID, evalSetVersionID int64) ([]*entity.ColumnEvalSetField, error) {
 	var version *entity.EvaluationSetVersion
 	if evalSetID == evalSetVersionID {
 		evalSet, err := e.evaluationSetService.GetEvaluationSet(ctx, gptr.Of(spaceID), evalSetID, gptr.Of(true))
@@ -1433,7 +1434,7 @@ func (e ExptResultServiceImpl) MGetStats(ctx context.Context, exptIDs []int64, s
 	return models, nil
 }
 
-func (e ExptResultServiceImpl) GetStats(ctx context.Context, exptID, spaceID int64, session *entity.Session) (*entity.ExptStats, error) {
+func (e ExptResultServiceImpl) GetStats(ctx context.Context, exptID int64, spaceID int64, session *entity.Session) (*entity.ExptStats, error) {
 	stats, err := e.MGetStats(ctx, []int64{exptID}, spaceID, session)
 	if err != nil {
 		return nil, err

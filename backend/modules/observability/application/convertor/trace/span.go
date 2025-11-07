@@ -6,14 +6,14 @@ package trace
 import (
 	"strconv"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/observability/domain/filter"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/observability/domain/span"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/component/rpc"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/common"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/loop_span"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/slices"
-	time_util "github.com/coze-dev/coze-loop/backend/pkg/time"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/domain/filter"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/domain/span"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/component/rpc"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/common"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/loop_span"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/slices"
+	time_util "code.byted.org/flowdevops/cozeloop/backend/pkg/time"
 	"github.com/samber/lo"
 )
 
@@ -181,45 +181,30 @@ func FilterFieldsDTO2DO(f *filter.FilterFields) *loop_span.FilterFields {
 	if f.QueryAndOr != nil {
 		ret.QueryAndOr = ptr.Of(loop_span.QueryAndOrEnum(*f.QueryAndOr))
 	}
-	ret.FilterFields = FilterFieldListDTO2DO(f.FilterFields)
-	return ret
-}
-
-func FilterFieldDTO2DO(field *filter.FilterField) *loop_span.FilterField {
-	if field == nil {
-		return nil
-	}
-	fieldName := ""
-	if field.FieldName != nil {
-		fieldName = *field.FieldName
-	}
-	fField := &loop_span.FilterField{
-		FieldName: fieldName,
-		Values:    field.Values,
-		FieldType: fieldTypeDTO2DO(field.FieldType),
-	}
-	if field.QueryAndOr != nil {
-		fField.QueryAndOr = ptr.Of(loop_span.QueryAndOrEnum(*field.QueryAndOr))
-	}
-	if field.QueryType != nil {
-		fField.QueryType = ptr.Of(loop_span.QueryTypeEnum(*field.QueryType))
-	}
-	if field.SubFilter != nil {
-		fField.SubFilter = FilterFieldsDTO2DO(field.SubFilter)
-	}
-	if field.IsCustom != nil {
-		fField.IsCustom = *field.IsCustom
-	}
-	return fField
-}
-
-func FilterFieldListDTO2DO(fields []*filter.FilterField) []*loop_span.FilterField {
-	ret := make([]*loop_span.FilterField, 0)
-	for _, field := range fields {
+	ret.FilterFields = make([]*loop_span.FilterField, 0)
+	for _, field := range f.GetFilterFields() {
 		if field == nil {
 			continue
 		}
-		ret = append(ret, FilterFieldDTO2DO(field))
+		fieldName := ""
+		if field.FieldName != nil {
+			fieldName = *field.FieldName
+		}
+		fField := &loop_span.FilterField{
+			FieldName: fieldName,
+			Values:    field.Values,
+			FieldType: fieldTypeDTO2DO(field.FieldType),
+		}
+		if field.QueryAndOr != nil {
+			fField.QueryAndOr = ptr.Of(loop_span.QueryAndOrEnum(*field.QueryAndOr))
+		}
+		if field.QueryType != nil {
+			fField.QueryType = ptr.Of(loop_span.QueryTypeEnum(*field.QueryType))
+		}
+		if field.SubFilter != nil {
+			fField.SubFilter = FilterFieldsDTO2DO(field.SubFilter)
+		}
+		ret.FilterFields = append(ret.FilterFields, fField)
 	}
 	return ret
 }

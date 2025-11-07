@@ -13,30 +13,30 @@ import (
 	"github.com/bytedance/gg/gptr"
 	"github.com/bytedance/gg/gslice"
 
-	"github.com/coze-dev/coze-loop/backend/infra/external/audit"
-	"github.com/coze-dev/coze-loop/backend/infra/external/benefit"
-	"github.com/coze-dev/coze-loop/backend/infra/idgen"
-	"github.com/coze-dev/coze-loop/backend/infra/lock"
-	"github.com/coze-dev/coze-loop/backend/infra/platestwrite"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/consts"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/idem"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/metrics"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/events"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/repo"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/pkg/contexts"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/pkg/encoding"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/json"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/goroutine"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/maps"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/external/audit"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/external/benefit"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/idgen"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/lock"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/platestwrite"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/consts"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/idem"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/metrics"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/events"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/repo"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/pkg/contexts"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/pkg/encoding"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/json"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/goroutine"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/maps"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 func NewExptManager(
-	// tupleSvc IExptTupleService,
+// tupleSvc IExptTupleService,
 	exptResultService ExptResultService,
 	exptRepo repo.IExperimentRepo,
 	exptRunLogRepo repo.IExptRunLogRepo,
@@ -413,7 +413,7 @@ func (e *ExptMangerImpl) mgetExptTupleByID(ctx context.Context, tupleIDs []*enti
 		return t.EvaluationSetVersion.ID, t
 	})
 	evaluatorMap := gslice.ToMap(evaluators, func(t *entity.Evaluator) (int64, *entity.Evaluator) {
-		return t.GetEvaluatorVersionID(), t
+		return t.GetEvaluatorVersion().GetID(), t
 	})
 
 	res := make([]*entity.ExptTuple, 0, len(tupleIDs))
@@ -481,21 +481,9 @@ func (e *ExptMangerImpl) CreateExpt(ctx context.Context, req *entity.CreateExptP
 
 	var versionedTargetID *entity.VersionedTargetID
 	if !req.CreateEvalTargetParam.IsNull() {
-		opts := make([]entity.Option, 0)
-		opts = append(opts, entity.WithCozeBotPublishVersion(req.CreateEvalTargetParam.BotPublishVersion),
-			entity.WithCozeBotInfoType(gptr.Indirect(req.CreateEvalTargetParam.BotInfoType)),
-			entity.WithRegion(req.CreateEvalTargetParam.Region),
-			entity.WithEnv(req.CreateEvalTargetParam.Env))
-		if req.CreateEvalTargetParam.CustomEvalTarget != nil {
-			opts = append(opts, entity.WithCustomEvalTarget(&entity.CustomEvalTarget{
-				ID:        req.CreateEvalTargetParam.CustomEvalTarget.ID,
-				Name:      req.CreateEvalTargetParam.CustomEvalTarget.Name,
-				AvatarURL: req.CreateEvalTargetParam.CustomEvalTarget.AvatarURL,
-				Ext:       req.CreateEvalTargetParam.CustomEvalTarget.Ext,
-			}))
-		}
 		targetID, targetVersionID, err := e.evalTargetService.CreateEvalTarget(ctx, req.WorkspaceID, gptr.Indirect(req.CreateEvalTargetParam.SourceTargetID), gptr.Indirect(req.CreateEvalTargetParam.SourceTargetVersion), gptr.Indirect(req.CreateEvalTargetParam.EvalTargetType),
-			opts...)
+			entity.WithCozeBotPublishVersion(req.CreateEvalTargetParam.BotPublishVersion),
+			entity.WithCozeBotInfoType(gptr.Indirect(req.CreateEvalTargetParam.BotInfoType)))
 		if err != nil {
 			return nil, errorx.Wrapf(err, "CreateEvalTarget failed, param: %v", json.Jsonify(req.CreateEvalTargetParam))
 		}
@@ -528,12 +516,12 @@ func (e *ExptMangerImpl) CreateExpt(ctx context.Context, req *entity.CreateExptP
 	for i, es := range tuple.Evaluators {
 		evaluatorRefs = append(evaluatorRefs, &entity.ExptEvaluatorVersionRef{
 			EvaluatorID:        es.ID,
-			EvaluatorVersionID: es.GetEvaluatorVersionID(),
+			EvaluatorVersionID: es.GetEvaluatorVersion().GetID(),
 		})
 		exptTurnResultFilterKeyMappings = append(exptTurnResultFilterKeyMappings, &entity.ExptTurnResultFilterKeyMapping{
 			SpaceID:   req.WorkspaceID,
 			ExptID:    ids[0],
-			FromField: strconv.FormatInt(es.GetEvaluatorVersionID(), 10),
+			FromField: strconv.FormatInt(es.GetEvaluatorVersion().GetID(), 10),
 			ToKey:     "key" + strconv.Itoa(i+1),
 			FieldType: entity.FieldTypeEvaluator,
 		})
@@ -615,7 +603,7 @@ func (e *ExptMangerImpl) Create(ctx context.Context, expt *entity.Experiment, se
 	return nil
 }
 
-func (e *ExptMangerImpl) Get(ctx context.Context, exptID, spaceID int64, session *entity.Session) (*entity.Experiment, error) {
+func (e *ExptMangerImpl) Get(ctx context.Context, exptID int64, spaceID int64, session *entity.Session) (*entity.Experiment, error) {
 	expts, err := e.MGet(ctx, []int64{exptID}, spaceID, session)
 	if err != nil {
 		return nil, err
@@ -702,7 +690,7 @@ func (e *ExptMangerImpl) Update(ctx context.Context, expt *entity.Experiment, se
 	return e.exptRepo.Update(ctx, expt)
 }
 
-func (e *ExptMangerImpl) Delete(ctx context.Context, exptID, spaceID int64, session *entity.Session) error {
+func (e *ExptMangerImpl) Delete(ctx context.Context, exptID int64, spaceID int64, session *entity.Session) error {
 	logs.CtxInfo(ctx, "delete expt, expt_id: %v", exptID)
 	return e.exptRepo.Delete(ctx, exptID, spaceID)
 }

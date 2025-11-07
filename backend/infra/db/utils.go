@@ -13,7 +13,7 @@ import (
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
 
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/slices"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/slices"
 )
 
 type WhereBuilder struct {

@@ -10,7 +10,7 @@ import (
 	"github.com/coze-dev/cozeloop-go/spec/tracespec"
 	"github.com/stretchr/testify/assert"
 
-	commonentity "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
+	commonentity "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
 )
 
 func TestConvertPrompt2Ob(t *testing.T) {

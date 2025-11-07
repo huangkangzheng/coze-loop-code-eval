@@ -4,8 +4,8 @@
 package convertor
 
 import (
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/domain/user"
-	"github.com/coze-dev/coze-loop/backend/modules/prompt/domain/component/rpc"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/domain/user"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/component/rpc"
 )
 
 func BatchUserDTO2DO(dtos []*user.UserInfoDetail) []*rpc.UserInfo {

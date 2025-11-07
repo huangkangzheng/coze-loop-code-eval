@@ -4,7 +4,7 @@
 package queueprocessor
 
 import (
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/collector/processor"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/collector/processor"
 )
 
 const (

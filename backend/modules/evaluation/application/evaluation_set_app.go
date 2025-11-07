@@ -10,19 +10,19 @@ import (
 
 	"github.com/bytedance/gg/gptr"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation"
-	domain_eval_set "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/domain/eval_set"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/eval_set"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/application/convertor/common"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/application/convertor/evaluation_set"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/consts"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/metrics"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/rpc"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/userinfo"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/service"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation"
+	domain_eval_set "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/eval_set"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/eval_set"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/application/convertor/common"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/application/convertor/evaluation_set"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/consts"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/metrics"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/rpc"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/userinfo"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/service"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
 )
 
 var (
@@ -292,7 +292,7 @@ func (e *EvaluationSetApplicationImpl) BatchCreateEvaluationSetItems(ctx context
 		return nil, err
 	}
 	// domain调用
-	idMap, errors, itemOutputs, err := e.evaluationSetItemService.BatchCreateEvaluationSetItems(ctx, &entity.BatchCreateEvaluationSetItemsParam{
+	idMap, errors, err := e.evaluationSetItemService.BatchCreateEvaluationSetItems(ctx, &entity.BatchCreateEvaluationSetItemsParam{
 		SpaceID:          req.WorkspaceID,
 		EvaluationSetID:  req.EvaluationSetID,
 		Items:            evaluation_set.ItemDTO2DOs(req.Items),
@@ -304,9 +304,8 @@ func (e *EvaluationSetApplicationImpl) BatchCreateEvaluationSetItems(ctx context
 	}
 	// 返回结果构建、错误处理
 	return &eval_set.BatchCreateEvaluationSetItemsResponse{
-		AddedItems:  idMap,
-		Errors:      evaluation_set.ItemErrorGroupDO2DTOs(errors),
-		ItemOutputs: evaluation_set.CreateDatasetItemOutputDO2DTOs(itemOutputs),
+		AddedItems: idMap,
+		Errors:     evaluation_set.ItemErrorGroupDO2DTOs(errors),
 	}, nil
 }
 

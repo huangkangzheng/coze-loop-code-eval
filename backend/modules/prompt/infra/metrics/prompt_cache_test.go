@@ -12,8 +12,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 
-	"github.com/coze-dev/coze-loop/backend/infra/metrics"
-	metricsmocks "github.com/coze-dev/coze-loop/backend/infra/metrics/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/metrics"
+	metricsmocks "code.byted.org/flowdevops/cozeloop/backend/infra/metrics/mocks"
 )
 
 func TestNewPromptCacheMetrics(t *testing.T) {

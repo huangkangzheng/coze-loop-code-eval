@@ -13,16 +13,16 @@ import (
 	"github.com/bytedance/gg/gptr"
 	"github.com/bytedance/gg/gslice"
 
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/metrics"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/rpc"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/repo"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/json"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/maps"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/metrics"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/rpc"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/repo"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/json"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/maps"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 type ExptAggrResultServiceImpl struct {
@@ -296,11 +296,12 @@ func (e *ExptAggrResultServiceImpl) BatchGetExptAggrResultByExperimentIDs(ctx co
 
 	versionID2Evaluator := make(map[int64]*entity.Evaluator)
 	for _, evaluator := range evaluatorVersionList {
-		if (evaluator.EvaluatorType == entity.EvaluatorTypePrompt && evaluator.PromptEvaluatorVersion == nil) || (evaluator.EvaluatorType == entity.EvaluatorTypeCode && evaluator.CodeEvaluatorVersion == nil) || !gslice.Contains(evaluatorVersionIDs, evaluator.GetEvaluatorVersionID()) {
+		evaluatorVersion := evaluator.GetEvaluatorVersion()
+		if evaluatorVersion == nil || !gslice.Contains(evaluatorVersionIDs, evaluatorVersion.GetID()) {
 			continue
 		}
 
-		versionID2Evaluator[evaluator.GetEvaluatorVersionID()] = evaluator
+		versionID2Evaluator[evaluatorVersion.GetID()] = evaluator
 	}
 
 	results := make([]*entity.ExptAggregateResult, 0, len(expt2AggrResults))
@@ -352,11 +353,16 @@ func (e *ExptAggrResultServiceImpl) BatchGetExptAggrResultByExperimentIDs(ctx co
 				return nil, fmt.Errorf("failed to get evaluator by version_id %d", evaluatorVersionID)
 			}
 
+			evaluatorVersion := evaluator.PromptEvaluatorVersion
+			if evaluatorVersion == nil {
+				return nil, fmt.Errorf("failed to get evaluator version by version_id %d", evaluatorVersionID)
+			}
+
 			evaluatorAggrResult := entity.EvaluatorAggregateResult{
 				EvaluatorVersionID: evaluatorVersionID,
 				AggregatorResults:  aggregateResultDO.AggregatorResults,
 				Name:               gptr.Of(evaluator.Name),
-				Version:            gptr.Of(evaluator.GetVersion()),
+				Version:            gptr.Of(evaluatorVersion.Version),
 			}
 			evaluatorResults[evaluatorVersionID] = &evaluatorAggrResult
 

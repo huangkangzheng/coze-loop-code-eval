@@ -10,7 +10,7 @@ import (
 	"github.com/cloudwego/kitex/pkg/kerrors"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
 )
 
 // AssertErrorEqual is a helper function that compares errors properly based on their type

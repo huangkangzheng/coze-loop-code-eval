@@ -9,8 +9,8 @@ import (
 	"github.com/bytedance/gg/gptr"
 	"github.com/bytedance/gg/gslice"
 
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/pkg/json"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/pkg/json"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
 )
 
 type EvalTargetRecord struct {
@@ -104,10 +104,9 @@ type EvalTargetRunError struct {
 type EvalTargetRunStatus int64
 
 const (
-	EvalTargetRunStatusUnknown       EvalTargetRunStatus = 0
-	EvalTargetRunStatusSuccess       EvalTargetRunStatus = 1
-	EvalTargetRunStatusFail          EvalTargetRunStatus = 2
-	EvalTargetRunStatusAsyncInvoking EvalTargetRunStatus = 3
+	EvalTargetRunStatusUnknown EvalTargetRunStatus = 0
+	EvalTargetRunStatusSuccess EvalTargetRunStatus = 1
+	EvalTargetRunStatusFail    EvalTargetRunStatus = 2
 )
 
 type ExecuteTargetCtx struct {

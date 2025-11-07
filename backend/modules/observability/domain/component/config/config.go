@@ -6,8 +6,8 @@ package config
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/loop_span"
-	"github.com/coze-dev/coze-loop/backend/pkg/conf"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/loop_span"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/conf"
 )
 
 type SystemView struct {
@@ -45,9 +45,6 @@ type MqConsumerCfg struct {
 	Topic         string   `mapstructure:"topic" json:"topic"`
 	ConsumerGroup string   `mapstructure:"consumer_group" json:"consumer_group"`
 	WorkerNum     int      `mapstructure:"worker_num" json:"worker_num"`
-	EnablePPE     *bool    `mapstructure:"enable_ppe" json:"enable_ppe"`
-	IsEnabled     *bool    `mapstructure:"is_enabled" json:"is_enabled"`
-	TagExpression *string  `mapstructure:"tag_expression" json:"tag_expression"`
 }
 
 type TraceCKCfg struct {
@@ -105,13 +102,6 @@ type QueryTraceRateLimitConfig struct {
 	SpaceMaxQPS   map[string]int `mapstructure:"space_max_qps" json:"space_max_qps"`
 }
 
-type ConsumerListening struct {
-	IsEnabled  bool     `json:"is_enabled"`
-	Clusters   []string `json:"clusters"`
-	IsAllSpace bool     `json:"is_all_space"`
-	SpaceList  []int64  `json:"space_list"`
-}
-
 //go:generate mockgen -destination=mocks/config.go -package=mocks . ITraceConfig
 type ITraceConfig interface {
 	GetSystemViews(ctx context.Context) ([]*SystemView, error)
@@ -126,8 +116,6 @@ type ITraceConfig interface {
 	GetDefaultTraceTenant(ctx context.Context) string
 	GetAnnotationSourceCfg(ctx context.Context) (*AnnotationSourceConfig, error)
 	GetQueryMaxQPS(ctx context.Context, key string) (int, error)
-	GetKeySpanTypes(ctx context.Context) map[string][]string
-	GetBackfillMqProducerCfg(ctx context.Context) (*MqProducerCfg, error)
 
 	conf.IConfigLoader
 }

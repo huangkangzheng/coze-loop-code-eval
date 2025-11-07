@@ -11,8 +11,8 @@ import (
 	"github.com/pkg/errors"
 	goredis "github.com/redis/go-redis/v9"
 
-	"github.com/coze-dev/coze-loop/backend/infra/redis"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/redis"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 type LatestWriteTracker struct {
@@ -129,7 +129,6 @@ const (
 	ResourceTypePromptCommit             ResourceType = "prompt_commit"
 	ResourceTypePromptLabel              ResourceType = "prompt_label"
 	ResourceTypePromptCommitLabelMapping ResourceType = "prompt_commit_label_mapping"
-	ResourceTypeCozeloopOptimizeTask     ResourceType = "cozeloop_optimize_task" // 外场智能优化
 
 	ResourceTypeExperiment    ResourceType = "experiment"
 	ResourceTypeEvalSet       ResourceType = "eval_set"

@@ -8,9 +8,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/prompt/domain/prompt"
-	promptconf "github.com/coze-dev/coze-loop/backend/modules/prompt/domain/component/conf"
-	"github.com/coze-dev/coze-loop/backend/pkg/conf"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/domain/prompt"
+	promptconf "code.byted.org/flowdevops/cozeloop/backend/modules/prompt/domain/component/conf"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/conf"
 )
 
 type PromptConfigProvider struct {

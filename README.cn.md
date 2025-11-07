@@ -10,7 +10,6 @@
 <p>
   <img alt="License" src="https://img.shields.io/badge/license-apache2.0-blue.svg">
   <img alt="Go Version" src="https://img.shields.io/badge/go-%3E%3D%201.24.0-blue">
-  <a href="https://deepwiki.com/coze-dev/coze-loop"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a>
 </p>
 
 [English](README.md) | 中文
@@ -35,7 +34,7 @@ Coze Loop 通过提供全生命周期的管理能力，帮助开发者更高效�
 | 观测 | * SDK 上报 Trace <br> * Trace 数据观测 |
 | 模型 | 支持接入 OpenAI、火山方舟等模型 |
 ## 快速开始
-> 参考[快速开始](https://github.com/coze-dev/coze-loop/wiki/2.-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B)，详细了解如何安装部署 Coze Loop 最新版本。
+> 参考[快速开始](https://code.byted.org/flowdevops/cozeloop/wiki/2.-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B)，详细了解如何安装部署 Coze Loop 最新版本。
 
 ### 部署方式1：Docker 部署 (Docker Compose)
 > 请提前安装并启动 Docker Engine。
@@ -46,7 +45,7 @@ Coze Loop 通过提供全生命周期的管理能力，帮助开发者更高效�
    执行以下命令，获取 Coze Loop 最新版本的源码。
    ```Bash
    # 克隆代码
-   git clone https://github.com/coze-dev/coze-loop.git
+   git clone https://code.byted.org/flowdevops/cozeloop.git
    
    # 进入coze-loop目录下
    cd coze-loop 
@@ -71,7 +70,7 @@ Coze Loop 通过提供全生命周期的管理能力，帮助开发者更高效�
 ### 部署方式2：Kubernetes 部署（Helm Chart）
 
 > * 已准备 Kubernetes 集群、启用 Nginx Ingress Addons，并安装 Kubectl 和 Helm 工具。
-> * 如需在本地快速体验，可通过 Minikube 部署 Kubernetes 集群。详细步骤可参考[快速开始](https://github.com/coze-dev/coze-loop/wiki/2.-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B)。
+> * 如需在本地快速体验，可通过 Minikube 部署 Kubernetes 集群。详细步骤可参考[快速开始](https://code.byted.org/flowdevops/cozeloop/wiki/2.-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B)。
 
 操作步骤：
 
@@ -109,15 +108,15 @@ Coze Loop 通过提供全生命周期的管理能力，帮助开发者更高效�
 * [Prompt 开发与调试](https://loop.coze.cn/open/docs/cozeloop/create-prompt)：Coze Loop 提供了完整的提示词开发流程。
 * [评测](https://loop.coze.cn/open/docs/cozeloop/evaluation-quick-start)：Coze Loop 的评测功能提供标准评测数据管理、自动化评估引擎和综合的实验结果统计。
 * [Trace 上报与查询](https://loop.coze.cn/open/docs/cozeloop/trace_integrate)：Coze Loop 支持对平台上创建的 Prompt 调试的 Trace 自动上报，实时追踪每一条 Trace 数据。
-* [开源版使用Coze Loop SDK](https://github.com/coze-dev/coze-loop/wiki/8.-%E5%BC%80%E6%BA%90%E7%89%88%E4%BD%BF%E7%94%A8-CozeLoop-SDK)：Coze Loop 三个语言的 [SDK](https://loop.coze.cn/open/docs/cozeloop/sdk) 均适用于商业版和开源版。对于开源版，开发者只需要初始化时修改部分参数配置。
+* [开源版使用Coze Loop SDK](https://code.byted.org/flowdevops/cozeloop/wiki/8.-%E5%BC%80%E6%BA%90%E7%89%88%E4%BD%BF%E7%94%A8-CozeLoop-SDK)：Coze Loop 三个语言的 [SDK](https://loop.coze.cn/open/docs/cozeloop/sdk) 均适用于商业版和开源版。对于开源版，开发者只需要初始化时修改部分参数配置。
 
 ## 开发指南
 
-* [系统架构](https://github.com/coze-dev/coze-loop/wiki/3.-%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84)：了解Coze Loop 开源版的技术架构与核心组件。
-* [启动模式](https://github.com/coze-dev/coze-loop/wiki/4.-%E6%9C%8D%E5%8A%A1%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F)：安装部署Coze Loop 开源版时，默认使用稳定模式，直接通过镜像启动，无需额外编译构建步骤。
-* [模型配置](https://github.com/coze-dev/coze-loop/wiki/5.-%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE)：Coze Loop 开源版通过 Eino 框架支持多种 LLM 模型，参考此文档查看支持的模型列表，了解如何配置模型。
-* [代码开发与测试](https://github.com/coze-dev/coze-loop/wiki/6.-%E4%BB%A3%E7%A0%81%E5%BC%80%E5%8F%91%E4%B8%8E%E6%B5%8B%E8%AF%95)：了解如何基于Coze Loop 开源版进行二次开发与测试。
-* [故障排查](https://github.com/coze-dev/coze-loop/wiki/7.-%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5)：了解如何查看容器状态、系统日志。
+* [系统架构](https://code.byted.org/flowdevops/cozeloop/wiki/3.-%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84)：了解Coze Loop 开源版的技术架构与核心组件。
+* [启动模式](https://code.byted.org/flowdevops/cozeloop/wiki/4.-%E6%9C%8D%E5%8A%A1%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F)：安装部署Coze Loop 开源版时，默认使用稳定模式，直接通过镜像启动，无需额外编译构建步骤。
+* [模型配置](https://code.byted.org/flowdevops/cozeloop/wiki/5.-%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE)：Coze Loop 开源版通过 Eino 框架支持多种 LLM 模型，参考此文档查看支持的模型列表，了解如何配置模型。
+* [代码开发与测试](https://code.byted.org/flowdevops/cozeloop/wiki/6.-%E4%BB%A3%E7%A0%81%E5%BC%80%E5%8F%91%E4%B8%8E%E6%B5%8B%E8%AF%95)：了解如何基于Coze Loop 开源版进行二次开发与测试。
+* [故障排查](https://code.byted.org/flowdevops/cozeloop/wiki/7.-%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5)：了解如何查看容器状态、系统日志。
 
 ## License
 本项目采用 Apache 2.0 许可证。详情请参阅 [LICENSE](LICENSE) 文件。
@@ -131,8 +130,8 @@ Coze Loop 通过提供全生命周期的管理能力，帮助开发者更高效�
 ### 问题反馈与功能建议
 为了更高效地跟踪和解决问题，保证信息透明和便于协同，我们推荐通过以下方式参与：
 
-* **GitHub Issues**：[提交 Bug 报告或功能请求](https://github.com/coze-dev/coze-loop/issues)
-* **Pull Requests**：[贡献代码或文档改进](https://github.com/coze-dev/coze-loop/pulls)
+* **GitHub Issues**：[提交 Bug 报告或功能请求](https://code.byted.org/flowdevops/cozeloop/issues)
+* **Pull Requests**：[贡献代码或文档改进](https://code.byted.org/flowdevops/cozeloop/pulls)
 
 ### 技术交流与讨论
 加入我们的技术交流群，与其他开发者分享经验、获取项目最新动态：

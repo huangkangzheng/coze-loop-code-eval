@@ -12,11 +12,11 @@ import (
 	"go.uber.org/mock/gomock"
 	"gorm.io/gorm"
 
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	dbmock "github.com/coze-dev/coze-loop/backend/infra/db/mocks"
-	mqmock "github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/component/mq/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/entity"
-	mock_repo "github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/repo/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	dbmock "code.byted.org/flowdevops/cozeloop/backend/infra/db/mocks"
+	mqmock "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/component/mq/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/entity"
+	mock_repo "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/repo/mocks"
 )
 
 func TestBatchGetVersionedDatasetsWithOpt(t *testing.T) {

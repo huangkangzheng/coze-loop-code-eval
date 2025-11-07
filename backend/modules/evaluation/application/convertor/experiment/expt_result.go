@@ -8,17 +8,17 @@ import (
 
 	"github.com/bytedance/gg/gptr"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/domain/tag"
-	domain_common "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/domain/common"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/domain/evaluator"
-	domain_expt "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/domain/expt"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/application/convertor/common"
-	evalsetconv "github.com/coze-dev/coze-loop/backend/modules/evaluation/application/convertor/evaluation_set"
-	evaluatorconv "github.com/coze-dev/coze-loop/backend/modules/evaluation/application/convertor/evaluator"
-	targetconv "github.com/coze-dev/coze-loop/backend/modules/evaluation/application/convertor/target"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/domain/tag"
+	domain_common "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/common"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/evaluator"
+	domain_expt "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/expt"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/application/convertor/common"
+	evalsetconv "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/application/convertor/evaluation_set"
+	evaluatorconv "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/application/convertor/evaluator"
+	targetconv "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/application/convertor/target"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
 )
 
 func ColumnEvalSetFieldsDO2DTOs(from []*entity.ColumnEvalSetField) []*domain_expt.ColumnEvalSetField {

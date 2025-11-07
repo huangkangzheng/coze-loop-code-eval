@@ -6,14 +6,13 @@ import (
 	"context"
 	client "github.com/cloudwego/kitex/client"
 	callopt "github.com/cloudwego/kitex/client/callopt"
-	trace "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/observability/trace"
+	trace "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/trace"
 )
 
 // Client is designed to provide IDL-compatible methods with call-option parameter for kitex framework.
 type Client interface {
 	ListSpans(ctx context.Context, req *trace.ListSpansRequest, callOptions ...callopt.Option) (r *trace.ListSpansResponse, err error)
 	GetTrace(ctx context.Context, req *trace.GetTraceRequest, callOptions ...callopt.Option) (r *trace.GetTraceResponse, err error)
-	SearchTraceTree(ctx context.Context, req *trace.SearchTraceTreeRequest, callOptions ...callopt.Option) (r *trace.SearchTraceTreeResponse, err error)
 	BatchGetTracesAdvanceInfo(ctx context.Context, req *trace.BatchGetTracesAdvanceInfoRequest, callOptions ...callopt.Option) (r *trace.BatchGetTracesAdvanceInfoResponse, err error)
 	IngestTracesInner(ctx context.Context, req *trace.IngestTracesRequest, callOptions ...callopt.Option) (r *trace.IngestTracesResponse, err error)
 	GetTracesMetaInfo(ctx context.Context, req *trace.GetTracesMetaInfoRequest, callOptions ...callopt.Option) (r *trace.GetTracesMetaInfoResponse, err error)
@@ -27,9 +26,6 @@ type Client interface {
 	ListAnnotations(ctx context.Context, req *trace.ListAnnotationsRequest, callOptions ...callopt.Option) (r *trace.ListAnnotationsResponse, err error)
 	ExportTracesToDataset(ctx context.Context, req *trace.ExportTracesToDatasetRequest, callOptions ...callopt.Option) (r *trace.ExportTracesToDatasetResponse, err error)
 	PreviewExportTracesToDataset(ctx context.Context, req *trace.PreviewExportTracesToDatasetRequest, callOptions ...callopt.Option) (r *trace.PreviewExportTracesToDatasetResponse, err error)
-	ChangeEvaluatorScore(ctx context.Context, req *trace.ChangeEvaluatorScoreRequest, callOptions ...callopt.Option) (r *trace.ChangeEvaluatorScoreResponse, err error)
-	ListAnnotationEvaluators(ctx context.Context, req *trace.ListAnnotationEvaluatorsRequest, callOptions ...callopt.Option) (r *trace.ListAnnotationEvaluatorsResponse, err error)
-	ExtractSpanInfo(ctx context.Context, req *trace.ExtractSpanInfoRequest, callOptions ...callopt.Option) (r *trace.ExtractSpanInfoResponse, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -69,11 +65,6 @@ func (p *kObservabilityTraceServiceClient) ListSpans(ctx context.Context, req *t
 func (p *kObservabilityTraceServiceClient) GetTrace(ctx context.Context, req *trace.GetTraceRequest, callOptions ...callopt.Option) (r *trace.GetTraceResponse, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.GetTrace(ctx, req)
-}
-
-func (p *kObservabilityTraceServiceClient) SearchTraceTree(ctx context.Context, req *trace.SearchTraceTreeRequest, callOptions ...callopt.Option) (r *trace.SearchTraceTreeResponse, err error) {
-	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.SearchTraceTree(ctx, req)
 }
 
 func (p *kObservabilityTraceServiceClient) BatchGetTracesAdvanceInfo(ctx context.Context, req *trace.BatchGetTracesAdvanceInfoRequest, callOptions ...callopt.Option) (r *trace.BatchGetTracesAdvanceInfoResponse, err error) {
@@ -139,19 +130,4 @@ func (p *kObservabilityTraceServiceClient) ExportTracesToDataset(ctx context.Con
 func (p *kObservabilityTraceServiceClient) PreviewExportTracesToDataset(ctx context.Context, req *trace.PreviewExportTracesToDatasetRequest, callOptions ...callopt.Option) (r *trace.PreviewExportTracesToDatasetResponse, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.PreviewExportTracesToDataset(ctx, req)
-}
-
-func (p *kObservabilityTraceServiceClient) ChangeEvaluatorScore(ctx context.Context, req *trace.ChangeEvaluatorScoreRequest, callOptions ...callopt.Option) (r *trace.ChangeEvaluatorScoreResponse, err error) {
-	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.ChangeEvaluatorScore(ctx, req)
-}
-
-func (p *kObservabilityTraceServiceClient) ListAnnotationEvaluators(ctx context.Context, req *trace.ListAnnotationEvaluatorsRequest, callOptions ...callopt.Option) (r *trace.ListAnnotationEvaluatorsResponse, err error) {
-	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.ListAnnotationEvaluators(ctx, req)
-}
-
-func (p *kObservabilityTraceServiceClient) ExtractSpanInfo(ctx context.Context, req *trace.ExtractSpanInfoRequest, callOptions ...callopt.Option) (r *trace.ExtractSpanInfoResponse, err error) {
-	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.ExtractSpanInfo(ctx, req)
 }

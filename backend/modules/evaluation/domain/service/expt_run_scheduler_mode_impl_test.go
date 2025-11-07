@@ -13,15 +13,15 @@ import (
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 
-	idgenmocks "github.com/coze-dev/coze-loop/backend/infra/idgen/mocks"
-	"github.com/coze-dev/coze-loop/backend/infra/middleware/session"
-	idemmocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/idem/mocks"
-	configmocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	eventmocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/events/mocks"
-	mock_repo "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/repo/mocks"
-	svcmocks "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/service/mocks"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
+	idgenmocks "code.byted.org/flowdevops/cozeloop/backend/infra/idgen/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/middleware/session"
+	idemmocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/idem/mocks"
+	configmocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	eventmocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/events/mocks"
+	mock_repo "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/repo/mocks"
+	svcmocks "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/service/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
 )
 
 type exptSubmitExecFields struct {

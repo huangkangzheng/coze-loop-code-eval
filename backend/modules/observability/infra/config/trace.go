@@ -7,9 +7,9 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/component/config"
-	"github.com/coze-dev/coze-loop/backend/pkg/conf"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/component/config"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/conf"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 const (
@@ -24,8 +24,6 @@ const (
 	traceMaxDurationDay        = "trace_max_duration_day"
 	annotationSourceCfgKey     = "annotation_source_cfg"
 	queryTraceRateLimitCfgKey  = "query_trace_rate_limit_config"
-	keySpanTypeCfgKey          = "key_span_type"
-	backfillMqProducerCfgKey   = "backfill_mq_producer_config"
 )
 
 type TraceConfigCenter struct {
@@ -74,14 +72,6 @@ func (t *TraceConfigCenter) GetAnnotationMqProducerCfg(ctx context.Context) (*co
 	return cfg, nil
 }
 
-func (t *TraceConfigCenter) GetBackfillMqProducerCfg(ctx context.Context) (*config.MqProducerCfg, error) {
-	cfg := new(config.MqProducerCfg)
-	if err := t.UnmarshalKey(context.Background(), backfillMqProducerCfgKey, cfg); err != nil {
-		return nil, err
-	}
-	return cfg, nil
-}
-
 func (t *TraceConfigCenter) GetTraceCkCfg(ctx context.Context) (*config.TraceCKCfg, error) {
 	cfg := new(config.TraceCKCfg)
 	if err := t.UnmarshalKey(context.Background(), traceCkCfgKey, cfg); err != nil {
@@ -108,12 +98,10 @@ func (t *TraceConfigCenter) GetTraceFieldMetaInfo(ctx context.Context) (*config.
 
 func (t *TraceConfigCenter) GetTraceDataMaxDurationDay(ctx context.Context, platformPtr *string) int64 {
 	defaultDuration := int64(7)
-	var platformType string
 	if platformPtr == nil {
-		platformType = "default"
-	} else {
-		platformType = *platformPtr
+		return defaultDuration
 	}
+	platformType := *platformPtr
 	mp := make(map[string]int64)
 	err := t.UnmarshalKey(ctx, traceMaxDurationDay, &mp)
 	if err != nil {
@@ -161,14 +149,6 @@ func (t *TraceConfigCenter) GetQueryMaxQPS(ctx context.Context, key string) (int
 		return qps, nil
 	}
 	return qpsConfig.DefaultMaxQPS, nil
-}
-
-func (t *TraceConfigCenter) GetKeySpanTypes(ctx context.Context) map[string][]string {
-	keyColumns := make(map[string][]string)
-	if err := t.UnmarshalKey(ctx, keySpanTypeCfgKey, &keyColumns); err != nil {
-		return keyColumns
-	}
-	return keyColumns
 }
 
 func NewTraceConfigCenter(confP conf.IConfigLoader) config.ITraceConfig {

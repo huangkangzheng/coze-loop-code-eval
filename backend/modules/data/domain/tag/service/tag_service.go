@@ -6,9 +6,9 @@ package service
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	entity2 "github.com/coze-dev/coze-loop/backend/modules/data/domain/tag/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/data/pkg/pagination"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	entity2 "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/tag/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/pkg/pagination"
 )
 
 //go:generate mockgen -destination=mocks/tag_service_mock.go -package=mocks . ITagService

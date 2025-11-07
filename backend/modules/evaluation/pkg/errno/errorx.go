@@ -1,7 +1,7 @@
 package errno
 
 import (
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
 )
 
 const (

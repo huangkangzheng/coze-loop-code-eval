@@ -6,7 +6,7 @@ package span_processor
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/loop_span"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/loop_span"
 )
 
 type Settings struct {
@@ -16,10 +16,7 @@ type Settings struct {
 	PlatformType          loop_span.PlatformType
 	QueryStartTime        int64 // ms
 	QueryEndTime          int64 // ms
-	QueryTenants          []string
-	SpanDoubleCheck       bool
-	QueryTraceID          string
-	QueryLogID            string
+	Tenant                string
 }
 
 type Factory interface {

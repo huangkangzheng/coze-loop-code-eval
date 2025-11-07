@@ -8,8 +8,8 @@ import (
 	"testing"
 
 	"github.com/bytedance/gg/gptr"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/domain/common"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/loop_span"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/common"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/loop_span"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -95,7 +95,7 @@ func TestNewDataset(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := NewDataset(tt.args.id, tt.args.spaceID, tt.args.name, tt.args.category, tt.args.schema, nil, nil)
+			got := NewDataset(tt.args.id, tt.args.spaceID, tt.args.name, tt.args.category, tt.args.schema)
 			assert.Equal(t, tt.want, got)
 		})
 	}
@@ -224,7 +224,7 @@ func TestNewDatasetItem(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := NewDatasetItem(tt.args.workspaceID, tt.args.datasetID, tt.args.span, nil)
+			got := NewDatasetItem(tt.args.workspaceID, tt.args.datasetID, tt.args.span)
 			assert.Equal(t, tt.want, got)
 		})
 	}

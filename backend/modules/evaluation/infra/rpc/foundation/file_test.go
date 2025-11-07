@@ -13,11 +13,11 @@ import (
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/file"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/file/fileservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/file"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/file/fileservice"
 )
 
-//go:generate mockgen -destination=mocks/fileservice_client.go -package=mocks github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/file/fileservice Client
+//go:generate mockgen -destination=mocks/fileservice_client.go -package=mocks code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/file/fileservice Client
 
 func TestNewFileRPCProvider(t *testing.T) {
 	t.Parallel()

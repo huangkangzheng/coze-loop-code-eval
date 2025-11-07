@@ -9,9 +9,9 @@ import (
 	"github.com/bytedance/gg/gptr"
 	"github.com/bytedance/gg/gslice"
 
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/pkg/json"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/pkg/json"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
 )
 
 type PromptEvaluatorVersion struct {

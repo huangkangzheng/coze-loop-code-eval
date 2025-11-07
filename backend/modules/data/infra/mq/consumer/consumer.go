@@ -4,10 +4,10 @@
 package consumer
 
 import (
-	"github.com/coze-dev/coze-loop/backend/infra/mq"
-	"github.com/coze-dev/coze-loop/backend/modules/data/application"
-	"github.com/coze-dev/coze-loop/backend/modules/data/pkg/consts"
-	"github.com/coze-dev/coze-loop/backend/pkg/conf"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/mq"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/application"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/pkg/consts"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/conf"
 )
 
 func NewConsumerWorkers(

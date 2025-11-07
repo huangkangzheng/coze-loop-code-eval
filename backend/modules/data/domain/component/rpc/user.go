@@ -6,7 +6,7 @@ package rpc
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/entity"
 )
 
 //go:generate mockgen -destination=mocks/user_provider.go -package=mocks . IUserProvider

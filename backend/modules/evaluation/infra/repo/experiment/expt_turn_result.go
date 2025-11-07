@@ -9,16 +9,16 @@ import (
 
 	"github.com/bytedance/gg/gptr"
 
-	"github.com/coze-dev/coze-loop/backend/infra/idgen"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/repo"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/experiment/mysql"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/experiment/mysql/convert"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/experiment/mysql/gorm_gen/model"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-	"github.com/coze-dev/coze-loop/backend/pkg/json"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/idgen"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/repo"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/experiment/mysql"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/experiment/mysql/convert"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/experiment/mysql/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/json"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 func NewExptTurnResultRepo(idgen idgen.IIDGenerator, exptTurnResultDAO mysql.ExptTurnResultDAO, exptTurnEvaluatorResultRefDAO mysql.IExptTurnEvaluatorResultRefDAO) repo.IExptTurnResultRepo {
@@ -97,7 +97,7 @@ func (r *ExptTurnResultRepoImpl) CreateTurnEvaluatorRefs(ctx context.Context, re
 	return r.exptTurnResultDAO.CreateTurnEvaluatorRefs(ctx, pos)
 }
 
-func (r *ExptTurnResultRepoImpl) BatchGet(ctx context.Context, spaceID, exptID int64, itemIDs []int64) ([]*entity.ExptTurnResult, error) {
+func (r *ExptTurnResultRepoImpl) BatchGet(ctx context.Context, spaceID int64, exptID int64, itemIDs []int64) ([]*entity.ExptTurnResult, error) {
 	exptTurnResultPOs, err := r.exptTurnResultDAO.BatchGet(ctx, spaceID, exptID, itemIDs)
 	if err != nil {
 		return nil, errorx.Wrapf(err, "BatchGet fail, spaceID: %v, exptID: %v, itemIDs: %v", spaceID, exptID, itemIDs)
@@ -110,7 +110,7 @@ func (r *ExptTurnResultRepoImpl) BatchGet(ctx context.Context, spaceID, exptID i
 	return exptTurnResults, nil
 }
 
-func (r *ExptTurnResultRepoImpl) Get(ctx context.Context, spaceID, exptID, itemID, turnID int64) (*entity.ExptTurnResult, error) {
+func (r *ExptTurnResultRepoImpl) Get(ctx context.Context, spaceID, exptID int64, itemID, turnID int64) (*entity.ExptTurnResult, error) {
 	exptTurnResultPO, err := r.exptTurnResultDAO.Get(ctx, spaceID, exptID, itemID, turnID)
 	if err != nil {
 		return nil, errorx.Wrapf(err, "BatchGet fail, spaceID: %v, exptID: %v, itemID: %v, turnID: %v", spaceID, exptID, itemID, turnID)

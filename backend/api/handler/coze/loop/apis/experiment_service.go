@@ -11,8 +11,8 @@ import (
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/experimentservice"
-	expt "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/expt"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/experimentservice"
+	expt "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/expt"
 )
 
 var localExptSvc experimentservice.Client
@@ -173,100 +173,4 @@ func ListExptResultExportRecord(ctx context.Context, c *app.RequestContext) {
 // @router /api/evaluation/v1/experiments/:expt_id/export_records/:export_id [POST]
 func GetExptResultExportRecord(ctx context.Context, c *app.RequestContext) {
 	invokeAndRender(ctx, c, localExptSvc.GetExptResultExportRecord)
-}
-
-// InsightAnalysisExperiment .
-// @router /api/evaluation/v1/experiments/:expt_id/insight_analysis [POST]
-func InsightAnalysisExperiment(ctx context.Context, c *app.RequestContext) {
-	var err error
-	var req expt.InsightAnalysisExperimentRequest
-	err = c.BindAndValidate(&req)
-	if err != nil {
-		c.String(consts.StatusBadRequest, err.Error())
-		return
-	}
-
-	resp := new(expt.InsightAnalysisExperimentResponse)
-
-	c.JSON(consts.StatusOK, resp)
-}
-
-// ListExptInsightAnalysisRecord .
-// @router /api/evaluation/v1/experiments/:expt_id/insight_analysis_records/list [POST]
-func ListExptInsightAnalysisRecord(ctx context.Context, c *app.RequestContext) {
-	var err error
-	var req expt.ListExptInsightAnalysisRecordRequest
-	err = c.BindAndValidate(&req)
-	if err != nil {
-		c.String(consts.StatusBadRequest, err.Error())
-		return
-	}
-
-	resp := new(expt.ListExptInsightAnalysisRecordResponse)
-
-	c.JSON(consts.StatusOK, resp)
-}
-
-// DeleteExptInsightAnalysisRecord .
-// @router /api/evaluation/v1/experiments/:expt_id/insight_analysis_records/:insight_analysis_record_id [DELETE]
-func DeleteExptInsightAnalysisRecord(ctx context.Context, c *app.RequestContext) {
-	var err error
-	var req expt.DeleteExptInsightAnalysisRecordRequest
-	err = c.BindAndValidate(&req)
-	if err != nil {
-		c.String(consts.StatusBadRequest, err.Error())
-		return
-	}
-
-	resp := new(expt.DeleteExptInsightAnalysisRecordResponse)
-
-	c.JSON(consts.StatusOK, resp)
-}
-
-// GetExptInsightAnalysisRecord .
-// @router /api/evaluation/v1/experiments/:expt_id/insight_analysis_records/:insight_analysis_record_id [POST]
-func GetExptInsightAnalysisRecord(ctx context.Context, c *app.RequestContext) {
-	var err error
-	var req expt.GetExptInsightAnalysisRecordRequest
-	err = c.BindAndValidate(&req)
-	if err != nil {
-		c.String(consts.StatusBadRequest, err.Error())
-		return
-	}
-
-	resp := new(expt.GetExptInsightAnalysisRecordResponse)
-
-	c.JSON(consts.StatusOK, resp)
-}
-
-// FeedbackExptInsightAnalysisReport .
-// @router /api/evaluation/v1/experiments/:expt_id/insight_analysis_records/:insight_analysis_record_id/feedback [POST]
-func FeedbackExptInsightAnalysisReport(ctx context.Context, c *app.RequestContext) {
-	var err error
-	var req expt.FeedbackExptInsightAnalysisReportRequest
-	err = c.BindAndValidate(&req)
-	if err != nil {
-		c.String(consts.StatusBadRequest, err.Error())
-		return
-	}
-
-	resp := new(expt.FeedbackExptInsightAnalysisReportResponse)
-
-	c.JSON(consts.StatusOK, resp)
-}
-
-// ListExptInsightAnalysisComment .
-// @router /api/evaluation/v1/experiments/:expt_id/insight_analysis_records/:insight_analysis_record_id/comments/list [POST]
-func ListExptInsightAnalysisComment(ctx context.Context, c *app.RequestContext) {
-	var err error
-	var req expt.ListExptInsightAnalysisCommentRequest
-	err = c.BindAndValidate(&req)
-	if err != nil {
-		c.String(consts.StatusBadRequest, err.Error())
-		return
-	}
-
-	resp := new(expt.ListExptInsightAnalysisCommentResponse)
-
-	c.JSON(consts.StatusOK, resp)
 }

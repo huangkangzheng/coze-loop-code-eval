@@ -16,7 +16,7 @@ import (
 
 	"gorm.io/plugin/dbresolver"
 
-	"github.com/coze-dev/coze-loop/backend/modules/observability/infra/repo/mysql/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/infra/repo/mysql/gorm_gen/model"
 )
 
 func newObservabilityView(db *gorm.DB, opts ...gen.DOOption) observabilityView {

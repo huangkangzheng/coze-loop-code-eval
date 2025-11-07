@@ -4,22 +4,21 @@
 package main
 
 import (
-	"github.com/coze-dev/coze-loop/backend/infra/mq"
-	dataapp "github.com/coze-dev/coze-loop/backend/modules/data/application"
-	dataconsumer "github.com/coze-dev/coze-loop/backend/modules/data/infra/mq/consumer"
-	exptapp "github.com/coze-dev/coze-loop/backend/modules/evaluation/application"
-	evalconsumer "github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/mq/rocket/consumer"
-	obapp "github.com/coze-dev/coze-loop/backend/modules/observability/application"
-	obconsumer "github.com/coze-dev/coze-loop/backend/modules/observability/infra/mq/consumer"
-	"github.com/coze-dev/coze-loop/backend/pkg/conf"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/mq"
+	dataapp "code.byted.org/flowdevops/cozeloop/backend/modules/data/application"
+	dataconsumer "code.byted.org/flowdevops/cozeloop/backend/modules/data/infra/mq/consumer"
+	exptapp "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/application"
+	evalconsumer "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/mq/rocket/consumer"
+	obapp "code.byted.org/flowdevops/cozeloop/backend/modules/observability/application"
+	obconsumer "code.byted.org/flowdevops/cozeloop/backend/modules/observability/infra/mq/consumer"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/conf"
 )
 
-func MustInitConsumerWorkers(
+func mustInitConsumerWorkers(
 	cfactory conf.IConfigLoaderFactory,
 	experimentApplication exptapp.IExperimentApplication,
 	datasetApplication dataapp.IJobRunMsgHandler,
 	obApplication obapp.IObservabilityOpenAPIApplication,
-	taskApplication obapp.ITaskApplication,
 ) []mq.IConsumerWorker {
 	var res []mq.IConsumerWorker
 
@@ -39,7 +38,7 @@ func MustInitConsumerWorkers(
 	if err != nil {
 		panic(err)
 	}
-	workers, err = obconsumer.NewConsumerWorkers(loader, obApplication, taskApplication)
+	workers, err = obconsumer.NewConsumerWorkers(loader, obApplication)
 	if err != nil {
 		panic(err)
 	}

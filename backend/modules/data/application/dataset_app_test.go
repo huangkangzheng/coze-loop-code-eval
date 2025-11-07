@@ -12,15 +12,15 @@ import (
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 
-	"github.com/coze-dev/coze-loop/backend/infra/external/audit"
-	mock_audit "github.com/coze-dev/coze-loop/backend/infra/external/audit/mocks"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/dataset"
-	dodataset "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/domain/dataset"
-	mock_auth "github.com/coze-dev/coze-loop/backend/modules/data/domain/component/rpc/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/entity"
-	mock_repo "github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/repo/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/service"
-	mock_dataset "github.com/coze-dev/coze-loop/backend/modules/data/domain/dataset/service/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/external/audit"
+	mock_audit "code.byted.org/flowdevops/cozeloop/backend/infra/external/audit/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/dataset"
+	dodataset "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/domain/dataset"
+	mock_auth "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/component/rpc/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/entity"
+	mock_repo "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/repo/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/service"
+	mock_dataset "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/dataset/service/mocks"
 )
 
 func TestDatasetApplicationImpl_CreateDataset(t *testing.T) {
@@ -49,7 +49,7 @@ func TestDatasetApplicationImpl_CreateDataset(t *testing.T) {
 	}{
 		{
 			name: "成功创建数据集",
-			req:  &dataset.CreateDatasetRequest{
+			req: &dataset.CreateDatasetRequest{
 				// 填充请求数据
 			},
 			mockAuth: func() {
@@ -66,7 +66,7 @@ func TestDatasetApplicationImpl_CreateDataset(t *testing.T) {
 		},
 		{
 			name: "鉴权失败",
-			req:  &dataset.CreateDatasetRequest{
+			req: &dataset.CreateDatasetRequest{
 				// 填充请求数据
 			},
 			mockAuth: func() {
@@ -83,7 +83,7 @@ func TestDatasetApplicationImpl_CreateDataset(t *testing.T) {
 		},
 		{
 			name: "创建数据集失败",
-			req:  &dataset.CreateDatasetRequest{
+			req: &dataset.CreateDatasetRequest{
 				// 填充请求数据
 			},
 			mockAuth: func() {

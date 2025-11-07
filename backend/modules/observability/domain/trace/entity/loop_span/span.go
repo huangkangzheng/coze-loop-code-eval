@@ -13,10 +13,10 @@ import (
 	"unsafe"
 
 	"github.com/bytedance/sonic"
-	"github.com/coze-dev/coze-loop/backend/pkg/json"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/conv"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/json"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/conv"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 	"github.com/pkg/errors"
 	"github.com/samber/lo"
 )
@@ -217,15 +217,8 @@ func (s *Span) getTokens(ctx context.Context) (inputTokens, outputTokens int64, 
 	return inputToken, outputToken, nil
 }
 
-func (s *Span) getStatus() string {
-	if s.StatusCode == 0 {
-		return SpanStatusSuccess
-	}
-	return SpanStatusError
-}
-
 // filter使用, 当前只支持特定参数,后续有需要可拓展到其他参数
-func (s *Span) GetFieldValue(fieldName string, isSystem, isCustom bool) any {
+func (s *Span) GetFieldValue(fieldName string, isSystem bool) any {
 	switch fieldName {
 	case SpanFieldStartTime:
 		return s.StartTime
@@ -259,22 +252,6 @@ func (s *Span) GetFieldValue(fieldName string, isSystem, isCustom bool) any {
 		return s.ObjectStorage
 	case SpanFieldMethod:
 		return s.Method
-	case SpanFieldStatus:
-		return s.getStatus()
-	}
-	if isCustom {
-		if val, ok := s.TagsString[fieldName]; ok {
-			return val
-		} else if val, ok := s.TagsLong[fieldName]; ok {
-			return val
-		} else if val, ok := s.TagsDouble[fieldName]; ok {
-			return val
-		} else if val, ok := s.TagsBool[fieldName]; ok {
-			return val
-		} else if val, ok := s.TagsByte[fieldName]; ok {
-			return val
-		}
-		return nil
 	}
 	if isSystem {
 		if val, ok := s.SystemTagsString[fieldName]; ok {
@@ -309,7 +286,7 @@ func (s *Span) IsValidSpan() error {
 		return fmt.Errorf("invalid trace_id: %s", s.TraceID)
 	}
 	for _, c := range s.TraceID {
-		if !(c >= '0' && c <= '9' || c >= 'a' && c <= 'f') { //nolint:staticcheck
+		if !(c >= '0' && c <= '9' || c >= 'a' && c <= 'f') { //nolint:staticcheck,QF1001
 			return fmt.Errorf("invalid trace_id: %s", s.TraceID)
 		}
 	}
@@ -317,7 +294,7 @@ func (s *Span) IsValidSpan() error {
 		return fmt.Errorf("invalid span_id: %s", s.SpanID)
 	}
 	for _, c := range s.SpanID {
-		if !(c >= '0' && c <= '9' || c >= 'a' && c <= 'f') { //nolint:staticcheck
+		if !(c >= '0' && c <= '9' || c >= 'a' && c <= 'f') { //nolint:staticcheck,QF1001
 			return fmt.Errorf("invalid span_id: %s", s.SpanID)
 		}
 	}
@@ -435,7 +412,7 @@ func (s *Span) ExtractByJsonpath(ctx context.Context, key string, jsonpath strin
 		data = s.Output
 	} else if strings.HasPrefix(key, "Tags.") {
 		key = strings.TrimPrefix(key, "Tags.")
-		tag := s.GetFieldValue(key, false, false)
+		tag := s.GetFieldValue(key, false)
 		data = conv.ToString(tag)
 	} else {
 		return "", errors.Errorf("unsupported mapping key: %s", key)
@@ -559,7 +536,7 @@ func (s SpanList) Stat(ctx context.Context) (inputTokens, outputTokens int64, er
 		inputTokens += in
 		outputTokens += out
 	}
-	return inputTokens, outputTokens, err
+	return
 }
 
 func (s SpanList) FilterSpans(f *FilterFields) SpanList {

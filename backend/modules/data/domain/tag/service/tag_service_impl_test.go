@@ -13,15 +13,15 @@ import (
 	"go.uber.org/mock/gomock"
 	"gorm.io/gorm"
 
-	db2 "github.com/coze-dev/coze-loop/backend/infra/db"
-	dbmock "github.com/coze-dev/coze-loop/backend/infra/db/mocks"
-	mocks2 "github.com/coze-dev/coze-loop/backend/infra/lock/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/component/conf"
-	mocks3 "github.com/coze-dev/coze-loop/backend/modules/data/domain/component/conf/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/tag/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/tag/repo"
-	"github.com/coze-dev/coze-loop/backend/modules/data/domain/tag/repo/mocks"
-	"github.com/coze-dev/coze-loop/backend/modules/data/pkg/pagination"
+	db2 "code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	dbmock "code.byted.org/flowdevops/cozeloop/backend/infra/db/mocks"
+	mocks2 "code.byted.org/flowdevops/cozeloop/backend/infra/lock/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/component/conf"
+	mocks3 "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/component/conf/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/tag/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/tag/repo"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/tag/repo/mocks"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/pkg/pagination"
 )
 
 func TestTagServiceImpl_CreateTag(t *testing.T) {
@@ -2131,7 +2131,7 @@ func TestTagServiceImpl_ArchiveOptionTag(t *testing.T) {
 						VersionNum: gptr.Of(int32(1)),
 						CreatedBy:  gptr.Of("user123"),
 					},
-				}, nil, nil) // GetLatestTag调用
+				}, nil, nil)                                                                                                                        // GetLatestTag调用
 				tagRepo.EXPECT().MGetTagValue(gomock.Any(), gomock.Any(), gomock.Any()).Return([]*entity.TagValue{}, &pagination.PageResult{}, nil) // GetAndBuildTagValues调用
 				db.EXPECT().Transaction(gomock.Any(), gomock.Any(), gomock.Any()).DoAndReturn(func(ctx context.Context, fn func(tx *gorm.DB) error, opts ...db2.Option) error {
 					return fn(&gorm.DB{Config: &gorm.Config{}})
@@ -2166,7 +2166,7 @@ func TestTagServiceImpl_ArchiveOptionTag(t *testing.T) {
 						VersionNum: gptr.Of(int32(1)),
 						CreatedBy:  gptr.Of("user123"),
 					},
-				}, nil, nil) // GetLatestTag调用
+				}, nil, nil)                                                                                                                        // GetLatestTag调用
 				tagRepo.EXPECT().MGetTagValue(gomock.Any(), gomock.Any(), gomock.Any()).Return([]*entity.TagValue{}, &pagination.PageResult{}, nil) // GetAndBuildTagValues调用
 				db.EXPECT().Transaction(gomock.Any(), gomock.Any(), gomock.Any()).DoAndReturn(func(ctx context.Context, fn func(tx *gorm.DB) error, opts ...db2.Option) error {
 					return fn(&gorm.DB{Config: &gorm.Config{}})
@@ -2208,7 +2208,7 @@ func TestTagServiceImpl_ArchiveOptionTag(t *testing.T) {
 						VersionNum: gptr.Of(int32(1)),
 						CreatedBy:  gptr.Of("user123"),
 					},
-				}, nil, nil) // GetLatestTag调用
+				}, nil, nil)                                                                                                                        // GetLatestTag调用
 				tagRepo.EXPECT().MGetTagValue(gomock.Any(), gomock.Any(), gomock.Any()).Return([]*entity.TagValue{}, &pagination.PageResult{}, nil) // GetAndBuildTagValues调用
 				db.EXPECT().Transaction(gomock.Any(), gomock.Any(), gomock.Any()).DoAndReturn(func(ctx context.Context, fn func(tx *gorm.DB) error, opts ...db2.Option) error {
 					return fn(&gorm.DB{Config: &gorm.Config{}})
@@ -2256,7 +2256,7 @@ func TestTagServiceImpl_ArchiveOptionTag(t *testing.T) {
 						VersionNum: gptr.Of(int32(1)),
 						CreatedBy:  gptr.Of("user123"),
 					},
-				}, nil, nil) // GetLatestTag调用
+				}, nil, nil)                                                                                                                        // GetLatestTag调用
 				tagRepo.EXPECT().MGetTagValue(gomock.Any(), gomock.Any(), gomock.Any()).Return([]*entity.TagValue{}, &pagination.PageResult{}, nil) // GetAndBuildTagValues调用
 				db.EXPECT().Transaction(gomock.Any(), gomock.Any(), gomock.Any()).DoAndReturn(func(ctx context.Context, fn func(tx *gorm.DB) error, opts ...db2.Option) error {
 					return fn(&gorm.DB{Config: &gorm.Config{}})
@@ -2295,7 +2295,7 @@ func TestTagServiceImpl_ArchiveOptionTag(t *testing.T) {
 						VersionNum: gptr.Of(int32(1)),
 						CreatedBy:  gptr.Of("user123"),
 					},
-				}, nil, nil) // GetLatestTag调用
+				}, nil, nil)                                                                                                                        // GetLatestTag调用
 				tagRepo.EXPECT().MGetTagValue(gomock.Any(), gomock.Any(), gomock.Any()).Return([]*entity.TagValue{}, &pagination.PageResult{}, nil) // GetAndBuildTagValues调用
 				db.EXPECT().Transaction(gomock.Any(), gomock.Any(), gomock.Any()).DoAndReturn(func(ctx context.Context, fn func(tx *gorm.DB) error, opts ...db2.Option) error {
 					return fn(&gorm.DB{Config: &gorm.Config{}})

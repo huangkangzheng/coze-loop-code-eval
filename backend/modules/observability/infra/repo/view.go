@@ -6,11 +6,11 @@ package repo
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/infra/idgen"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/repo"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/infra/repo/mysql"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/infra/repo/mysql/convertor"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/idgen"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/repo"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/infra/repo/mysql"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/infra/repo/mysql/convertor"
 )
 
 func NewViewRepoImpl(viewDao mysql.IViewDao, idGenerator idgen.IIDGenerator) repo.IViewRepo {

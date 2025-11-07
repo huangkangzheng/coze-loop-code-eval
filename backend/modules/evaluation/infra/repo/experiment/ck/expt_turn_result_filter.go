@@ -12,12 +12,12 @@ import (
 
 	"gorm.io/gorm"
 
-	"github.com/coze-dev/coze-loop/backend/infra/ck"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/experiment/ck/gorm_gen/model"
-	compare_model "github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/experiment/ck/model"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/ck"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/experiment/ck/gorm_gen/model"
+	compare_model "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/experiment/ck/model"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 // FieldFilter 用于描述map字段的筛选条件

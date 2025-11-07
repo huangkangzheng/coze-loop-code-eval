@@ -6,9 +6,9 @@ package evaluator
 import (
 	"github.com/bytedance/gg/gptr"
 
-	evaluatordto "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/domain/evaluator"
-	commonconvertor "github.com/coze-dev/coze-loop/backend/modules/evaluation/application/convertor/common"
-	evaluatordo "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
+	evaluatordto "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/evaluator"
+	commonconvertor "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/application/convertor/common"
+	evaluatordo "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
 )
 
 func ConvertEvaluatorRecordDTO2DO(dto *evaluatordto.EvaluatorRecord) *evaluatordo.EvaluatorRecord {

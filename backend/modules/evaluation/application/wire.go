@@ -9,65 +9,61 @@ package application
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/rpc/notify"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/rpc/notify"
 	"github.com/google/wire"
-	"github.com/sirupsen/logrus"
 
-	"github.com/coze-dev/coze-loop/backend/infra/ck"
-	"github.com/coze-dev/coze-loop/backend/infra/db"
-	"github.com/coze-dev/coze-loop/backend/infra/external/audit"
-	"github.com/coze-dev/coze-loop/backend/infra/external/benefit"
-	"github.com/coze-dev/coze-loop/backend/infra/fileserver"
-	"github.com/coze-dev/coze-loop/backend/infra/idgen"
-	"github.com/coze-dev/coze-loop/backend/infra/limiter"
-	"github.com/coze-dev/coze-loop/backend/infra/lock"
-	"github.com/coze-dev/coze-loop/backend/infra/metrics"
-	"github.com/coze-dev/coze-loop/backend/infra/mq"
-	"github.com/coze-dev/coze-loop/backend/infra/platestwrite"
-	"github.com/coze-dev/coze-loop/backend/infra/redis"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/apis/promptexecuteservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/dataset/datasetservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/data/tag/tagservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation"
-	evaluationservice "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/auth/authservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/file/fileservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/foundation/user/userservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/llm/runtime/llmruntimeservice"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/prompt/promptmanageservice"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component"
-	mtr "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/metrics"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/rpc"
-	componentrpc "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/rpc"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/component/userinfo"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/service"
-	domainservice "github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/service"
-	evaltargetmtr "github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/metrics/eval_target"
-	evalsetmtr "github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/metrics/evaluation_set"
-	evaluatormtr "github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/metrics/evaluator"
-	exptmtr "github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/metrics/experiment"
-	evalmtr "github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/metrics/openapi"
-	rmqproducer "github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/mq/rocket/producer"
-	evaluatorrepo "github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/evaluator"
-	evaluatormysql "github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/evaluator/mysql"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/experiment"
-	exptck "github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/experiment/ck"
-	exptmysql "github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/experiment/mysql"
-	exptredis "github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/experiment/redis/dao"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/idem"
-	iredis "github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/idem/redis"
-	targetrepo "github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/target"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/repo/target/mysql"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/rpc/agent"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/rpc/data"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/rpc/foundation"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/rpc/llm"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/rpc/prompt"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/rpc/tag"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/infra/runtime"
-	evalconf "github.com/coze-dev/coze-loop/backend/modules/evaluation/pkg/conf"
-	"github.com/coze-dev/coze-loop/backend/pkg/conf"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/ck"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/external/audit"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/external/benefit"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/fileserver"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/idgen"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/limiter"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/lock"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/metrics"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/mq"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/platestwrite"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/redis"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/apis/promptexecuteservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/dataset/datasetservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/tag/tagservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation"
+	evaluationservice "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/auth/authservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/file/fileservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/user/userservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/llm/runtime/llmruntimeservice"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/promptmanageservice"
+	mtr "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/metrics"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/rpc"
+	componentrpc "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/rpc"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/component/userinfo"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/service"
+	domainservice "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/service"
+	evaltargetmtr "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/metrics/eval_target"
+	evalsetmtr "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/metrics/evaluation_set"
+	evaluatormtr "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/metrics/evaluator"
+	exptmtr "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/metrics/experiment"
+	rmqproducer "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/mq/rocket/producer"
+	evaluatorrepo "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/evaluator"
+	evaluatormysql "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/evaluator/mysql"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/experiment"
+	exptck "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/experiment/ck"
+	exptmysql "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/experiment/mysql"
+	exptredis "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/experiment/redis/dao"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/idem"
+	iredis "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/idem/redis"
+	targetrepo "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/target"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/repo/target/mysql"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/rpc/agent"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/rpc/data"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/rpc/foundation"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/rpc/llm"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/rpc/prompt"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/infra/rpc/tag"
+	evalconf "code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/pkg/conf"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/conf"
 )
 
 var (
@@ -132,7 +128,6 @@ var (
 		targetDomainService,
 		evaluatorDomainService,
 		flagSet,
-		evalAsyncRepoSet,
 	)
 
 	evaluatorDomainService = wire.NewSet(
@@ -140,12 +135,6 @@ var (
 		domainservice.NewEvaluatorRecordServiceImpl,
 		NewEvaluatorSourceServices,
 		llm.NewLLMRPCProvider,
-		NewRuntimeFactory,
-		NewRuntimeManagerFromFactory,
-		NewSandboxConfig,
-		NewLogger,
-
-		service.NewCodeBuilderFactory,
 		evaluatorrepo.NewEvaluatorRepo,
 		evaluatorrepo.NewEvaluatorRecordRepo,
 		evaluatormysql.NewEvaluatorDAO,
@@ -206,20 +195,6 @@ var (
 		foundation.NewAuthRPCProvider,
 		targetDomainService,
 		flagSet,
-		evalAsyncRepoSet,
-	)
-
-	evalAsyncRepoSet = wire.NewSet(
-		experiment.NewEvalAsyncRepo,
-		exptredis.NewEvalAsyncDAO,
-	)
-
-	evalOpenAPISet = wire.NewSet(
-		NewEvalOpenAPIApplication,
-		experimentSet,
-		evalmtr.NewEvaluationOApiMetrics,
-		domainservice.NewEvaluationSetSchemaServiceImpl,
-		data.NewDatasetRPCAdapter,
 	)
 )
 
@@ -311,73 +286,8 @@ func InitEvalTargetApplication(ctx context.Context,
 	return nil
 }
 
-// NewSandboxConfig 创建默认沙箱配置
-func NewSandboxConfig() *entity.SandboxConfig {
-	return entity.DefaultSandboxConfig()
-}
-
-// NewLogger 创建默认日志记录器
-func NewLogger() *logrus.Logger {
-	logger := logrus.New()
-	logger.SetLevel(logrus.InfoLevel)
-	return logger
-}
-
-// NewRuntimeFactory 创建运行时工厂
-func NewRuntimeFactory(logger *logrus.Logger, sandboxConfig *entity.SandboxConfig) component.IRuntimeFactory {
-	return runtime.NewRuntimeFactory(logger, sandboxConfig)
-}
-
-// NewRuntimeManagerFromFactory 从工厂创建运行时管理器
-func NewRuntimeManagerFromFactory(factory component.IRuntimeFactory, logger *logrus.Logger) component.IRuntimeManager {
-	return runtime.NewRuntimeManager(factory, logger)
-}
-
-func NewEvaluatorSourceServices(
-	llmProvider componentrpc.ILLMProvider,
-	metric mtr.EvaluatorExecMetrics,
-	config evalconf.IConfiger,
-	runtimeManager component.IRuntimeManager,
-	codeBuilderFactory service.CodeBuilderFactory,
-) map[entity.EvaluatorType]domainservice.EvaluatorSourceService {
-	// 设置codeBuilderFactory的runtimeManager依赖
-	codeBuilderFactory.SetRuntimeManager(runtimeManager)
-
-	services := []domainservice.EvaluatorSourceService{
+func NewEvaluatorSourceServices(llmProvider componentrpc.ILLMProvider, metric mtr.EvaluatorExecMetrics, config evalconf.IConfiger) []domainservice.EvaluatorSourceService {
+	return []domainservice.EvaluatorSourceService{
 		domainservice.NewEvaluatorSourcePromptServiceImpl(llmProvider, metric, config),
-		domainservice.NewEvaluatorSourceCodeServiceImpl(runtimeManager, codeBuilderFactory, metric),
 	}
-
-	serviceMap := make(map[entity.EvaluatorType]domainservice.EvaluatorSourceService)
-	for _, svc := range services {
-		serviceMap[svc.EvaluatorType()] = svc
-	}
-	return serviceMap
-}
-
-func InitEvalOpenAPIApplication(
-	ctx context.Context,
-	configFactory conf.IConfigLoaderFactory,
-	rmqFactory mq.IFactory,
-	cmdable redis.Cmdable,
-	idgen idgen.IIDGenerator,
-	db db.Provider,
-	client promptmanageservice.Client,
-	executeClient promptexecuteservice.Client,
-	authClient authservice.Client,
-	meter metrics.Meter,
-	dataClient datasetservice.Client,
-	userClient userservice.Client,
-	llmClient llmruntimeservice.Client,
-	tagClient tagservice.Client,
-	limiterFactory limiter.IRateLimiterFactory,
-	objectStorage fileserver.ObjectStorage,
-	auditClient audit.IAuditService,
-	benefitService benefit.IBenefitService,
-	ckProvider ck.Provider,
-) (IEvalOpenAPIApplication, error) {
-	wire.Build(
-		evalOpenAPISet,
-	)
-	return nil, nil
 }

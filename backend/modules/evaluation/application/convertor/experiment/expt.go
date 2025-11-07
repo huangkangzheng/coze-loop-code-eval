@@ -7,18 +7,18 @@ import (
 	"github.com/bytedance/gg/gcond"
 	"github.com/bytedance/gg/gptr"
 
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/domain/common"
-	evaluatordto "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/domain/evaluator"
-	domain_expt "github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/domain/expt"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/eval_target"
-	"github.com/coze-dev/coze-loop/backend/kitex_gen/coze/loop/evaluation/expt"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/application/convertor/evaluation_set"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/application/convertor/evaluator"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/application/convertor/target"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/consts"
-	"github.com/coze-dev/coze-loop/backend/modules/evaluation/domain/entity"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/maps"
-	"github.com/coze-dev/coze-loop/backend/pkg/lang/ptr"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/common"
+	evaluatordto "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/evaluator"
+	domain_expt "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/expt"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/eval_target"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/expt"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/application/convertor/evaluation_set"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/application/convertor/evaluator"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/application/convertor/target"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/consts"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/evaluation/domain/entity"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/maps"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/lang/ptr"
 )
 
 func NewEvalConfConvert() *EvalConfConvert {
@@ -270,8 +270,6 @@ func CreateEvalTargetParamDTO2DO(param *eval_target.CreateEvalTargetParam) *enti
 		SourceTargetID:      param.SourceTargetID,
 		SourceTargetVersion: param.SourceTargetVersion,
 		BotPublishVersion:   param.BotPublishVersion,
-		Region:              param.Region,
-		Env:                 param.Env,
 	}
 	if param.EvalTargetType != nil {
 		res.EvalTargetType = gptr.Of(entity.EvalTargetType(*param.EvalTargetType))
@@ -279,14 +277,7 @@ func CreateEvalTargetParamDTO2DO(param *eval_target.CreateEvalTargetParam) *enti
 	if param.BotInfoType != nil {
 		res.BotInfoType = gptr.Of(entity.CozeBotInfoType(*param.BotInfoType))
 	}
-	if param.CustomEvalTarget != nil {
-		res.CustomEvalTarget = &entity.CustomEvalTarget{
-			ID:        param.CustomEvalTarget.ID,
-			Name:      param.CustomEvalTarget.Name,
-			AvatarURL: param.CustomEvalTarget.AvatarURL,
-			Ext:       param.CustomEvalTarget.Ext,
-		}
-	}
+
 	return res
 }
 

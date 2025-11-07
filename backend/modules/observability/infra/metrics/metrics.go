@@ -8,9 +8,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/coze-dev/coze-loop/backend/infra/metrics"
-	metrics2 "github.com/coze-dev/coze-loop/backend/modules/observability/domain/component/metrics"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/metrics"
+	metrics2 "code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/component/metrics"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 )
 
 const (

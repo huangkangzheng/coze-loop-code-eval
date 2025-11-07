@@ -12,9 +12,9 @@ import (
 
 	"github.com/bytedance/gg/gptr"
 
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/loop_span"
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/otel/open_inference"
-	"github.com/coze-dev/coze-loop/backend/pkg/logs"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/loop_span"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/otel/open_inference"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/logs"
 
 	semconv1_26_0 "go.opentelemetry.io/otel/semconv/v1.26.0"
 	semconv1_27_0 "go.opentelemetry.io/otel/semconv/v1.27.0"
@@ -79,7 +79,6 @@ var (
 		tracespec.Input: {
 			attributeKey: []string{
 				openInferenceAttributeInput,
-				springAIAttributeToolInput,
 				otelAttributeInput,
 			},
 			attributeKeyPrefix: []string{
@@ -105,7 +104,6 @@ var (
 		tracespec.Output: {
 			attributeKey: []string{
 				openInferenceAttributeOutput,
-				springAIAttributeToolOutput,
 				otelAttributeOutput,
 			},
 			attributeKeyPrefix: []string{

@@ -16,7 +16,7 @@ import (
 
 	"gorm.io/plugin/dbresolver"
 
-	"github.com/coze-dev/coze-loop/backend/modules/data/infra/repo/tag/mysql/gorm_gen/model"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/data/infra/repo/tag/mysql/gorm_gen/model"
 )
 
 func newTagValue(db *gorm.DB, opts ...gen.DOOption) tagValue {

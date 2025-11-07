@@ -11,8 +11,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 
-	dataset_conf "github.com/coze-dev/coze-loop/backend/modules/data/domain/component/conf"
-	mock_conf "github.com/coze-dev/coze-loop/backend/pkg/conf/mocks"
+	dataset_conf "code.byted.org/flowdevops/cozeloop/backend/modules/data/domain/component/conf"
+	mock_conf "code.byted.org/flowdevops/cozeloop/backend/pkg/conf/mocks"
 )
 
 func TestConfiger_GetConsumerConfigs(t *testing.T) {

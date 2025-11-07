@@ -6,7 +6,7 @@ package contexts
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/pkg/consts"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/consts"
 )
 
 type ctxLocaleKeyType struct{}

@@ -4,8 +4,8 @@
 package dist
 
 import (
-	"github.com/coze-dev/coze-loop/backend/infra/limiter"
-	"github.com/coze-dev/coze-loop/backend/infra/redis"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/limiter"
+	"code.byted.org/flowdevops/cozeloop/backend/infra/redis"
 )
 
 // NewRateLimiterFactory

@@ -9,7 +9,6 @@
 <p>
   <img alt="License" src="https://img.shields.io/badge/license-apache2.0-blue.svg">
   <img alt="Go Version" src="https://img.shields.io/badge/go-%3E%3D%201.24.0-blue">
-  <a href="https://deepwiki.com/coze-dev/coze-loop"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a>
 </p>
 
 English | [中文](README.cn.md)
@@ -37,7 +36,7 @@ Coze Loop helps developers develop and operate AI Agent more efficiently by prov
 | Observation | SDK trace reporting <br> * Trace data observation |
 | Model | Support integration with OpenAI, Volcengine Ark, and other models |
 ## Quick Start
-> Refer to [Quick Start](https://github.com/coze-dev/coze-loop/wiki/2.-Quickstart) to learn in detail how to install and deploy the latest version of Coze Loop.
+> Refer to [Quick Start](https://code.byted.org/flowdevops/cozeloop/wiki/2.-Quickstart) to learn in detail how to install and deploy the latest version of Coze Loop.
 
 ### Deployment method 1: Docker deployment (Docker Compose)
 > Please install and start Docker Engine before you start.
@@ -48,7 +47,7 @@ Procedure:
    Run the following command to obtain the latest version of the Coze Loop source code.
    ```Bash
    # Clone the code
-   git clone https://github.com/coze-dev/coze-loop.git
+   git clone https://code.byted.org/flowdevops/cozeloop.git
    
    # Enter the coze-loop directory
    cd coze-loop 
@@ -73,7 +72,7 @@ Procedure:
 ### Deployment method 2: Kubernetes deployment using Helm Chart
 
 > * The Kubernetes cluster has been prepared, the Nginx Ingress add-ons have been enabled, and the Kubectl and Helm tools have been installed.
-> * To quickly try it out locally, you can deploy a Kubernetes cluster using Minikube. For detailed steps, refer to [Quick Start](https://github.com/coze-dev/coze-loop/wiki/2.-Quickstart).
+> * To quickly try it out locally, you can deploy a Kubernetes cluster using Minikube. For detailed steps, refer to [Quick Start](https://code.byted.org/flowdevops/cozeloop/wiki/2.-Quickstart).
 
 Procedure:
 
@@ -111,15 +110,15 @@ Procedure:
 * [Prompt development and debugging](https://loop.coze.cn/open/docs/cozeloop/create-prompt): Coze Loop provides a complete prompt development workflow.
 * [Evaluation](https://loop.coze.cn/open/docs/cozeloop/evaluation-quick-start): The evaluation functionality of Coze Loop provides standard evaluation data management, an automated evaluation engine, and comprehensive statistics on experimental results.
 * [Trace reporting and query](https://loop.coze.cn/open/docs/cozeloop/trace_integrate): Coze Loop supports automatic reporting of traces from prompt debugging sessions created on the platform, enabling real-time tracking of each trace.
-* [Open-source Edition usage of the Coze Loop SDK](https://github.com/coze-dev/coze-loop/wiki/8.-Open-source-edition-uses-CozeLoop-SDK): The Coze Loop SDK in three languages is suitable for both commercial and open-source editions. For the Open-source Edition, developers only need to modify some parameter configurations during initialization.
+* [Open-source Edition usage of the Coze Loop SDK](https://code.byted.org/flowdevops/cozeloop/wiki/8.-Open-source-edition-uses-CozeLoop-SDK): The Coze Loop SDK in three languages is suitable for both commercial and open-source editions. For the Open-source Edition, developers only need to modify some parameter configurations during initialization.
 
 ## Developer guide
 
-* [System architecture](https://github.com/coze-dev/coze-loop/wiki/3.-Architecture): Learn about the technical architecture and core components of Coze Loop Open-source Edition.
-* [Startup mode](https://github.com/coze-dev/coze-loop/wiki/4.-Service-startup-modes): When installing and deploying Coze Loop Open-source Edition, the default development mode allows backend file modifications without requiring service redeployment.
-* [Model configuration](https://github.com/coze-dev/coze-loop/wiki/5.-Model-configuration): Coze Loop Open-source Edition supports various LLM models through the Eino framework. Refer to this document to view the supported model list and learn how to configure models.
-* [Code development and testing](https://github.com/coze-dev/coze-loop/wiki/6.-Code-development-and-testing): Learn how to perform secondary development and testing based on Coze Loop Open-source Edition.
-* [Fault troubleshooting](https://github.com/coze-dev/coze-loop/wiki/7.-Troubleshooting): Learn how to check container status and system logs.
+* [System architecture](https://code.byted.org/flowdevops/cozeloop/wiki/3.-Architecture): Learn about the technical architecture and core components of Coze Loop Open-source Edition.
+* [Startup mode](https://code.byted.org/flowdevops/cozeloop/wiki/4.-Service-startup-modes): When installing and deploying Coze Loop Open-source Edition, the default development mode allows backend file modifications without requiring service redeployment.
+* [Model configuration](https://code.byted.org/flowdevops/cozeloop/wiki/5.-Model-configuration): Coze Loop Open-source Edition supports various LLM models through the Eino framework. Refer to this document to view the supported model list and learn how to configure models.
+* [Code development and testing](https://code.byted.org/flowdevops/cozeloop/wiki/6.-Code-development-and-testing): Learn how to perform secondary development and testing based on Coze Loop Open-source Edition.
+* [Fault troubleshooting](https://code.byted.org/flowdevops/cozeloop/wiki/7.-Troubleshooting): Learn how to check container status and system logs.
 
 ## License
 
@@ -141,8 +140,8 @@ We are committed to building an open and friendly developer community. All devel
 
 ### Issue Reports & Feature Requests
 To efficiently track and resolve issues while ensuring transparency and collaboration, we recommend participating through:
-- **GitHub Issues**: [Submit bug reports or feature requests](https://github.com/coze-dev/coze-loop/issues)
-- **Pull Requests**: [Contribute code or documentation improvements](https://github.com/coze-dev/coze-loop/pulls)
+- **GitHub Issues**: [Submit bug reports or feature requests](https://code.byted.org/flowdevops/cozeloop/issues)
+- **Pull Requests**: [Contribute code or documentation improvements](https://code.byted.org/flowdevops/cozeloop/pulls)
 
 ### Technical Discussion & Communication
 Join our technical discussion groups to share experiences with other developers and stay updated with the latest project developments:

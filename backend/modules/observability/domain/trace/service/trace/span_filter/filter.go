@@ -6,21 +6,14 @@ package span_filter
 import (
 	"context"
 
-	"github.com/coze-dev/coze-loop/backend/modules/observability/domain/trace/entity/loop_span"
-	obErrorx "github.com/coze-dev/coze-loop/backend/modules/observability/pkg/errno"
-	"github.com/coze-dev/coze-loop/backend/pkg/errorx"
-)
-
-type SourceType string
-
-const (
-	SourceTypeAutoTask SourceType = "auto_task"
+	"code.byted.org/flowdevops/cozeloop/backend/modules/observability/domain/trace/entity/loop_span"
+	obErrorx "code.byted.org/flowdevops/cozeloop/backend/modules/observability/pkg/errno"
+	"code.byted.org/flowdevops/cozeloop/backend/pkg/errorx"
 )
 
 type SpanEnv struct {
 	WorkspaceID           int64
 	ThirdPartyWorkspaceID string
-	Source                SourceType
 }
 
 type Factory interface {
