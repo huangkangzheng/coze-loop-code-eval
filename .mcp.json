@@ -1,5 +1,9 @@
 {
   "mcpServers": {
+    "deepwiki": {
+      "type": "http",
+      "url": "https://mcp.deepwiki.com/mcp"
+    },
     "code-map": {
       "command": "/Users/admin/go/src/code.byted.org/stone/caribou/modules/code_map/code-map-server"
     }
