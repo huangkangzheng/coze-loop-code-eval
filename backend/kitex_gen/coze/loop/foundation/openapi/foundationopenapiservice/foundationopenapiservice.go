@@ -3,11 +3,11 @@
 package foundationopenapiservice
 
 import (
+	openapi "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/openapi"
 	"context"
 	"errors"
 	client "github.com/cloudwego/kitex/client"
 	kitex "github.com/cloudwego/kitex/pkg/serviceinfo"
-	openapi "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/openapi"
 )
 
 var errInvalidMessageType = errors.New("invalid message type for service method handler")

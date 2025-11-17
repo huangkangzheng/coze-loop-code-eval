@@ -9,7 +9,6 @@ package apis
 import (
 	"context"
 
-	"github.com/cloudwego/kitex/pkg/endpoint"
 	"code.byted.org/flowdevops/cozeloop/backend/infra/ck"
 	"code.byted.org/flowdevops/cozeloop/backend/infra/db"
 	"code.byted.org/flowdevops/cozeloop/backend/infra/external/audit"
@@ -42,6 +41,7 @@ import (
 	application6 "code.byted.org/flowdevops/cozeloop/backend/modules/observability/application"
 	application2 "code.byted.org/flowdevops/cozeloop/backend/modules/prompt/application"
 	"code.byted.org/flowdevops/cozeloop/backend/pkg/conf"
+	"github.com/cloudwego/kitex/pkg/endpoint"
 	"github.com/google/wire"
 )
 

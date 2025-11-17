@@ -2,8 +2,8 @@
 package llmmanageservice
 
 import (
-	server "github.com/cloudwego/kitex/server"
 	manage "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/llm/manage"
+	server "github.com/cloudwego/kitex/server"
 )
 
 // NewServer creates a server.Server with the given handler and options.

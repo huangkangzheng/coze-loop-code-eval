@@ -3,7 +3,6 @@
 package apis
 
 import (
-	"github.com/apache/thrift/lib/go/thrift"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/dataset"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/tag"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/eval_set"
@@ -24,6 +23,7 @@ import (
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/execute"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/manage"
 	openapi0 "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/openapi"
+	"github.com/apache/thrift/lib/go/thrift"
 )
 
 type EvaluationSetService interface {

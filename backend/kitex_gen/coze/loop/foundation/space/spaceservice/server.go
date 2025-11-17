@@ -2,8 +2,8 @@
 package spaceservice
 
 import (
-	server "github.com/cloudwego/kitex/server"
 	space "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/space"
+	server "github.com/cloudwego/kitex/server"
 )
 
 // NewServer creates a server.Server with the given handler and options.

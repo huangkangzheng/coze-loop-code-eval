@@ -3,10 +3,10 @@
 package fileservice
 
 import (
+	file "cod
 	"context"
 	client "github.com/cloudwego/kitex/client"
 	callopt "github.com/cloudwego/kitex/client/callopt"
-	file "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/file"
 )
 
 // Client is designed to provide IDL-compatible methods with call-option parameter for kitex framework.

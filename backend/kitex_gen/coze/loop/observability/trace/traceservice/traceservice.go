@@ -3,11 +3,11 @@
 package traceservice
 
 import (
+	trace "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/trace"
 	"context"
 	"errors"
 	client "github.com/cloudwego/kitex/client"
 	kitex "github.com/cloudwego/kitex/pkg/serviceinfo"
-	trace "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/trace"
 )
 
 var errInvalidMessageType = errors.New("invalid message type for service method handler")

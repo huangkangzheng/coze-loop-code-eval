@@ -3,12 +3,12 @@
 package observabilityopenapiservice
 
 import (
+	apis "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/apis"
+	openapi "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/openapi"
 	"context"
 	"errors"
 	client "github.com/cloudwego/kitex/client"
 	kitex "github.com/cloudwego/kitex/pkg/serviceinfo"
-	apis "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/apis"
-	openapi "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/openapi"
 )
 
 var errInvalidMessageType = errors.New("invalid message type for service method handler")

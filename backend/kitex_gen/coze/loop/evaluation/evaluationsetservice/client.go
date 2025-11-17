@@ -3,10 +3,10 @@
 package evaluationsetservice
 
 import (
+	eval_set 
 	"context"
 	client "github.com/cloudwego/kitex/client"
 	callopt "github.com/cloudwego/kitex/client/callopt"
-	eval_set "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/eval_set"
 )
 
 // Client is designed to provide IDL-compatible methods with call-option parameter for kitex framework.

@@ -4,10 +4,10 @@ package louser // import code.byted.org/flowdevops/cozeloop/backend/louser
 import (
 	"context"
 
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/user"
 	"github.com/cloudwego/kitex/client/callopt"
 	"github.com/cloudwego/kitex/pkg/endpoint"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
-	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/user"
 )
 
 type LocalUserService struct {

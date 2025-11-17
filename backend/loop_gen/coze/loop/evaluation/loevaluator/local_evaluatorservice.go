@@ -4,10 +4,10 @@ package loevaluator // import code.byted.org/flowdevops/cozeloop/backend/loevalu
 import (
 	"context"
 
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/evaluator"
 	"github.com/cloudwego/kitex/client/callopt"
 	"github.com/cloudwego/kitex/pkg/endpoint"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
-	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/evaluator"
 )
 
 type LocalEvaluatorService struct {
@@ -381,6 +381,48 @@ func (l *LocalEvaluatorService) DebugEvaluator(ctx context.Context, req *evaluat
 	arg := &evaluator.EvaluatorServiceDebugEvaluatorArgs{Req: req}
 	result := &evaluator.EvaluatorServiceDebugEvaluatorResult{}
 	ctx = l.injectRPCInfo(ctx, "DebugEvaluator")
+	if err := chain(ctx, arg, result); err != nil {
+		return nil, err
+	}
+	return result.GetSuccess(), nil
+}
+
+func (l *LocalEvaluatorService) ValidateEvaluator(ctx context.Context, request *evaluator.ValidateEvaluatorRequest, callOptions ...callopt.Option) (*evaluator.ValidateEvaluatorResponse, error) {
+	chain := l.mds(func(ctx context.Context, in, out interface{}) error {
+		arg := in.(*evaluator.EvaluatorServiceValidateEvaluatorArgs)
+		result := out.(*evaluator.EvaluatorServiceValidateEvaluatorResult)
+		resp, err := l.impl.ValidateEvaluator(ctx, arg.Request)
+		if err != nil {
+			return err
+		}
+		result.SetSuccess(resp)
+		return nil
+	})
+
+	arg := &evaluator.EvaluatorServiceValidateEvaluatorArgs{Request: request}
+	result := &evaluator.EvaluatorServiceValidateEvaluatorResult{}
+	ctx = l.injectRPCInfo(ctx, "ValidateEvaluator")
+	if err := chain(ctx, arg, result); err != nil {
+		return nil, err
+	}
+	return result.GetSuccess(), nil
+}
+
+func (l *LocalEvaluatorService) BatchDebugEvaluator(ctx context.Context, req *evaluator.BatchDebugEvaluatorRequest, callOptions ...callopt.Option) (*evaluator.BatchDebugEvaluatorResponse, error) {
+	chain := l.mds(func(ctx context.Context, in, out interface{}) error {
+		arg := in.(*evaluator.EvaluatorServiceBatchDebugEvaluatorArgs)
+		result := out.(*evaluator.EvaluatorServiceBatchDebugEvaluatorResult)
+		resp, err := l.impl.BatchDebugEvaluator(ctx, arg.Req)
+		if err != nil {
+			return err
+		}
+		result.SetSuccess(resp)
+		return nil
+	})
+
+	arg := &evaluator.EvaluatorServiceBatchDebugEvaluatorArgs{Req: req}
+	result := &evaluator.EvaluatorServiceBatchDebugEvaluatorResult{}
+	ctx = l.injectRPCInfo(ctx, "BatchDebugEvaluator")
 	if err := chain(ctx, arg, result); err != nil {
 		return nil, err
 	}

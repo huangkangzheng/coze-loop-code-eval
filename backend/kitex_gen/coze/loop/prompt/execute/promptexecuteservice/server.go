@@ -2,8 +2,8 @@
 package promptexecuteservice
 
 import (
-	server "github.com/cloudwego/kitex/server"
 	execute "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/execute"
+	server "github.com/cloudwego/kitex/server"
 )
 
 // NewServer creates a server.Server with the given handler and options.

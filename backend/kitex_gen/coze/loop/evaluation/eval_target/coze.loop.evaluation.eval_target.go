@@ -3,12 +3,11 @@
 package eval_target
 
 import (
+	"code.byted.org/
 	"context"
 	"fmt"
 	"github.com/apache/thrift/lib/go/thrift"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/base"
-	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/eval_target"
-	"strings"
 )
 
 type CreateEvalTargetRequest struct {

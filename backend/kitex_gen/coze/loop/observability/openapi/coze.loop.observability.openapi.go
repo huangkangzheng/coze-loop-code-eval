@@ -4,9 +4,6 @@ package openapi
 
 import (
 	"bytes"
-	"context"
-	"fmt"
-	"github.com/apache/thrift/lib/go/thrift"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/base"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/domain/annotation"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/domain/common"
@@ -14,6 +11,9 @@ import (
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/domain/span"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/domain/trace"
 	trace0 "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/trace"
+	"context"
+	"fmt"
+	"github.com/apache/thrift/lib/go/thrift"
 	"strings"
 )
 

@@ -5,13 +5,13 @@ import (
 	"context"
 	"fmt"
 
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/debug"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/debug/promptdebugservice"
+	"code.byted.org/flowdevops/cozeloop/backend/loop_gen/infra/kitex/localstream"
 	"github.com/cloudwego/kitex/client/callopt"
 	"github.com/cloudwego/kitex/client/callopt/streamcall"
 	"github.com/cloudwego/kitex/pkg/endpoint"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
-	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/debug"
-	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/debug/promptdebugservice"
-	"code.byted.org/flowdevops/cozeloop/backend/loop_gen/infra/kitex/localstream"
 )
 
 type LocalPromptDebugService struct {

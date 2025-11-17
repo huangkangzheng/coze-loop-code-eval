@@ -3,12 +3,11 @@
 package manage
 
 import (
-	"context"
-	"fmt"
-	"github.com/apache/thrift/lib/go/thrift"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/base"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/domain/prompt"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/domain/user"
+	"context"
+	"
 	"strings"
 )
 

@@ -3,12 +3,12 @@
 package promptmanageservice
 
 import (
+	apis "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/apis"
+	manage "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/manage"
 	"context"
 	"errors"
 	client "github.com/cloudwego/kitex/client"
 	kitex "github.com/cloudwego/kitex/pkg/serviceinfo"
-	apis "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/apis"
-	manage "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/manage"
 )
 
 var errInvalidMessageType = errors.New("invalid message type for service method handler")

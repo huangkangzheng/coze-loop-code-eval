@@ -4,10 +4,10 @@ package loexpt // import code.byted.org/flowdevops/cozeloop/backend/loexpt
 import (
 	"context"
 
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/expt"
 	"github.com/cloudwego/kitex/client/callopt"
 	"github.com/cloudwego/kitex/pkg/endpoint"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
-	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/expt"
 )
 
 type LocalExperimentService struct {

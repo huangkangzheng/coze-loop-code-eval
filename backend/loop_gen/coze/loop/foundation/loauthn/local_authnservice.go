@@ -4,10 +4,10 @@ package loauthn // import code.byted.org/flowdevops/cozeloop/backend/loauthn
 import (
 	"context"
 
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/authn"
 	"github.com/cloudwego/kitex/client/callopt"
 	"github.com/cloudwego/kitex/pkg/endpoint"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
-	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/authn"
 )
 
 type LocalAuthNService struct {

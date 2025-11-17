@@ -3,13 +3,13 @@
 package foundation
 
 import (
-	"github.com/apache/thrift/lib/go/thrift"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/auth"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/authn"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/file"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/openapi"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/space"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/user"
+	"github.com/apache/thrift/lib/go/thrift"
 )
 
 type AuthService interface {

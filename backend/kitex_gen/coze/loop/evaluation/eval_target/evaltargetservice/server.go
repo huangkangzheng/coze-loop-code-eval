@@ -2,8 +2,8 @@
 package evaltargetservice
 
 import (
-	server "github.com/cloudwego/kitex/server"
 	eval_target "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/eval_target"
+	server "github.com/cloudwego/kitex/server"
 )
 
 // NewServer creates a server.Server with the given handler and options.

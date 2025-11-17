@@ -3,9 +3,9 @@
 package runtime
 
 import (
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/llm/domain/common"
 	"fmt"
 	"github.com/apache/thrift/lib/go/thrift"
-	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/llm/domain/common"
 	"strings"
 )
 

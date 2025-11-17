@@ -3,12 +3,12 @@
 package runtime
 
 import (
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/base"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/llm/domain/runtime"
 	"context"
 	"fmt"
 	"github.com/apache/thrift/lib/go/thrift"
 	"github.com/cloudwego/kitex/pkg/streaming"
-	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/base"
-	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/llm/domain/runtime"
 )
 
 type ChatRequest struct {

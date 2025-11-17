@@ -3,11 +3,11 @@
 package datasetservice
 
 import (
+	dataset "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/dataset"
 	"context"
 	"errors"
 	client "github.com/cloudwego/kitex/client"
 	kitex "github.com/cloudwego/kitex/pkg/serviceinfo"
-	dataset "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/dataset"
 )
 
 var errInvalidMessageType = errors.New("invalid message type for service method handler")

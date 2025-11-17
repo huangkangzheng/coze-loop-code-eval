@@ -3,11 +3,11 @@
 package fileservice
 
 import (
+	file "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/file"
 	"context"
 	"errors"
 	client "github.com/cloudwego/kitex/client"
 	kitex "github.com/cloudwego/kitex/pkg/serviceinfo"
-	file "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/file"
 )
 
 var errInvalidMessageType = errors.New("invalid message type for service method handler")

@@ -3,12 +3,12 @@
 package promptopenapiservice
 
 import (
+	openapi "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/openapi"
 	"context"
 	"errors"
 	client "github.com/cloudwego/kitex/client"
 	kitex "github.com/cloudwego/kitex/pkg/serviceinfo"
 	streaming "github.com/cloudwego/kitex/pkg/streaming"
-	openapi "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/openapi"
 )
 
 var errInvalidMessageType = errors.New("invalid message type for service method handler")

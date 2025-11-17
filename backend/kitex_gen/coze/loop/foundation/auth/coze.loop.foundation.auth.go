@@ -3,11 +3,11 @@
 package auth
 
 import (
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/base"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/domain/auth"
 	"context"
 	"fmt"
 	"github.com/apache/thrift/lib/go/thrift"
-	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/base"
-	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/domain/auth"
 )
 
 // 批量鉴权函数，支持服务端和前端调用

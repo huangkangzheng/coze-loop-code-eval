@@ -3,12 +3,12 @@
 package experimentservice
 
 import (
+	apis "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/apis"
+	expt "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/expt"
 	"context"
 	"errors"
 	client "github.com/cloudwego/kitex/client"
 	kitex "github.com/cloudwego/kitex/pkg/serviceinfo"
-	apis "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/apis"
-	expt "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/expt"
 )
 
 var errInvalidMessageType = errors.New("invalid message type for service method handler")

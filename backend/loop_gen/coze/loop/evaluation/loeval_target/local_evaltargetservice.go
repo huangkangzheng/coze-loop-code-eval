@@ -4,10 +4,10 @@ package loeval_target // import code.byted.org/flowdevops/cozeloop/backend/loeva
 import (
 	"context"
 
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/eval_target"
 	"github.com/cloudwego/kitex/client/callopt"
 	"github.com/cloudwego/kitex/pkg/endpoint"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
-	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/eval_target"
 )
 
 type LocalEvalTargetService struct {

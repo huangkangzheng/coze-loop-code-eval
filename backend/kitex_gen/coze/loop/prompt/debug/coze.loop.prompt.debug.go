@@ -3,12 +3,12 @@
 package debug
 
 import (
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/base"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/domain/prompt"
 	"context"
 	"fmt"
 	"github.com/apache/thrift/lib/go/thrift"
 	"github.com/cloudwego/kitex/pkg/streaming"
-	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/base"
-	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/domain/prompt"
 	"strings"
 )
 

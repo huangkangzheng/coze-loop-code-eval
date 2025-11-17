@@ -2,8 +2,8 @@
 package traceservice
 
 import (
-	server "github.com/cloudwego/kitex/server"
 	trace "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/trace"
+	server "github.com/cloudwego/kitex/server"
 )
 
 // NewServer creates a server.Server with the given handler and options.

@@ -3,11 +3,11 @@
 package promptexecuteservice
 
 import (
+	execute "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/execute"
 	"context"
 	"errors"
 	client "github.com/cloudwego/kitex/client"
 	kitex "github.com/cloudwego/kitex/pkg/serviceinfo"
-	execute "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/execute"
 )
 
 var errInvalidMessageType = errors.New("invalid message type for service method handler")

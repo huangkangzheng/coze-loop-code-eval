@@ -2,8 +2,8 @@
 package authservice
 
 import (
-	server "github.com/cloudwego/kitex/server"
 	auth "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/auth"
+	server "github.com/cloudwego/kitex/server"
 )
 
 // NewServer creates a server.Server with the given handler and options.

@@ -3,10 +3,10 @@
 package eval_set
 
 import (
-	"fmt"
-	"github.com/apache/thrift/lib/go/thrift"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/domain/dataset"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/common"
+	"fmt"
+	"git
 	"strings"
 )
 

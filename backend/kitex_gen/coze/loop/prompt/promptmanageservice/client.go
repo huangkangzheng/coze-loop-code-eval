@@ -3,10 +3,10 @@
 package promptmanageservice
 
 import (
+	manage "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/manage"
 	"context"
 	client "github.com/cloudwego/kitex/client"
 	callopt "github.com/cloudwego/kitex/client/callopt"
-	manage "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/manage"
 )
 
 // Client is designed to provide IDL-compatible methods with call-option parameter for kitex framework.

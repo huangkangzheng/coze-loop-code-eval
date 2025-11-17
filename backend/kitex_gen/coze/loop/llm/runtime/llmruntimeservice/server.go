@@ -2,8 +2,8 @@
 package llmruntimeservice
 
 import (
-	server "github.com/cloudwego/kitex/server"
 	runtime "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/llm/runtime"
+	server "github.com/cloudwego/kitex/server"
 )
 
 // NewServer creates a server.Server with the given handler and options.

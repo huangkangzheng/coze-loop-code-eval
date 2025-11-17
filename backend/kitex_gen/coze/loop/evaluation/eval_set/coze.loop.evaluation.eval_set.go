@@ -3,13 +3,12 @@
 package eval_set
 
 import (
-	"context"
-	"fmt"
-	"github.com/apache/thrift/lib/go/thrift"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/base"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/domain/dataset"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/common"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/domain/eval_set"
+	"context"
+	"
 	"strings"
 )
 

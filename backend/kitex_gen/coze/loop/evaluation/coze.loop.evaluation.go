@@ -3,11 +3,11 @@
 package evaluation
 
 import (
-	"github.com/apache/thrift/lib/go/thrift"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/eval_set"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/eval_target"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/evaluator"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/expt"
+	"github.com/apache/thrift/lib/go/thrift"
 )
 
 type EvaluationSetService interface {

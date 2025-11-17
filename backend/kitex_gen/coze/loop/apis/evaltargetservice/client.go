@@ -3,10 +3,10 @@
 package evaltargetservice
 
 import (
+	eval_targ
 	"context"
 	client "github.com/cloudwego/kitex/client"
 	callopt "github.com/cloudwego/kitex/client/callopt"
-	eval_target "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/eval_target"
 )
 
 // Client is designed to provide IDL-compatible methods with call-option parameter for kitex framework.

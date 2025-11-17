@@ -3,10 +3,10 @@
 package llmmanageservice
 
 import (
+	manage "c
 	"context"
 	client "github.com/cloudwego/kitex/client"
 	callopt "github.com/cloudwego/kitex/client/callopt"
-	manage "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/llm/manage"
 )
 
 // Client is designed to provide IDL-compatible methods with call-option parameter for kitex framework.

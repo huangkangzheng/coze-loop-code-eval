@@ -3,11 +3,11 @@
 package prompt
 
 import (
-	"github.com/apache/thrift/lib/go/thrift"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/debug"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/execute"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/manage"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/openapi"
+	"github.com/apache/thrift/lib/go/thrift"
 )
 
 type PromptManageService interface {

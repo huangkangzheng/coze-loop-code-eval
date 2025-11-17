@@ -4,10 +4,10 @@ package loopenapi // import code.byted.org/flowdevops/cozeloop/backend/loopenapi
 import (
 	"context"
 
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/openapi"
 	"github.com/cloudwego/kitex/client/callopt"
 	"github.com/cloudwego/kitex/pkg/endpoint"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
-	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/openapi"
 )
 
 type LocalFoundationOpenAPIService struct {

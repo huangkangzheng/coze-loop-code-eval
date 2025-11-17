@@ -3,12 +3,12 @@
 package spaceservice
 
 import (
+	foundation "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation"
+	space "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/space"
 	"context"
 	"errors"
 	client "github.com/cloudwego/kitex/client"
 	kitex "github.com/cloudwego/kitex/pkg/serviceinfo"
-	foundation "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation"
-	space "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/space"
 )
 
 var errInvalidMessageType = errors.New("invalid message type for service method handler")

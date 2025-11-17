@@ -3,10 +3,10 @@
 package authnservice
 
 import (
+	authn "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/authn"
 	"context"
 	client "github.com/cloudwego/kitex/client"
 	callopt "github.com/cloudwego/kitex/client/callopt"
-	authn "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/authn"
 )
 
 // Client is designed to provide IDL-compatible methods with call-option parameter for kitex framework.

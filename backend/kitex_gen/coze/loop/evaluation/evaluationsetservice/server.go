@@ -2,8 +2,8 @@
 package evaluationsetservice
 
 import (
-	server "github.com/cloudwego/kitex/server"
 	evaluation "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation"
+	server "github.com/cloudwego/kitex/server"
 )
 
 // NewServer creates a server.Server with the given handler and options.

@@ -3,9 +3,9 @@
 package prompt
 
 import (
-	"github.com/apache/thrift/lib/go/thrift"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/llm/manage"
 	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/llm/runtime"
+	"github.com/apache/thrift/lib/go/thrift"
 )
 
 type LLMManageService interface {

@@ -3,11 +3,11 @@
 package execute
 
 import (
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/base"
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/domain/prompt"
 	"context"
 	"fmt"
 	"github.com/apache/thrift/lib/go/thrift"
-	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/base"
-	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt/domain/prompt"
 	"strings"
 )
 

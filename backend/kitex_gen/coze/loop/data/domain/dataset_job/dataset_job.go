@@ -3,11 +3,11 @@
 package dataset_job
 
 import (
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/domain/dataset"
 	"database/sql"
 	"database/sql/driver"
 	"fmt"
 	"github.com/apache/thrift/lib/go/thrift"
-	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/data/domain/dataset"
 	"strings"
 )
 

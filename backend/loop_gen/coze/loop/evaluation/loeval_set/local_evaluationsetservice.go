@@ -4,10 +4,10 @@ package loeval_set // import code.byted.org/flowdevops/cozeloop/backend/loeval_s
 import (
 	"context"
 
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/eval_set"
 	"github.com/cloudwego/kitex/client/callopt"
 	"github.com/cloudwego/kitex/pkg/endpoint"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
-	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/eval_set"
 )
 
 type LocalEvaluationSetService struct {

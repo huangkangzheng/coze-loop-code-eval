@@ -3,9 +3,9 @@
 package view
 
 import (
+	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/domain/common"
 	"fmt"
 	"github.com/apache/thrift/lib/go/thrift"
-	"code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/observability/domain/common"
 	"strings"
 )
 

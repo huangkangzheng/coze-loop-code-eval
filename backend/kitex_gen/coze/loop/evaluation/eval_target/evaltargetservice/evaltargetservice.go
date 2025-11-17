@@ -3,11 +3,11 @@
 package evaltargetservice
 
 import (
+	eval_target "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/eval_target"
 	"context"
 	"errors"
 	client "github.com/cloudwego/kitex/client"
 	kitex "github.com/cloudwego/kitex/pkg/serviceinfo"
-	eval_target "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/evaluation/eval_target"
 )
 
 var errInvalidMessageType = errors.New("invalid message type for service method handler")

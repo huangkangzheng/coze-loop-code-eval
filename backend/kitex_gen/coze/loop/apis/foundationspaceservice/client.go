@@ -3,10 +3,10 @@
 package foundationspaceservice
 
 import (
+	space "co
 	"context"
 	client "github.com/cloudwego/kitex/client"
 	callopt "github.com/cloudwego/kitex/client/callopt"
-	space "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/foundation/space"
 )
 
 // Client is designed to provide IDL-compatible methods with call-option parameter for kitex framework.

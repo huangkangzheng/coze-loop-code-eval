@@ -3,12 +3,12 @@
 package llmmanageservice
 
 import (
+	manage "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/llm/manage"
+	prompt "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt"
 	"context"
 	"errors"
 	client "github.com/cloudwego/kitex/client"
 	kitex "github.com/cloudwego/kitex/pkg/serviceinfo"
-	manage "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/llm/manage"
-	prompt "code.byted.org/flowdevops/cozeloop/backend/kitex_gen/coze/loop/prompt"
 )
 
 var errInvalidMessageType = errors.New("invalid message type for service method handler")
