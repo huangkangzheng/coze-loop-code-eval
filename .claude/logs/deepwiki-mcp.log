@@ -1,0 +1,38 @@
+2025/11/17 15:10:55 DeepWiki MCP Server starting, log file: /Users/admin/go/src/github.com/huangkangzheng/coze-loop-code-eval/.claude/logs/deepwiki-mcp.log
+2025/11/17 15:10:55 DeepWiki UI server started at http://localhost:8899
+2025/11/17 15:10:56 DeepWiki MCP Server starting, log file: /Users/admin/go/src/github.com/huangkangzheng/coze-loop-code-eval/.claude/logs/deepwiki-mcp.log
+2025/11/17 15:10:56 DeepWiki UI server started at http://localhost:8899
+2025/11/17 15:10:56 Web UI server error: listen tcp :8899: bind: address already in use
+2025/11/17 15:11:14 Server error: context canceled
+2025/11/17 15:11:14 DeepWiki MCP Server starting, log file: /Users/admin/go/src/github.com/huangkangzheng/coze-loop-code-eval/.claude/logs/deepwiki-mcp.log
+2025/11/17 15:11:14 DeepWiki UI server started at http://localhost:8899
+2025/11/17 15:11:14 Server error: context canceled
+2025/11/17 15:44:03 DeepWiki MCP Server starting, log file: /Users/admin/go/src/github.com/huangkangzheng/coze-loop-code-eval/.claude/logs/deepwiki-mcp.log
+2025/11/17 15:44:03 DeepWiki UI server started at http://localhost:8899
+2025/11/17 15:44:03 Server error: context canceled
+2025/11/17 15:44:03 DeepWiki MCP Server starting, log file: /Users/admin/go/src/github.com/huangkangzheng/coze-loop-code-eval/.claude/logs/deepwiki-mcp.log
+2025/11/17 15:44:03 DeepWiki UI server started at http://localhost:8899
+2025/11/17 15:44:07 Server error: context canceled
+2025/11/17 15:44:07 DeepWiki MCP Server starting, log file: /Users/admin/go/src/github.com/huangkangzheng/coze-loop-code-eval/.claude/logs/deepwiki-mcp.log
+2025/11/17 15:44:07 DeepWiki UI server started at http://localhost:8899
+2025/11/17 15:44:07 Server error: context canceled
+2025/11/17 15:44:09 Server error: context canceled
+2025/11/17 15:44:09 DeepWiki MCP Server starting, log file: /Users/admin/go/src/github.com/huangkangzheng/coze-loop-code-eval/.claude/logs/deepwiki-mcp.log
+2025/11/17 15:44:09 DeepWiki UI server started at http://localhost:8899
+2025/11/17 15:44:09 Server error: context canceled
+2025/11/17 15:45:03 DeepWiki MCP Server starting, log file: /Users/admin/go/src/github.com/huangkangzheng/coze-loop-code-eval/.claude/logs/deepwiki-mcp.log
+2025/11/17 15:45:03 DeepWiki UI server started at http://localhost:8899
+2025/11/17 15:45:06 DeepWiki MCP Server starting, log file: /Users/admin/go/src/github.com/huangkangzheng/coze-loop-code-eval/.claude/logs/deepwiki-mcp.log
+2025/11/17 15:45:06 DeepWiki UI server started at http://localhost:8899
+2025/11/17 15:45:06 Web UI server error: listen tcp :8899: bind: address already in use
+2025/11/17 15:45:18 Server error: context canceled
+2025/11/17 15:45:18 DeepWiki MCP Server starting, log file: /Users/admin/go/src/github.com/huangkangzheng/coze-loop-code-eval/.claude/logs/deepwiki-mcp.log
+2025/11/17 15:45:18 DeepWiki UI server started at http://localhost:8899
+2025/11/17 15:45:18 Server error: context canceled
+2025/11/17 15:53:23 Server error: context canceled
+2025/11/17 15:53:44 DeepWiki MCP Server starting, log file: /Users/admin/go/src/github.com/huangkangzheng/coze-loop-code-eval/.claude/logs/deepwiki-mcp.log
+2025/11/17 15:53:44 DeepWiki UI server started at http://localhost:8899
+2025/11/17 15:53:44 Server error: context canceled
+2025/11/17 15:53:44 DeepWiki MCP Server starting, log file: /Users/admin/go/src/github.com/huangkangzheng/coze-loop-code-eval/.claude/logs/deepwiki-mcp.log
+2025/11/17 15:53:44 DeepWiki UI server started at http://localhost:8899
+2025/11/17 15:53:54 Server error: context canceled

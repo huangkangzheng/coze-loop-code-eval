@@ -174,3 +174,4 @@ Code-Map: "描述 PromptBasic、PromptDraft、PromptVersion 这三个实体之�
 
 # 用户个人偏好
 1. 总是用中文回复
+2. 将技术设计输出到.claude/specs/{{xxx功能}}.md下
